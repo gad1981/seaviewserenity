@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://seaviewserenity.gr/</loc><changefreq>weekly</changefreq></url><url><loc>https://seaviewserenity.gr/The-Villa/</loc><changefreq>weekly</changefreq></url><url><loc>https://seaviewserenity.gr/Book-now/</loc><changefreq>weekly</changefreq></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://seaviewserenity.gr/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://seaviewserenity.gr/The-Villa/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://seaviewserenity.gr/Book-now/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://seaviewserenity.gr/Articles/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/seaside-accommodation-syros-delfini-beach/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/syros-vs-santorini-mykonos-calmer-cyclades/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/best-time-to-visit-syros-seaside-holiday/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/greece-short-term-rentals-2026-what-travellers-want/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/how-to-get-to-syros-from-athens-ferry-flight/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/family-vacation-syros-seaside-house/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/ermoupoli-and-beach-day-syros-itinerary/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/syros-food-guide-for-villa-guests/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/greece-vacation-rental-checklist-before-you-book/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://seaviewserenity.gr/Articles/kini-delfini-galissas-syros-beaches-guide/</loc><lastmod>2026-11-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

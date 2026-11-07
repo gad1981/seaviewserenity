@@ -5,6 +5,7 @@ Static copy of [seaviewserenity.gr](https://seaviewserenity.gr), mirrored from t
 ## Pages
 - Home (`/`)
 - The Villa (`/The-Villa/`)
+- Articles (`/Articles/`) — SEO travel guides with citations
 - Book now (`/Book-now/`)
 
 ## Local preview
