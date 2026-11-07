@@ -2,20 +2,178 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
-    { "source": "/book-now", "destination": "/Book-now/", "permanent": true },
-    { "source": "/book-now/", "destination": "/Book-now/", "permanent": true }
+    {
+      "source": "/",
+      "destination": "/en/",
+      "permanent": false
+    },
+    {
+      "source": "/The-Villa",
+      "destination": "/en/The-Villa/",
+      "permanent": true
+    },
+    {
+      "source": "/The-Villa/",
+      "destination": "/en/The-Villa/",
+      "permanent": true
+    },
+    {
+      "source": "/Book-now",
+      "destination": "/en/Book-now/",
+      "permanent": true
+    },
+    {
+      "source": "/Book-now/",
+      "destination": "/en/Book-now/",
+      "permanent": true
+    },
+    {
+      "source": "/book-now",
+      "destination": "/en/Book-now/",
+      "permanent": true
+    },
+    {
+      "source": "/book-now/",
+      "destination": "/en/Book-now/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles",
+      "destination": "/en/Articles/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/",
+      "destination": "/en/Articles/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seaside-accommodation-syros-delfini-beach",
+      "destination": "/en/Articles/seaside-accommodation-syros-delfini-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seaside-accommodation-syros-delfini-beach/",
+      "destination": "/en/Articles/seaside-accommodation-syros-delfini-beach/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-vs-santorini-mykonos-calmer-cyclades",
+      "destination": "/en/Articles/syros-vs-santorini-mykonos-calmer-cyclades/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-vs-santorini-mykonos-calmer-cyclades/",
+      "destination": "/en/Articles/syros-vs-santorini-mykonos-calmer-cyclades/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/best-time-to-visit-syros-seaside-holiday",
+      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want",
+      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight",
+      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/family-vacation-syros-seaside-house",
+      "destination": "/en/Articles/family-vacation-syros-seaside-house/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/family-vacation-syros-seaside-house/",
+      "destination": "/en/Articles/family-vacation-syros-seaside-house/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ermoupoli-and-beach-day-syros-itinerary",
+      "destination": "/en/Articles/ermoupoli-and-beach-day-syros-itinerary/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ermoupoli-and-beach-day-syros-itinerary/",
+      "destination": "/en/Articles/ermoupoli-and-beach-day-syros-itinerary/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-food-guide-for-villa-guests",
+      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-food-guide-for-villa-guests/",
+      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-vacation-rental-checklist-before-you-book",
+      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide",
+      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide/",
+      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/gallery/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/gallery_gen/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/Articles/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     }
   ]

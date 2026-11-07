@@ -1,0 +1,70 @@
+/* Language switcher + RTL helpers */
+.svs-header-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.svs-lang {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  justify-content: flex-end;
+}
+
+.svs-lang a {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--svs-muted, #5c6670);
+  text-decoration: none;
+  border: 1px solid var(--svs-line, #d9e2ec);
+  padding: 0.15rem 0.45rem;
+  background: #fff;
+}
+
+.svs-lang a:hover,
+.svs-lang a[aria-current="true"] {
+  color: var(--svs-sea-deep, #3d6fa8);
+  border-color: var(--svs-sea, #7caae5);
+}
+
+html[dir="rtl"] .svs-shell-header {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .svs-header-tools {
+  align-items: flex-start;
+}
+
+html[dir="rtl"] .svs-shell-nav,
+html[dir="rtl"] .svs-lang {
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] body.svs-articles {
+  font-family: Heebo, "Open Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+html[dir="rtl"] .svs-articles h1,
+html[dir="rtl"] .svs-articles h2,
+html[dir="rtl"] .svs-articles h3,
+html[dir="rtl"] .svs-shell-brand {
+  font-family: Heebo, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html[dir="rtl"] .svs-callout {
+  border-left: none;
+  border-right: 4px solid var(--svs-sea, #7caae5);
+}
+
+@media (max-width: 720px) {
+  .svs-header-tools {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  html[dir="rtl"] .svs-header-tools {
+    align-items: flex-start;
+  }
+}
