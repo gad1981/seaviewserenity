@@ -1,0 +1,39 @@
+/*
+ * Language dropdown is a sibling of .wb-menu (never inside it).
+ * Do not override .wb-menu / .hmenu display — that breaks the mobile burger.
+ */
+
+.svs-lang-dd--sitepro {
+  position: fixed;
+  top: 18px;
+  right: 16px;
+  z-index: 100002;
+}
+
+.svs-lang-dd--sitepro .svs-lang-dd__btn {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.svs-lang-dd--sitepro .svs-lang-dd__menu {
+  z-index: 100003;
+}
+
+/* Interactive map inside original Site.pro picture frame */
+.svs-sitepro-map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Leave room for the ~32px burger on the far right */
+@media (max-width: 767px) {
+  .svs-lang-dd--sitepro {
+    top: 14px;
+    right: 56px;
+  }
+}

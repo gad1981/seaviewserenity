@@ -48,6 +48,26 @@
       "permanent": true
     },
     {
+      "source": "/Terms",
+      "destination": "/en/Terms/",
+      "permanent": true
+    },
+    {
+      "source": "/Terms/",
+      "destination": "/en/Terms/",
+      "permanent": true
+    },
+    {
+      "source": "/Cookies",
+      "destination": "/en/Cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/Cookies/",
+      "destination": "/en/Cookies/",
+      "permanent": true
+    },
+    {
       "source": "/Articles/seaside-accommodation-syros-delfini-beach",
       "destination": "/en/Articles/seaside-accommodation-syros-delfini-beach/",
       "permanent": true

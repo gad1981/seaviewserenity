@@ -1,0 +1,225 @@
+/* Full site footer — Site.pro pages + Articles shell */
+.svs-site-footer {
+  --svs-footer-bg: #0f2a3d;
+  --svs-footer-ink: #f4f8fb;
+  --svs-footer-muted: #a8bbc9;
+  --svs-footer-line: rgba(255, 255, 255, 0.12);
+  --svs-footer-link: #d7e8f5;
+  --svs-footer-accent: #7caae5;
+  background: linear-gradient(180deg, #14374f 0%, var(--svs-footer-bg) 100%);
+  color: var(--svs-footer-ink);
+  margin-top: 0;
+  padding: 2.75rem 0 1.5rem;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  position: relative;
+  z-index: 20;
+}
+
+.svs-site-footer__inner {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+}
+
+.svs-site-footer__brand {
+  margin-bottom: 2rem;
+  max-width: 36rem;
+}
+
+.svs-site-footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--svs-footer-ink);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+.svs-site-footer__logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.svs-site-footer__tagline {
+  margin: 0.85rem 0 0;
+  color: var(--svs-footer-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.svs-site-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.75rem 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--svs-footer-line);
+}
+
+.svs-site-footer__heading {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--svs-footer-accent);
+}
+
+.svs-site-footer__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.svs-site-footer__col a {
+  color: var(--svs-footer-link);
+  text-decoration: none;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.svs-site-footer__col a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.svs-site-footer__muted {
+  color: var(--svs-footer-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.svs-site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  padding-top: 1.15rem;
+  color: var(--svs-footer-muted);
+  font-size: 0.85rem;
+}
+
+.svs-site-footer__bottom p {
+  margin: 0;
+}
+
+.svs-site-footer__bottom a {
+  color: var(--svs-footer-link);
+}
+
+/* Hide Site.pro's minimal copyright strip — replaced by .svs-site-footer */
+body:has(.svs-site-footer) [id^="wb_footer_"] {
+  display: none !important;
+}
+
+html[dir="rtl"] .svs-site-footer__bottom {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 900px) {
+  .svs-site-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.svs-site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.35rem;
+}
+
+.svs-site-footer__legal a {
+  color: var(--svs-footer-link);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.svs-site-footer__legal a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Cookie consent bar */
+.svs-cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100010;
+  padding: 0.85rem 1rem;
+  background: rgba(15, 42, 61, 0.97);
+  color: #f4f8fb;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.svs-cookie-banner[hidden] {
+  display: none !important;
+}
+
+.svs-cookie-banner__inner {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.svs-cookie-banner__text {
+  flex: 1 1 16rem;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #d7e8f5;
+}
+
+.svs-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.svs-cookie-banner__link {
+  color: #9ec5ea;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.svs-cookie-banner__btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: #7caae5;
+  color: #0f2a3d;
+  font: 700 0.85rem/1 Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 0.55rem 0.9rem;
+}
+
+.svs-cookie-banner__btn:hover {
+  background: #a8c8ef;
+}
+
+@media (max-width: 560px) {
+  .svs-site-footer {
+    padding: 2.25rem 0 1.25rem;
+  }
+
+  .svs-site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .svs-site-footer__bottom {
+    flex-direction: column;
+  }
+}

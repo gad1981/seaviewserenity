@@ -274,6 +274,229 @@
   background: #2f5f93;
 }
 
+/* Book-now platforms panel */
+.svs-book-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0;
+  margin: 0.5rem auto 1.75rem;
+  border: 1px solid var(--svs-line);
+  background: var(--svs-white);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.svs-book-hero-media {
+  min-height: 280px;
+  background: #d7e6f5;
+}
+
+.svs-book-hero-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.svs-book-hero-panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background:
+    linear-gradient(165deg, #eef5fc 0%, #f8fbff 55%, #ffffff 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.svs-book-hero-panel h2 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+}
+
+.svs-book-hero-panel > p {
+  margin: 0 0 1.15rem;
+  color: var(--svs-muted);
+}
+
+.svs-book-platforms {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.svs-book-platform {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid var(--svs-line);
+  text-decoration: none;
+  color: var(--svs-ink);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.svs-book-platform:hover {
+  border-color: var(--svs-sea);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(61, 111, 168, 0.12);
+}
+
+.svs-book-platform-logo {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+}
+
+.svs-book-platform-logo img {
+  display: block;
+  max-height: 40px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.svs-book-platform-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--svs-sea-deep);
+  white-space: nowrap;
+}
+
+.svs-book-direct {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.25rem;
+  margin: 0 auto 2rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--svs-line);
+  background: var(--svs-white);
+}
+
+.svs-book-direct h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.svs-book-direct-copy p {
+  margin: 0 0 0.75rem;
+  color: var(--svs-muted);
+}
+
+.svs-book-address {
+  color: var(--svs-ink) !important;
+}
+
+.svs-book-contacts {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.svs-book-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--svs-line);
+  text-decoration: none;
+  color: var(--svs-text);
+  background: #f7fbff;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.svs-book-contact:hover {
+  border-color: var(--svs-sea);
+  background: #eef5fc;
+}
+
+.svs-book-contact-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--svs-sea-deep);
+}
+
+.svs-book-map {
+  margin: 0 auto 2.75rem;
+  border: 1px solid var(--svs-line);
+  background: var(--svs-white);
+  overflow: hidden;
+}
+
+.svs-book-map-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  background: linear-gradient(180deg, #eef5fc 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--svs-line);
+}
+
+.svs-book-map-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.3rem;
+}
+
+.svs-book-map-head p {
+  margin: 0;
+  color: var(--svs-muted);
+  max-width: 42ch;
+}
+
+.svs-book-map-head .svs-cta {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.svs-book-map-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: #d9e7f5;
+}
+
+.svs-book-map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.svs-book-map-note {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  font-size: 0.92rem;
+  color: var(--svs-muted);
+}
+
+.svs-book-map-note a {
+  color: var(--svs-sea-deep);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .svs-book-hero,
+  .svs-book-direct {
+    grid-template-columns: 1fr;
+  }
+
+  .svs-book-hero-media {
+    min-height: 220px;
+    max-height: 260px;
+  }
+
+  .svs-book-map-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .svs-book-map-frame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 .svs-sources {
   margin-top: 2.5rem;
   padding-top: 1.25rem;

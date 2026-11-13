@@ -12,6 +12,7 @@ LOCALES = ["en", "el", "fr", "de", "it", "he"]
 SITE = "https://seaviewserenity.gr"
 UI = json.loads((ROOT / "i18n" / "ui.json").read_text(encoding="utf-8"))
 ART_I18N = json.loads((ROOT / "i18n" / "articles.json").read_text(encoding="utf-8"))
+LEGAL = json.loads((ROOT / "i18n" / "legal.json").read_text(encoding="utf-8"))
 LANG_NAMES = UI["language_names"]
 
 # Image map per article (shared media at /Articles/media/)
@@ -82,18 +83,28 @@ def hreflang_links(path_after_locale: str) -> str:
 
 
 def lang_switcher(lang: str, path_after_locale: str, aria: str) -> str:
-    opts = []
-    for loc in LOCALES:
-        href = f"/{loc}/{path_after_locale}" if path_after_locale else f"/{loc}/"
-        cur = ' aria-current="true"' if loc == lang else ""
-        opts.append(f'<a href="{href}" hreflang="{loc}"{cur}>{LANG_NAMES[loc]}</a>')
-    return f'<nav class="svs-lang" aria-label="{aria}">' + "".join(opts) + "</nav>"
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from lang_switcher import lang_dropdown
+
+    return lang_dropdown(lang, path_after_locale, aria, LANG_NAMES, sitepro=False)
 
 
-def shell_header(lang: str, ui: dict, active: str, path_after: str) -> str:
-    rtl = ' dir="rtl"' if lang == "he" else ""
-    # not used for full page; helper pieces
-    return ""
+def site_chrome(lang: str, ui: dict, active: str, path_after: str, switcher: str, nav: str) -> str:
+    """Brand + primary nav + language dropdown on the right."""
+    return f'''  <header class="svs-shell svs-shell-header">
+    <a class="svs-shell-brand" href="/{lang}/">
+      <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
+      <span>{esc(ui["brand"])}</span>
+    </a>
+    <div class="svs-shell-header-right">
+      <nav class="svs-shell-nav" aria-label="Primary">
+        {nav}
+      </nav>
+      {switcher}
+    </div>
+  </header>'''
 
 
 def article_page(lang: str, slug: str) -> str:
@@ -172,6 +183,12 @@ def article_page(lang: str, slug: str) -> str:
 
     nav = nav_html(lang, ui, "articles")
     switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_footer import site_footer
+
+    foot = site_footer(lang, ui)
 
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
@@ -193,23 +210,13 @@ def article_page(lang: str, slug: str) -> str:
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
   <link href="/css/articles.css" rel="stylesheet" />
   <link href="/css/i18n.css" rel="stylesheet" />
+  <link href="/css/footer.css" rel="stylesheet" />
   <script type="application/ld+json">
 {json.dumps(json_ld, ensure_ascii=False, indent=2)}
   </script>
 </head>
 <body class="svs-articles">
-  <header class="svs-shell svs-shell-header">
-    <a class="svs-shell-brand" href="/{lang}/">
-      <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
-      <span>{esc(ui["brand"])}</span>
-    </a>
-    <div class="svs-header-tools">
-      {switcher}
-      <nav class="svs-shell-nav" aria-label="Primary">
-      {nav}
-      </nav>
-    </div>
-  </header>
+  {site_chrome(lang, ui, "articles", path_after, switcher, nav)}
   <main>
     <div class="svs-shell svs-hero svs-hero--article">
       <p class="svs-kicker">{esc(meta.get("kicker") or ui["articles_kicker"])}</p>
@@ -228,10 +235,8 @@ def article_page(lang: str, slug: str) -> str:
       </div>
     </article>
   </main>
-  <footer class="svs-shell svs-shell-footer">
-    <p>{ui["footer_copy"].replace("seaviewserenity.gr", '<a href="/' + lang + '/">seaviewserenity.gr</a>')}</p>
-    <p>{ui["footer_designed"].replace("georgegad.com", '<a href="https://georgegad.com" target="_blank" rel="noopener">georgegad.com</a>')}</p>
-  </footer>
+  {foot}
+  <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
 '''
@@ -286,6 +291,12 @@ def articles_index(lang: str) -> str:
     rtl_attr = ' dir="rtl"' if lang == "he" else ""
     fonts = "Heebo:400,600,700|Open+Sans:400,600,700" if lang == "he" else "Roboto:400,500,700|Open+Sans:400,600,700"
     switcher = lang_switcher(lang, "Articles/", ui["switcher_aria"])
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_footer import site_footer
+
+    foot = site_footer(lang, ui)
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
@@ -305,20 +316,10 @@ def articles_index(lang: str) -> str:
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
   <link href="/css/articles.css" rel="stylesheet" />
   <link href="/css/i18n.css" rel="stylesheet" />
+  <link href="/css/footer.css" rel="stylesheet" />
 </head>
 <body class="svs-articles">
-  <header class="svs-shell svs-shell-header">
-    <a class="svs-shell-brand" href="/{lang}/">
-      <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
-      <span>{esc(ui["brand"])}</span>
-    </a>
-    <div class="svs-header-tools">
-      {switcher}
-      <nav class="svs-shell-nav" aria-label="Primary">
-      {nav_html(lang, ui, "articles")}
-      </nav>
-    </div>
-  </header>
+  {site_chrome(lang, ui, "articles", "Articles/", switcher, nav_html(lang, ui, "articles"))}
   <main class="svs-shell">
     <div class="svs-hero">
       <p class="svs-kicker">{esc(ui["articles_kicker"])}</p>
@@ -338,10 +339,8 @@ def articles_index(lang: str) -> str:
       <a class="svs-cta" href="/{lang}/Book-now/">{esc(ui["nav_book"])}</a>
     </div>
   </main>
-  <footer class="svs-shell svs-shell-footer">
-    <p>{ui["footer_copy"].replace("seaviewserenity.gr", '<a href="/' + lang + '/">seaviewserenity.gr</a>')}</p>
-    <p>{ui["footer_designed"].replace("georgegad.com", '<a href="https://georgegad.com" target="_blank" rel="noopener">georgegad.com</a>')}</p>
-  </footer>
+  {foot}
+  <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
 '''
@@ -423,20 +422,73 @@ def marketing_page(lang: str, page: str) -> str:
       <h1>{esc(ui["book_h1"])}</h1>
       <p class="svs-lede">{esc(ui["book_intro"])}</p>
     </div>
-    <figure class="svs-figure svs-hero-figure svs-shell">
-      <img src="/Articles/media/syros-delfini-beach.jpg" alt="Delfini Beach Syros" loading="lazy" width="1200" height="675" />
-    </figure>
-    <article class="svs-article-wrap"><div class="svs-article">
-      <p>{esc(ui["book_cta_note"])}</p>
-      <p><strong>Delfini Beach, Ano Syros 81400, Syros, Greece</strong></p>
-      <p>WhatsApp / Phone: <a href="https://api.whatsapp.com/send?phone=306937027555" target="_blank" rel="noopener">+30 693 702 7555</a><br/>
-      Instagram: <a href="https://www.instagram.com/seaviewserenityatsyros/" target="_blank" rel="noopener">@seaviewserenityatsyros</a></p>
-      <p>
-        <a class="svs-cta" href="https://www.booking.com/hotel/gr/sea-view-serenity.el.html" target="_blank" rel="noopener">Booking.com</a>
-        <a class="svs-cta" href="https://www.airbnb.com/rooms/1116489236524222235" target="_blank" rel="noopener" style="margin-inline-start:0.5rem;background:#13161a">Airbnb</a>
+    <section class="svs-shell svs-book-hero" aria-label="{esc(ui["book_platforms_title"])}">
+      <div class="svs-book-hero-media">
+        <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui["brand"])}" loading="eager" width="1200" height="675" />
+      </div>
+      <div class="svs-book-hero-panel">
+        <p class="svs-kicker">{esc(ui["book_platforms_title"])}</p>
+        <h2>{esc(ui["book_platforms_title"])}</h2>
+        <p>{esc(ui["book_platforms_lede"])}</p>
+        <div class="svs-book-platforms">
+          <a class="svs-book-platform" href="https://www.booking.com/hotel/gr/sea-view-serenity.el.html" target="_blank" rel="noopener">
+            <span class="svs-book-platform-logo"><img src="/gallery_gen/b695a04a5a807d8bc319519be3e32a78_608x152_80x67_765x305_crop.png" alt="Booking.com" width="180" height="48" loading="lazy" /></span>
+            <span class="svs-book-platform-label">{esc(ui["book_on"])} Booking.com</span>
+          </a>
+          <a class="svs-book-platform" href="https://www.airbnb.com/rooms/1116489236524222235" target="_blank" rel="noopener">
+            <span class="svs-book-platform-logo"><img src="/gallery_gen/981fbd136d9f99a100faff1cea3a540a_268x84_fit.png" alt="Airbnb" width="140" height="44" loading="lazy" /></span>
+            <span class="svs-book-platform-label">{esc(ui["book_on"])} Airbnb</span>
+          </a>
+          <a class="svs-book-platform" href="https://www.vrbo.com/en-gb/p11962377" target="_blank" rel="noopener">
+            <span class="svs-book-platform-logo"><img src="/gallery_gen/ee79e1c39b6e9cf0b84b093a4b3b89dd_656x226_0x112_656x464_crop.png" alt="Vrbo" width="140" height="48" loading="lazy" /></span>
+            <span class="svs-book-platform-label">{esc(ui["book_on"])} Vrbo</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="svs-shell svs-book-direct">
+      <div class="svs-book-direct-copy">
+        <h2>{esc(ui["book_direct_title"])}</h2>
+        <p>{esc(ui["book_direct_lede"])}</p>
+        <p class="svs-book-address"><strong>Delfini Beach, Ano Syros 81400, Syros, Greece</strong></p>
+      </div>
+      <div class="svs-book-contacts">
+        <a class="svs-book-contact" href="https://api.whatsapp.com/send?phone=306937027555" target="_blank" rel="noopener">
+          <span class="svs-book-contact-title">{esc(ui["book_whatsapp"])}</span>
+          <span>+30 693 702 7555</span>
+        </a>
+        <a class="svs-book-contact" href="https://www.instagram.com/seaviewserenityatsyros/" target="_blank" rel="noopener">
+          <span class="svs-book-contact-title">{esc(ui["book_instagram"])}</span>
+          <span>@seaviewserenityatsyros</span>
+        </a>
+        <a class="svs-book-contact" href="https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA" target="_blank" rel="noopener">
+          <span class="svs-book-contact-title">Maps</span>
+          <span>{esc(ui["book_maps"])}</span>
+        </a>
+      </div>
+    </section>
+    <section class="svs-shell svs-book-map" aria-label="{esc(ui["book_map_title"])}">
+      <div class="svs-book-map-head">
+        <div>
+          <h2>{esc(ui["book_map_title"])}</h2>
+          <p>{esc(ui["book_map_lede"])}</p>
+        </div>
+        <a class="svs-cta" href="https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA" target="_blank" rel="noopener">{esc(ui["book_map_cta"])}</a>
+      </div>
+      <div class="svs-book-map-frame">
+        <iframe
+          title="{esc(ui["book_map_title"])} — Sea View Serenity"
+          src="https://www.google.com/maps?q=Sea+View+Serenity+Villa+at+Delfini+Beach+Syros@37.4584631,24.9024781&z=15&hl={lang}&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p class="svs-book-map-note">
+        <a href="https://www.google.com/maps/place/Sea+View+Serenity+Villa+at+Delfini+Beach+Syros/@37.4584631,24.9024781,17z" target="_blank" rel="noopener">{esc(ui["book_map_cta"])}</a>
+        · Delfini Beach, Ano Syros 81400, Syros, Greece
       </p>
-      <p><a href="https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA" target="_blank" rel="noopener">Google Maps — Sea View Serenity</a></p>
-    </div></article>'''
+    </section>'''
 
     switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
     return f'''<!DOCTYPE html>
@@ -460,18 +512,7 @@ def marketing_page(lang: str, page: str) -> str:
   <link href="/css/i18n.css" rel="stylesheet" />
 </head>
 <body class="svs-articles">
-  <header class="svs-shell svs-shell-header">
-    <a class="svs-shell-brand" href="/{lang}/">
-      <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
-      <span>{esc(ui["brand"])}</span>
-    </a>
-    <div class="svs-header-tools">
-      {switcher}
-      <nav class="svs-shell-nav" aria-label="Primary">
-      {nav_html(lang, ui, active)}
-      </nav>
-    </div>
-  </header>
+  {site_chrome(lang, ui, active, path_after, switcher, nav_html(lang, ui, active))}
   <main>
 {body}
   </main>
@@ -479,6 +520,92 @@ def marketing_page(lang: str, page: str) -> str:
     <p>{ui["footer_copy"].replace("seaviewserenity.gr", '<a href="/' + lang + '/">seaviewserenity.gr</a>')}</p>
     <p>{ui["footer_designed"].replace("georgegad.com", '<a href="https://georgegad.com" target="_blank" rel="noopener">georgegad.com</a>')}</p>
   </footer>
+</body>
+</html>
+'''
+
+
+def legal_page(lang: str, kind: str) -> str:
+    """kind: 'terms' | 'cookies'"""
+    ui = UI[lang]
+    L = LEGAL[lang]
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_footer import site_footer
+
+    if kind == "terms":
+        path_after = "Terms/"
+        title, desc, h1, updated, body = (
+            L["terms_title"],
+            L["terms_description"],
+            L["terms_h1"],
+            L["terms_updated"],
+            L["terms_body"],
+        )
+        active = "home"
+    else:
+        path_after = "Cookies/"
+        title, desc, h1, updated, body = (
+            L["cookies_title"],
+            L["cookies_description"],
+            L["cookies_h1"],
+            L["cookies_updated"],
+            L["cookies_body"],
+        )
+        active = "home"
+
+    sections = "\n".join(
+        f"      <h2>{esc(block['h2'])}</h2>\n      <p>{esc(block['p'])}</p>" for block in body
+    )
+    canonical = f"{SITE}/{lang}/{path_after}"
+    rtl_attr = ' dir="rtl"' if lang == "he" else ""
+    fonts = (
+        "Heebo:400,600,700|Open+Sans:400,600,700"
+        if lang == "he"
+        else "Roboto:400,500,700|Open+Sans:400,600,700"
+    )
+    switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
+    foot = site_footer(lang, ui)
+    other = "Cookies" if kind == "terms" else "Terms"
+    other_label = L["cookies_nav"] if kind == "terms" else L["terms_nav"]
+    return f'''<!DOCTYPE html>
+<html lang="{lang}"{rtl_attr}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(desc)}" />
+  <link rel="canonical" href="{canonical}" />
+{hreflang_links(path_after)}
+  <meta property="og:title" content="{esc(title)}" />
+  <meta property="og:description" content="{esc(desc)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{canonical}" />
+  <meta property="og:locale" content="{og_locale(lang)}" />
+  <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
+  <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
+  <link href="/css/articles.css" rel="stylesheet" />
+  <link href="/css/i18n.css" rel="stylesheet" />
+  <link href="/css/footer.css" rel="stylesheet" />
+</head>
+<body class="svs-articles">
+  {site_chrome(lang, ui, active, path_after, switcher, nav_html(lang, ui, active))}
+  <main class="svs-shell">
+    <div class="svs-hero svs-hero--article">
+      <p class="svs-kicker">{esc(L["legal_heading"])}</p>
+      <h1>{esc(h1)}</h1>
+      <p class="svs-meta">{esc(updated)}</p>
+    </div>
+    <article class="svs-article-wrap">
+      <div class="svs-article">
+{sections}
+        <p class="svs-meta" style="margin-top:2rem"><a href="/{lang}/{other}/">{esc(other_label)}</a></p>
+      </div>
+    </article>
+  </main>
+  {foot}
+  <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
 '''
@@ -492,7 +619,7 @@ def write(path: Path, content: str) -> None:
 def build_sitemap() -> None:
     urls = []
     for lang in LOCALES:
-        for path in ["", "The-Villa/", "Book-now/", "Articles/"]:
+        for path in ["", "The-Villa/", "Book-now/", "Articles/", "Terms/", "Cookies/"]:
             loc = f"{SITE}/{lang}/{path}" if path else f"{SITE}/{lang}/"
             urls.append(f"  <url><loc>{loc}</loc><changefreq>weekly</changefreq></url>")
         for slug in ARTICLE_MEDIA:
@@ -519,6 +646,10 @@ def build_vercel() -> None:
         {"source": "/book-now/", "destination": "/en/Book-now/", "permanent": True},
         {"source": "/Articles", "destination": "/en/Articles/", "permanent": True},
         {"source": "/Articles/", "destination": "/en/Articles/", "permanent": True},
+        {"source": "/Terms", "destination": "/en/Terms/", "permanent": True},
+        {"source": "/Terms/", "destination": "/en/Terms/", "permanent": True},
+        {"source": "/Cookies", "destination": "/en/Cookies/", "permanent": True},
+        {"source": "/Cookies/", "destination": "/en/Cookies/", "permanent": True},
     ]
     for slug in ARTICLE_MEDIA:
         redirects.append(
@@ -559,16 +690,20 @@ def build_vercel() -> None:
 
 def main() -> None:
     extract_en_articles()
-    # Remove old Site.pro locale copies under en for villa/book/home — rebuild clean
-    # Keep en/Articles media path shared at root Articles/media
+    # Home / Villa / Book: restore original Site.pro layouts (hero, gallery, absolute CSS)
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from restore_sitepro import write_pages as write_sitepro_pages
+
+    write_sitepro_pages()
 
     for lang in LOCALES:
-        write(ROOT / lang / "index.html", marketing_page(lang, "home"))
-        write(ROOT / lang / "The-Villa" / "index.html", marketing_page(lang, "villa"))
-        write(ROOT / lang / "Book-now" / "index.html", marketing_page(lang, "book"))
         write(ROOT / lang / "Articles" / "index.html", articles_index(lang))
         for slug in ARTICLE_MEDIA:
             write(ROOT / lang / "Articles" / slug / "index.html", article_page(lang, slug))
+        write(ROOT / lang / "Terms" / "index.html", legal_page(lang, "terms"))
+        write(ROOT / lang / "Cookies" / "index.html", legal_page(lang, "cookies"))
         print("built", lang)
 
     # Root index redirect fallback for static hosts without vercel
