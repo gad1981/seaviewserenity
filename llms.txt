@@ -1,0 +1,33 @@
+# Sea View Serenity
+
+> Seaside holiday house near Delfini Beach, Syros (Cyclades, Greece). Three bedrooms, sea views, full kitchen, parking. Ideal for families and friends.
+
+- Site: https://seaviewserenity.gr/
+- Brand: Sea View Serenity
+- Location: Delfini Beach, Ano Syros 81400, Syros, Greece
+- Coordinates: 37.4584631, 24.9024781
+- Phone / WhatsApp: +30 693 702 7555
+- Instagram: https://www.instagram.com/seaviewserenityatsyros/
+- Map: https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA
+
+## Languages
+
+- English: https://seaviewserenity.gr/en/
+- Greek: https://seaviewserenity.gr/el/
+- French: https://seaviewserenity.gr/fr/
+- German: https://seaviewserenity.gr/de/
+- Italian: https://seaviewserenity.gr/it/
+- Hebrew: https://seaviewserenity.gr/he/
+
+## Key pages (English)
+
+- Home: https://seaviewserenity.gr/en/
+- The Villa: https://seaviewserenity.gr/en/The-Villa/
+- Book now: https://seaviewserenity.gr/en/Book-now/
+- Articles: https://seaviewserenity.gr/en/Articles/
+- Sitemap: https://seaviewserenity.gr/sitemap.xml
+
+## Optional
+
+- Terms: https://seaviewserenity.gr/en/Terms/
+- Cookies: https://seaviewserenity.gr/en/Cookies/

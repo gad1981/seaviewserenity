@@ -15,6 +15,22 @@ ART_I18N = json.loads((ROOT / "i18n" / "articles.json").read_text(encoding="utf-
 LEGAL = json.loads((ROOT / "i18n" / "legal.json").read_text(encoding="utf-8"))
 LANG_NAMES = UI["language_names"]
 
+import sys as _sys
+
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from seo import (  # noqa: E402
+    SITE as SEO_SITE,
+    breadcrumb_ld,
+    lodging_ld,
+    organization_ld,
+    seo_head,
+    webpage_ld,
+    website_ld,
+    og_locale as seo_og_locale,
+    hreflang_links as seo_hreflang_links,
+    DEFAULT_OG_IMAGE,
+)
+
 # Home photos from original Site.pro (only files present in the repo mirror)
 HOME_HERO_IMG = "/gallery_gen/d9a25b075f62f8d817a4f599e5f5010c_fit.png"
 HOME_WELCOME_IMG = "/gallery_gen/c0901f857a87ad3da5b8c683d0235ea7_fit.png"
@@ -43,22 +59,23 @@ VILLA_KITCHEN_IMG = "/gallery_gen/53c40bb5e4411ffb3c88abd37c52f3b0_fit.png"
 def home_carousel_html(ui: dict) -> str:
     slides = []
     dots = []
+    label = esc(ui.get("home_gallery", "Gallery"))
     for i, src in enumerate(HOME_CAROUSEL):
         eager = ' loading="eager" fetchpriority="high"' if i == 0 else ' loading="lazy"'
         hidden = "false" if i == 0 else "true"
         active = " is-active" if i == 0 else ""
         current = ' aria-current="true"' if i == 0 else ' aria-current="false"'
+        slide_alt = f"{label} — {i + 1}"
         slides.append(
             f'<div class="svs-carousel__slide" aria-hidden="{hidden}">'
-            f'<img src="{src}" alt=""{eager} width="1448" height="1086" /></div>'
+            f'<img src="{src}" alt="{slide_alt}"{eager} width="1448" height="1086" /></div>'
         )
         dots.append(
             f'<button type="button" class="svs-carousel__dot{active}" '
             f'data-svs-carousel-dot aria-label="{i + 1}"{current}></button>'
         )
-    label = esc(ui.get("home_gallery", "Gallery"))
     return f'''
-    <section class="svs-shell svs-carousel" data-svs-carousel data-interval="3000" aria-roledescription="carousel" aria-label="{label}">
+    <section class="svs-shell svs-carousel svs-reveal svs-reveal--zoom" data-reveal-delay="0.15" data-svs-carousel data-interval="3000" aria-roledescription="carousel" aria-label="{label}">
       <div class="svs-carousel__viewport">
         <div class="svs-carousel__track">
           {"".join(slides)}
@@ -110,8 +127,7 @@ def extract_en_articles() -> None:
         mid_alt = figs[0][0] if figs else ""
         mid_cap = figs[0][1] if figs else ""
         body = body_m.group(1) if body_m else ""
-        # strip embedded mid figure from body for rebuild
-        body = re.sub(r'<figure class="svs-figure".*?</figure>\s*', "", body, count=1, flags=re.S)
+        # Keep all inline figures — EN bodies are the photo-illustrated source of truth
         EN_META[slug] = {
             "title": re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", title.group(1) if title else slug),
             "description": desc.group(1) if desc else "",
@@ -129,14 +145,7 @@ def extract_en_articles() -> None:
 
 def hreflang_links(path_after_locale: str) -> str:
     """path_after_locale like '' or 'Articles/' or 'The-Villa/'"""
-    lines = []
-    for loc in LOCALES:
-        href = f"{SITE}/{loc}/{path_after_locale}".rstrip("/") + "/"
-        if path_after_locale == "":
-            href = f"{SITE}/{loc}/"
-        lines.append(f'  <link rel="alternate" hreflang="{loc}" href="{href}" />')
-    lines.append(f'  <link rel="alternate" hreflang="x-default" href="{SITE}/en/{path_after_locale.lstrip("/")}" />')
-    return "\n".join(lines)
+    return seo_hreflang_links(path_after_locale)
 
 
 def lang_switcher(lang: str, path_after_locale: str, aria: str) -> str:
@@ -157,6 +166,14 @@ def css_links() -> str:
     return css_head_links(articles=True)
 
 
+def js_v() -> str:
+    import sys
+    from pathlib import Path as _P
+    sys.path.insert(0, str(_P(__file__).resolve().parent))
+    from site_chrome import CSS_V
+    return CSS_V
+
+
 def site_chrome(lang: str, ui: dict, active: str, path_after: str, switcher: str = "", nav: str = "") -> str:
     """Articles-style top nav — site-wide norm."""
     import sys
@@ -169,33 +186,56 @@ def site_chrome(lang: str, ui: dict, active: str, path_after: str, switcher: str
     return build_chrome(lang, ui, active, path_after, LANG_NAMES)
 
 
+def _word_count_html(html: str) -> int:
+    return len(re.sub(r"<[^>]+>", " ", html or "").split())
+
+
 def article_page(lang: str, slug: str) -> str:
     ui = UI[lang]
+    en_meta = dict(EN_META[slug])
     if lang == "en":
-        meta = dict(EN_META[slug])
+        meta = en_meta
     else:
         meta = dict(ART_I18N[slug][lang])
+        # Prefer translated body when it is still substantial; otherwise use the
+        # expanded English body so photos and depth are not lost mid-migration.
+        if _word_count_html(meta.get("body", "")) < 700:
+            meta = {
+                **meta,
+                "body": en_meta["body"],
+                "hero_alt": meta.get("hero_alt") or en_meta.get("hero_alt", ""),
+                "hero_caption": meta.get("hero_caption") or en_meta.get("hero_caption", ""),
+                "mid_alt": meta.get("mid_alt") or en_meta.get("mid_alt", ""),
+                "mid_caption": meta.get("mid_caption") or en_meta.get("mid_caption", ""),
+            }
     # translations sometimes append brand to title — keep h1 clean
     meta["title"] = re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", meta["title"]).strip()
     hero, mid = ARTICLE_MEDIA[slug]
     book = f"/{lang}/Book-now/"
-    body = meta["body"].replace('href="BOOK"', f'href="{book}"').replace("href='BOOK'", f'href="{book}"')
-    # insert mid figure after first h2 block end / first section
-    mid_fig = f'''<figure class="svs-figure">
+    villa = f"/{lang}/The-Villa/"
+    body = (
+        meta["body"]
+        .replace('href="BOOK"', f'href="{book}"')
+        .replace("href='BOOK'", f'href="{book}"')
+        .replace('href="/en/Book-now/"', f'href="{book}"')
+        .replace('href="/en/The-Villa/"', f'href="{villa}"')
+    )
+    # Only inject the legacy mid image when the body has no inline figures yet
+    if '<figure class="svs-figure"' not in body:
+        mid_fig = f'''<figure class="svs-figure">
   <img src="/Articles/media/{mid}" alt="{meta.get("mid_alt","")}" loading="lazy" width="1200" height="675" />
   <figcaption>{meta.get("mid_caption","")}</figcaption>
 </figure>
 '''
-    if "<h2>" in body:
-        # after first closing </p> following first h2
-        m = re.search(r"<h2>.*?</h2>\s*<p>.*?</p>", body, re.S)
-        if m:
-            i = m.end()
-            body = body[:i] + "\n" + mid_fig + body[i:]
+        if "<h2>" in body:
+            m = re.search(r"<h2>.*?</h2>\s*<p>.*?</p>", body, re.S)
+            if m:
+                i = m.end()
+                body = body[:i] + "\n" + mid_fig + body[i:]
+            else:
+                body = mid_fig + body
         else:
             body = mid_fig + body
-    else:
-        body = mid_fig + body
 
     sources = EN_SOURCES.get(slug, "")
     # localize sources heading only
@@ -224,24 +264,39 @@ def article_page(lang: str, slug: str) -> str:
     if lang == "he":
         fonts = "Heebo:400,600,700|Open+Sans:400,600,700"
 
-    json_ld = {
+    hero_url = f"{SITE}/Articles/media/{hero}"
+    published = "2026-11-07"
+    modified = "2026-11-21"
+    article_ld = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": meta["title"],
         "description": meta["description"],
-        "datePublished": "2026-11-07",
-        "dateModified": "2026-11-07",
+        "datePublished": published,
+        "dateModified": modified,
         "inLanguage": lang,
-        "author": {"@type": "Organization", "name": "Sea View Serenity hosts"},
-        "publisher": {
-            "@type": "Organization",
-            "name": "Sea View Serenity",
-            "logo": {"@type": "ImageObject", "url": f"{SITE}/gallery/favicons/favicon.png"},
-        },
-        "mainEntityOfPage": canonical,
-        "image": [f"{SITE}/Articles/media/{hero}"],
+        "author": {"@type": "Organization", "name": "Sea View Serenity hosts", "@id": f"{SITE}/#organization"},
+        "publisher": organization_ld(),
+        "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
+        "image": [
+            {
+                "@type": "ImageObject",
+                "url": hero_url,
+                "width": 1200,
+                "height": 675,
+            }
+        ],
         "keywords": meta.get("keywords", ""),
+        "articleSection": "Travel",
+        "about": {"@id": f"{SITE}/#lodging"},
     }
+    crumbs = breadcrumb_ld(
+        [
+            (ui["nav_home"], f"{SITE}/{lang}/"),
+            (ui["nav_articles"], f"{SITE}/{lang}/Articles/"),
+            (meta["title"], canonical),
+        ]
+    )
 
     nav = nav_html(lang, ui, "articles")
     switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
@@ -251,29 +306,31 @@ def article_page(lang: str, slug: str) -> str:
     from site_footer import site_footer
 
     foot = site_footer(lang, ui)
+    head_seo = seo_head(
+        lang=lang,
+        title=title,
+        description=meta["description"],
+        canonical=canonical,
+        path_after=path_after,
+        og_type="article",
+        og_image=hero_url,
+        og_image_alt=meta.get("hero_alt") or meta["title"],
+        og_image_w=1200,
+        og_image_h=675,
+        keywords=meta.get("keywords", ""),
+        article_published=f"{published}T00:00:00+02:00",
+        article_modified=f"{modified}T00:00:00+02:00",
+        json_ld=[organization_ld(), article_ld, crumbs],
+    )
 
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title}</title>
-  <meta name="description" content="{esc(meta["description"])}" />
-  <meta name="keywords" content="{esc(meta.get("keywords",""))}" />
-  <link rel="canonical" href="{canonical}" />
-{hreflang_links(path_after)}
-  <meta property="og:title" content="{esc(title)}" />
-  <meta property="og:description" content="{esc(meta["description"])}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="{canonical}" />
-  <meta property="og:locale" content="{og_locale(lang)}" />
-  <meta property="og:image" content="{SITE}/Articles/media/{hero}" />
-  <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
+{head_seo}
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
 {css_links()}
-  <script type="application/ld+json">
-{json.dumps(json_ld, ensure_ascii=False, indent=2)}
-  </script>
 </head>
 <body class="svs-articles">
   {site_chrome(lang, ui, "articles", path_after, switcher, nav)}
@@ -281,7 +338,7 @@ def article_page(lang: str, slug: str) -> str:
     <div class="svs-shell svs-hero svs-hero--article">
       <p class="svs-kicker">{esc(meta.get("kicker") or ui["articles_kicker"])}</p>
       <h1>{esc(meta["title"])}</h1>
-      <p class="svs-meta">{esc(ui["articles_meta_by"])} · {esc(ui["articles_meta_updated"])} 2026-11-07 · {esc(ui["articles_meta_read"])}</p>
+      <p class="svs-meta">{esc(ui["articles_meta_by"])} · {esc(ui["articles_meta_updated"])} 2026-11-21 · {esc(ui["articles_meta_read"])}</p>
     </div>
     <figure class="svs-figure svs-hero-figure svs-shell">
   <img src="/Articles/media/{hero}" alt="{esc(meta.get("hero_alt",""))}" loading="lazy" width="1200" height="675" />
@@ -296,8 +353,8 @@ def article_page(lang: str, slug: str) -> str:
     </article>
   </main>
   {foot}
-  <script src="/js/site-header.js" defer></script>
-  <script src="/js/lang-switcher.js" defer></script>
+  <script src="/js/site-header.js?v={js_v()}" defer></script>
+  <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
 </body>
 </html>
 '''
@@ -313,7 +370,7 @@ def esc(s: str) -> str:
 
 
 def og_locale(lang: str) -> str:
-    return {"en": "en_GB", "el": "el_GR", "fr": "fr_FR", "de": "de_DE", "it": "it_IT", "he": "he_IL"}[lang]
+    return seo_og_locale(lang)
 
 
 def nav_html(lang: str, ui: dict, active: str) -> str:
@@ -336,7 +393,7 @@ def articles_index(lang: str) -> str:
         meta["title"] = re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", meta["title"]).strip()
         cards.append(
             f'''    <a class="svs-card" href="/{lang}/Articles/{slug}/">
-      <div class="svs-card-media"><img src="/Articles/media/{hero}" alt="" loading="lazy" width="640" height="400" /></div>
+      <div class="svs-card-media"><img src="/Articles/media/{hero}" alt="{esc(meta["title"])}" loading="lazy" width="640" height="400" /></div>
       <p class="svs-kicker">Guide</p>
       <h2>{esc(meta["title"])}</h2>
       <p>{esc(meta["description"])}</p>
@@ -353,22 +410,42 @@ def articles_index(lang: str) -> str:
     from site_footer import site_footer
 
     foot = site_footer(lang, ui)
+    og_img = f"{SITE}/Articles/media/villa-terrace-sunset.jpg"
+    head_seo = seo_head(
+        lang=lang,
+        title=ui["articles_index_title"],
+        description=ui["articles_index_description"],
+        canonical=canonical,
+        path_after="Articles/",
+        og_image=og_img,
+        og_image_alt=ui.get("og_image_alt_articles") or ui["articles_index_h1"],
+        og_image_w=1200,
+        og_image_h=675,
+        keywords="Syros, Delfini Beach, Cyclades, Greece vacation rental, seaside house",
+        json_ld=[
+            organization_ld(),
+            website_ld(lang),
+            webpage_ld(
+                lang=lang,
+                name=ui["articles_index_title"],
+                description=ui["articles_index_description"],
+                url=canonical,
+                page_type="CollectionPage",
+            ),
+            breadcrumb_ld(
+                [
+                    (ui["nav_home"], f"{SITE}/{lang}/"),
+                    (ui["nav_articles"], canonical),
+                ]
+            ),
+        ],
+    )
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{esc(ui["articles_index_title"])}</title>
-  <meta name="description" content="{esc(ui["articles_index_description"])}" />
-  <link rel="canonical" href="{canonical}" />
-{hreflang_links("Articles/")}
-  <meta property="og:title" content="{esc(ui["articles_index_title"])}" />
-  <meta property="og:description" content="{esc(ui["articles_index_description"])}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="{canonical}" />
-  <meta property="og:locale" content="{og_locale(lang)}" />
-  <meta property="og:image" content="{SITE}/Articles/media/villa-terrace-sunset.jpg" />
-  <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
+{head_seo}
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
 {css_links()}
 </head>
@@ -381,7 +458,7 @@ def articles_index(lang: str) -> str:
       <p class="svs-lede">{esc(ui["articles_index_lede"])}</p>
     </div>
     <figure class="svs-figure svs-hero-figure">
-  <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui["brand"])}" loading="lazy" width="1200" height="675" />
+  <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui.get("og_image_alt_articles") or ui["brand"])}" loading="lazy" width="1200" height="675" />
   <figcaption>{esc(ui["articles_ready_text"])}</figcaption>
 </figure>
     <section class="svs-grid" aria-label="Article list">
@@ -394,8 +471,8 @@ def articles_index(lang: str) -> str:
     </div>
   </main>
   {foot}
-  <script src="/js/site-header.js" defer></script>
-  <script src="/js/lang-switcher.js" defer></script>
+  <script src="/js/site-header.js?v={js_v()}" defer></script>
+  <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
 </body>
 </html>
 '''
@@ -424,12 +501,12 @@ def marketing_page(lang: str, page: str) -> str:
         cta = esc(ui["home_book_cta"])
         body = f'''
     <section class="svs-bleed-hero" aria-label="{esc(ui["brand"])}">
-      <img class="svs-bleed-hero__media" src="{HOME_HERO_IMG}" alt="" width="1448" height="1086" loading="eager" fetchpriority="high" />
+      <img class="svs-bleed-hero__media" src="{HOME_HERO_IMG}" alt="{esc(ui.get("og_image_alt_home") or ui["brand"])}" width="1448" height="1086" loading="eager" fetchpriority="high" />
       <div class="svs-bleed-hero__scrim" aria-hidden="true"></div>
       <div class="svs-bleed-hero__content svs-shell">
-        <h1 class="svs-brand">{esc(ui["home_h1"])}</h1>
-        <p class="svs-lede">{esc(desc)}</p>
-        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+        <h1 class="svs-brand svs-reveal svs-reveal--fade" data-reveal-delay="0.2">{esc(ui["home_h1"])}</h1>
+        <p class="svs-lede svs-reveal" data-reveal-delay="0.45">{esc(desc)}</p>
+        <p class="svs-reveal svs-reveal--zoom" data-reveal-delay="0.7"><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <a class="svs-bleed-hero__scroll" href="#welcome" aria-label="{esc(ui["scroll_cue"])}">
         <span class="svs-bleed-hero__scroll-mouse" aria-hidden="true"><span class="svs-bleed-hero__scroll-wheel"></span></span>
@@ -437,34 +514,34 @@ def marketing_page(lang: str, page: str) -> str:
         <span class="svs-bleed-hero__scroll-line" aria-hidden="true"></span>
       </a>
     </section>
-    <section class="svs-shell svs-home-block" id="welcome">
+    <section class="svs-shell svs-home-block svs-reveal" data-reveal-delay="0.05" id="welcome">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["home_welcome_h2"])}</h2>
         <p>{esc(ui["home_welcome_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{HOME_WELCOME_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{HOME_WELCOME_IMG}" alt="{esc(ui["home_welcome_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block svs-home-block--flip">
+    <section class="svs-shell svs-home-block svs-home-block--flip svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["home_view_h2"])}</h2>
         <p>{esc(ui["home_view_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{HOME_VIEW_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{HOME_VIEW_IMG}" alt="{esc(ui["home_view_h2"])} — {esc(ui["brand"])}, Syros" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block">
+    <section class="svs-shell svs-home-block svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["home_amenities_h2"])}</h2>
         <p>{esc(ui["home_amenities_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{HOME_AMENITIES_IMG}" alt="" loading="lazy" width="1536" height="1024" />
+        <img src="{HOME_AMENITIES_IMG}" alt="{esc(ui["home_amenities_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1536" height="1024" />
       </figure>
     </section>
 {home_carousel_html(ui)}'''
@@ -477,62 +554,62 @@ def marketing_page(lang: str, page: str) -> str:
         cta = esc(ui["villa_cta"])
         body = f'''
     <div class="svs-shell svs-hero">
-      <p class="svs-kicker">{esc(ui["brand"])}</p>
-      <h1>{esc(ui["villa_h1"])}</h1>
-      <p class="svs-lede">{esc(ui["villa_intro"])}</p>
-      <p style="margin-top:1rem"><a class="svs-cta" href="{book}">{cta}</a></p>
+      <p class="svs-kicker svs-reveal svs-reveal--fade" data-reveal-delay="0.1">{esc(ui["brand"])}</p>
+      <h1 class="svs-reveal svs-reveal--fade" data-reveal-delay="0.25">{esc(ui["villa_h1"])}</h1>
+      <p class="svs-lede svs-reveal" data-reveal-delay="0.45">{esc(ui["villa_intro"])}</p>
+      <p class="svs-reveal svs-reveal--zoom" data-reveal-delay="0.7" style="margin-top:1rem"><a class="svs-cta" href="{book}">{cta}</a></p>
     </div>
-    <figure class="svs-figure svs-hero-figure svs-shell">
-      <img src="{VILLA_HERO_IMG}" alt="" loading="eager" width="1448" height="1086" />
+    <figure class="svs-figure svs-hero-figure svs-shell svs-reveal svs-reveal--zoom" data-reveal-delay="0.35">
+      <img src="{VILLA_HERO_IMG}" alt="{esc(ui.get("og_image_alt_villa") or ui["villa_h1"])}" loading="eager" width="1448" height="1086" />
     </figure>
-    <section class="svs-shell svs-home-block">
+    <section class="svs-shell svs-home-block svs-reveal" data-reveal-delay="0.05">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["villa_bedrooms_h2"])}</h2>
         <p>{esc(ui["villa_bedrooms_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_BEDROOMS_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_BEDROOMS_IMG}" alt="{esc(ui["villa_bedrooms_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block svs-home-block--flip">
+    <section class="svs-shell svs-home-block svs-home-block--flip svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["villa_bathrooms_h2"])}</h2>
         <p>{esc(ui["villa_bathrooms_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_BATHROOMS_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_BATHROOMS_IMG}" alt="{esc(ui["villa_bathrooms_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block">
+    <section class="svs-shell svs-home-block svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["villa_dinner_h2"])}</h2>
         <p>{esc(ui["villa_dinner_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_DINNER_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_DINNER_IMG}" alt="{esc(ui["villa_dinner_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block svs-home-block--flip">
+    <section class="svs-shell svs-home-block svs-home-block--flip svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["villa_living_h2"])}</h2>
         <p>{esc(ui["villa_living_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_LIVING_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_LIVING_IMG}" alt="{esc(ui["villa_living_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>
-    <section class="svs-shell svs-home-block">
+    <section class="svs-shell svs-home-block svs-reveal" data-reveal-delay="0.08">
       <div class="svs-home-block__copy">
         <h2>{esc(ui["villa_kitchen_h2"])}</h2>
         <p>{esc(ui["villa_kitchen_p"])}</p>
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_KITCHEN_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_KITCHEN_IMG}" alt="{esc(ui["villa_kitchen_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
       </figure>
     </section>'''
     else:  # book
@@ -542,11 +619,11 @@ def marketing_page(lang: str, page: str) -> str:
         og_image = f"{SITE}/gallery_gen/813a875966b2335423d49b510d298d8c_fit.png"
         body = f'''
     <div class="svs-shell svs-hero">
-      <p class="svs-kicker">{esc(ui["brand"])}</p>
-      <h1>{esc(ui["book_h1"])}</h1>
-      <p class="svs-lede">{esc(ui["book_intro"])}</p>
+      <p class="svs-kicker svs-reveal svs-reveal--fade" data-reveal-delay="0.1">{esc(ui["brand"])}</p>
+      <h1 class="svs-reveal svs-reveal--fade" data-reveal-delay="0.25">{esc(ui["book_h1"])}</h1>
+      <p class="svs-lede svs-reveal" data-reveal-delay="0.45">{esc(ui["book_intro"])}</p>
     </div>
-    <section class="svs-shell svs-book-hero" aria-label="{esc(ui["book_platforms_title"])}">
+    <section class="svs-shell svs-book-hero svs-reveal" data-reveal-delay="0.2" aria-label="{esc(ui["book_platforms_title"])}">
       <div class="svs-book-hero-media">
         <img src="/gallery_gen/813a875966b2335423d49b510d298d8c_fit.png" alt="{esc(ui["brand"])}" loading="eager" width="1200" height="675" />
       </div>
@@ -570,7 +647,7 @@ def marketing_page(lang: str, page: str) -> str:
         </div>
       </div>
     </section>
-    <section class="svs-shell svs-book-direct">
+    <section class="svs-shell svs-book-direct svs-reveal" data-reveal-delay="0.1">
       <div class="svs-book-direct-copy">
         <h2>{esc(ui["book_direct_title"])}</h2>
         <p>{esc(ui["book_direct_lede"])}</p>
@@ -591,7 +668,7 @@ def marketing_page(lang: str, page: str) -> str:
         </a>
       </div>
     </section>
-    <section class="svs-shell svs-book-map" aria-label="{esc(ui["book_map_title"])}">
+    <section class="svs-shell svs-book-map svs-reveal" data-reveal-delay="0.1" aria-label="{esc(ui["book_map_title"])}">
       <div class="svs-book-map-head">
         <div>
           <h2>{esc(ui["book_map_title"])}</h2>
@@ -615,24 +692,67 @@ def marketing_page(lang: str, page: str) -> str:
     </section>'''
 
     switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
-    page_title = esc(title) if "Sea View Serenity" in title else f'{esc(title)} | Sea View Serenity'
+    page_title = title if "Sea View Serenity" in title else f"{title} | Sea View Serenity"
     foot = site_footer(lang, ui)
+
+    if page == "home":
+        og_alt = ui.get("og_image_alt_home") or title
+        og_w, og_h = 1448, 1086
+        crumbs = breadcrumb_ld([(ui["nav_home"], canonical)])
+        ld = [
+            organization_ld(),
+            website_ld(lang),
+            lodging_ld(lang, desc),
+            webpage_ld(lang=lang, name=page_title, description=desc, url=canonical),
+            crumbs,
+        ]
+        kw = "Syros villa, Delfini Beach, seaside house Syros, Cyclades holiday rental, Sea View Serenity"
+    elif page == "villa":
+        og_alt = ui.get("og_image_alt_villa") or title
+        og_w, og_h = 1448, 1086
+        crumbs = breadcrumb_ld(
+            [(ui["nav_home"], f"{SITE}/{lang}/"), (ui["nav_villa"], canonical)]
+        )
+        ld = [
+            organization_ld(),
+            lodging_ld(lang, desc),
+            webpage_ld(lang=lang, name=page_title, description=desc, url=canonical),
+            crumbs,
+        ]
+        kw = "Syros villa rooms, Delfini Beach house, kitchen, parking, sea view bedrooms"
+    else:
+        og_alt = ui.get("og_image_alt_book") or title
+        og_w, og_h = 1448, 1086
+        crumbs = breadcrumb_ld(
+            [(ui["nav_home"], f"{SITE}/{lang}/"), (ui["nav_book"], canonical)]
+        )
+        ld = [
+            organization_ld(),
+            lodging_ld(lang, desc),
+            webpage_ld(lang=lang, name=page_title, description=desc, url=canonical),
+            crumbs,
+        ]
+        kw = "book Syros villa, Delfini Beach rental, Airbnb Syros, Booking.com Syros"
+
+    head_seo = seo_head(
+        lang=lang,
+        title=page_title,
+        description=desc,
+        canonical=canonical,
+        path_after=path_after,
+        og_image=og_image,
+        og_image_alt=og_alt,
+        og_image_w=og_w,
+        og_image_h=og_h,
+        keywords=kw,
+        json_ld=ld,
+    )
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{page_title}</title>
-  <meta name="description" content="{esc(desc)}" />
-  <link rel="canonical" href="{canonical}" />
-{hreflang_links(path_after)}
-  <meta property="og:title" content="{esc(title)}" />
-  <meta property="og:description" content="{esc(desc)}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="{canonical}" />
-  <meta property="og:locale" content="{og_locale(lang)}" />
-  <meta property="og:image" content="{og_image}" />
-  <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
+{head_seo}
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
 {css_links()}
 </head>
@@ -642,9 +762,10 @@ def marketing_page(lang: str, page: str) -> str:
 {body}
   </main>
   {foot}
-  <script src="/js/site-header.js" defer></script>
-  <script src="/js/home-carousel.js" defer></script>
-  <script src="/js/lang-switcher.js" defer></script>
+  <script src="/js/site-header.js?v={js_v()}" defer></script>
+  <script src="/js/reveal.js?v={js_v()}" defer></script>
+  <script src="/js/home-carousel.js?v={js_v()}" defer></script>
+  <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
 </body>
 </html>
 '''
@@ -694,21 +815,33 @@ def legal_page(lang: str, kind: str) -> str:
     foot = site_footer(lang, ui)
     other = "Cookies" if kind == "terms" else "Terms"
     other_label = L["cookies_nav"] if kind == "terms" else L["terms_nav"]
+    page_title = title if "Sea View Serenity" in title else f"{title} | Sea View Serenity"
+    head_seo = seo_head(
+        lang=lang,
+        title=page_title,
+        description=desc,
+        canonical=canonical,
+        path_after=path_after,
+        og_image=DEFAULT_OG_IMAGE,
+        og_image_alt=ui.get("og_image_alt_home") or ui["brand"],
+        robots="index, follow",
+        json_ld=[
+            organization_ld(),
+            webpage_ld(lang=lang, name=page_title, description=desc, url=canonical),
+            breadcrumb_ld(
+                [
+                    (ui["nav_home"], f"{SITE}/{lang}/"),
+                    (h1, canonical),
+                ]
+            ),
+        ],
+    )
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{esc(title)}</title>
-  <meta name="description" content="{esc(desc)}" />
-  <link rel="canonical" href="{canonical}" />
-{hreflang_links(path_after)}
-  <meta property="og:title" content="{esc(title)}" />
-  <meta property="og:description" content="{esc(desc)}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="{canonical}" />
-  <meta property="og:locale" content="{og_locale(lang)}" />
-  <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
+{head_seo}
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
 {css_links()}
 </head>
@@ -728,8 +861,8 @@ def legal_page(lang: str, kind: str) -> str:
     </article>
   </main>
   {foot}
-  <script src="/js/site-header.js" defer></script>
-  <script src="/js/lang-switcher.js" defer></script>
+  <script src="/js/site-header.js?v={js_v()}" defer></script>
+  <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
 </body>
 </html>
 '''
@@ -741,18 +874,49 @@ def write(path: Path, content: str) -> None:
 
 
 def build_sitemap() -> None:
+    """Multilingual sitemap with xhtml:link hreflang annotations."""
+    lastmod = "2026-11-21"
+    paths = [
+        ("", "1.0", "weekly"),
+        ("The-Villa/", "0.9", "weekly"),
+        ("Book-now/", "0.95", "weekly"),
+        ("Articles/", "0.85", "weekly"),
+        ("Terms/", "0.3", "yearly"),
+        ("Cookies/", "0.3", "yearly"),
+    ]
+    for slug in ARTICLE_MEDIA:
+        paths.append((f"Articles/{slug}/", "0.75", "monthly"))
+
+    def loc_for(lang: str, path: str) -> str:
+        return f"{SITE}/{lang}/" if path == "" else f"{SITE}/{lang}/{path}"
+
+    def xhtml_links(path: str) -> str:
+        lines = []
+        for loc in LOCALES:
+            lines.append(
+                f'    <xhtml:link rel="alternate" hreflang="{loc}" href="{loc_for(loc, path)}" />'
+            )
+        lines.append(
+            f'    <xhtml:link rel="alternate" hreflang="x-default" href="{loc_for("en", path)}" />'
+        )
+        return "\n".join(lines)
+
     urls = []
-    for lang in LOCALES:
-        for path in ["", "The-Villa/", "Book-now/", "Articles/", "Terms/", "Cookies/"]:
-            loc = f"{SITE}/{lang}/{path}" if path else f"{SITE}/{lang}/"
-            urls.append(f"  <url><loc>{loc}</loc><changefreq>weekly</changefreq></url>")
-        for slug in ARTICLE_MEDIA:
+    for path, priority, freq in paths:
+        for lang in LOCALES:
             urls.append(
-                f"  <url><loc>{SITE}/{lang}/Articles/{slug}/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>"
+                "  <url>\n"
+                f"    <loc>{loc_for(lang, path)}</loc>\n"
+                f"    <lastmod>{lastmod}</lastmod>\n"
+                f"    <changefreq>{freq}</changefreq>\n"
+                f"    <priority>{priority}</priority>\n"
+                f"{xhtml_links(path)}\n"
+                "  </url>"
             )
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + "\n".join(urls)
         + "\n</urlset>\n"
     )
@@ -807,6 +971,14 @@ def build_vercel() -> None:
                 "source": "/Articles/media/(.*)",
                 "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}],
             },
+            {
+                "source": "/(.*)",
+                "headers": [
+                    {"key": "X-Content-Type-Options", "value": "nosniff"},
+                    {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"},
+                    {"key": "X-Frame-Options", "value": "SAMEORIGIN"},
+                ],
+            },
         ],
     }
     (ROOT / "vercel.json").write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
@@ -833,13 +1005,33 @@ def main() -> None:
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=/en/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sea View Serenity | Seaside House near Delfini Beach, Syros</title>
+  <meta name="description" content="Sea View Serenity — seaside house on Syros, a 10-minute walk from Delfini Beach. Choose your language to continue." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://seaviewserenity.gr/en/" />
-  <title>Sea View Serenity</title>
+  <link rel="alternate" hreflang="en" href="https://seaviewserenity.gr/en/" />
+  <link rel="alternate" hreflang="el" href="https://seaviewserenity.gr/el/" />
+  <link rel="alternate" hreflang="fr" href="https://seaviewserenity.gr/fr/" />
+  <link rel="alternate" hreflang="de" href="https://seaviewserenity.gr/de/" />
+  <link rel="alternate" hreflang="it" href="https://seaviewserenity.gr/it/" />
+  <link rel="alternate" hreflang="he" href="https://seaviewserenity.gr/he/" />
+  <link rel="alternate" hreflang="x-default" href="https://seaviewserenity.gr/en/" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <meta http-equiv="refresh" content="0; url=/en/" />
   <script>location.replace('/en/' + location.search + location.hash);</script>
 </head>
 <body>
-  <p><a href="/en/">Sea View Serenity — continue in English</a></p>
+  <h1>Sea View Serenity</h1>
+  <p>Seaside house near Delfini Beach, Syros.</p>
+  <ul>
+    <li><a href="/en/" hreflang="en">English</a></li>
+    <li><a href="/el/" hreflang="el">Ελληνικά</a></li>
+    <li><a href="/fr/" hreflang="fr">Français</a></li>
+    <li><a href="/de/" hreflang="de">Deutsch</a></li>
+    <li><a href="/it/" hreflang="it">Italiano</a></li>
+    <li><a href="/he/" hreflang="he">עברית</a></li>
+  </ul>
 </body>
 </html>
 """,

@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Static assets
+Allow: /gallery/
+Allow: /gallery_gen/
+Allow: /Articles/media/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+
+Host: https://seaviewserenity.gr
 Sitemap: https://seaviewserenity.gr/sitemap.xml

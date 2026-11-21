@@ -428,6 +428,39 @@
   background: #2f5f93;
 }
 
+/* Gradual entry reveals (Site.pro-style) */
+.svs-reveal {
+  opacity: 0;
+  transform: translateY(1.35rem);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.svs-reveal--zoom {
+  transform: scale(0.92) translateY(0.75rem);
+}
+
+.svs-reveal--fade {
+  transform: none;
+}
+
+.svs-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svs-reveal,
+  .svs-reveal--zoom,
+  .svs-reveal--fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Home content blocks — 1080 shell, original Site.pro sections */
 .svs-home-block {
   display: grid;

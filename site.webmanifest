@@ -1,0 +1,32 @@
+{
+  "name": "Sea View Serenity",
+  "short_name": "SVS Syros",
+  "description": "Seaside house near Delfini Beach, Syros — calm Cyclades stays for families and friends.",
+  "start_url": "/en/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7caae5",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/gallery/favicons/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/gallery/favicons/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/gallery/favicons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

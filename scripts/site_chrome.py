@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 # Bump when shared CSS changes so all pages refresh together
-CSS_V = "norm10"
+CSS_V = "norm17"
 
 
 def css_head_links(*, articles: bool = False, sitepro: bool = False) -> str:
@@ -63,12 +63,17 @@ def site_chrome(lang: str, ui: dict, active: str, path_after: str) -> str:
 def site_chrome_with_switcher(
     lang: str, ui: dict, active: str, path_after: str, switcher: str, nav: str
 ) -> str:
+    menu_open = esc(ui.get("menu_open", "Menu"))
+    menu_close = esc(ui.get("menu_close", "Close menu"))
     return f'''  <header class="svs-shell-header">
     <a class="svs-shell-brand" href="/{lang}/">
       <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
       <span>{esc(ui["brand"])}</span>
     </a>
-    <div class="svs-shell-header-right">
+    <button class="svs-nav-toggle" type="button" aria-expanded="false" aria-controls="svs-nav-panel" aria-label="{menu_open}" data-label-open="{menu_open}" data-label-close="{menu_close}">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <div class="svs-nav-panel" id="svs-nav-panel">
       <nav class="svs-shell-nav" aria-label="Primary">
         {nav}
       </nav>

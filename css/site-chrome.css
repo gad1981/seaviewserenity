@@ -75,18 +75,18 @@ body.svs-page-home .svs-shell-header:not(.is-scrolled) {
   color: #fff;
 }
 
-body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-shell-brand,
-body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-shell-nav a {
+body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-shell-brand,
+body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-shell-nav a {
   color: #fff;
 }
 
-body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-shell-nav a:hover,
-body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-shell-nav a[aria-current="page"] {
+body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-shell-nav a:hover,
+body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-shell-nav a[aria-current="page"] {
   color: #fff;
   opacity: 1;
 }
 
-body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-shell-nav a {
+body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-shell-nav a {
   opacity: 0.86;
 }
 
@@ -118,6 +118,13 @@ body.svs-page-home .svs-shell-header.is-scrolled {
   border-radius: 50%;
 }
 
+.svs-nav-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem 1.1rem;
+  margin-inline-start: auto;
+}
+
 .svs-shell-nav {
   display: flex;
   flex-wrap: wrap;
@@ -137,6 +144,63 @@ body.svs-page-home .svs-shell-header.is-scrolled {
   color: var(--svs-sea-deep);
 }
 
+.svs-nav-toggle {
+  display: none;
+  position: relative;
+  z-index: 1002;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin: 0;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 1px solid var(--svs-line);
+  background: var(--svs-white);
+  color: var(--svs-ink);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.svs-nav-toggle span {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-nav-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+
+body.svs-page-home .svs-shell-header.is-scrolled .svs-nav-toggle,
+.svs-shell-header.is-nav-open .svs-nav-toggle {
+  background: var(--svs-white);
+  border-color: var(--svs-line);
+  color: var(--svs-ink);
+}
+
+.svs-shell-header.is-nav-open .svs-nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.svs-shell-header.is-nav-open .svs-nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.svs-shell-header.is-nav-open .svs-nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+body.svs-nav-locked {
+  overflow: hidden;
+}
+
 /* Articles / legal / shell pages: clear fixed header */
 body.svs-articles {
   padding-top: 4.5rem;
@@ -153,17 +217,146 @@ body:has(.svs-shell-header) [id^="wb_header_"] {
   display: none !important;
 }
 
-@media (max-width: 720px) {
-  body.svs-articles:not(.svs-page-home) {
-    padding-top: 7.5rem;
+/* Tablet + mobile: burger instead of inline menu */
+@media (max-width: 900px) {
+  .svs-shell-header {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem;
   }
 
-  .svs-shell-header {
+  .svs-shell-brand {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .svs-shell-brand span {
+    flex: 0 0 auto;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .svs-nav-toggle {
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .svs-nav-panel {
+    display: none;
+    flex: 1 1 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0.35rem 0 1.25rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+    overflow: auto;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .svs-nav-panel.is-open {
+    display: flex !important;
+  }
+
+  .svs-shell-header.is-nav-open {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.75rem;
+    row-gap: 0;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom-color: var(--svs-line) !important;
+    box-shadow: none !important;
+    color: var(--svs-ink);
+  }
+
+  .svs-shell-header.is-nav-open .svs-shell-brand,
+  body.svs-page-home .svs-shell-header.is-nav-open .svs-shell-brand {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    color: var(--svs-ink) !important;
+  }
+
+  .svs-shell-header.is-nav-open .svs-nav-toggle {
+    grid-column: 2;
+    grid-row: 1;
+    margin-inline-start: 0;
+  }
+
+  .svs-shell-header.is-nav-open .svs-nav-panel.is-open {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: stretch;
+    min-height: 0;
   }
 
   .svs-shell-nav {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  .svs-shell-nav a {
+    padding: 0.95rem 0.15rem;
+    border-bottom: 1px solid var(--svs-line);
+    color: var(--svs-ink) !important;
+    opacity: 1 !important;
+    font-size: 1.05rem;
+  }
+
+  .svs-shell-nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .svs-nav-panel .svs-lang-dd {
+    width: 100%;
+  }
+
+  .svs-nav-panel .svs-lang-dd__btn {
+    width: 100%;
     justify-content: flex-start;
+    padding: 0.75rem 0.85rem;
+    background: #fff !important;
+    border-color: var(--svs-line) !important;
+    color: var(--svs-ink) !important;
+  }
+
+  .svs-nav-panel .svs-lang-dd__menu {
+    position: static;
+    min-width: 0;
+    width: 100%;
+    margin-top: 0.35rem;
+    box-shadow: none;
+  }
+
+  body.svs-articles:not(.svs-page-home) {
+    padding-top: 4.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .svs-shell-brand img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .svs-shell-brand span {
+    font-size: 0.88rem;
+  }
+
+  /* Closed bar may ellipsis; open menu always shows the full name */
+  .svs-shell-header.is-nav-open .svs-shell-brand span {
+    font-size: 0.95rem;
   }
 }
