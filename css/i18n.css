@@ -26,6 +26,17 @@
   color: var(--svs-ink, #13161a);
   font: 600 0.78rem/1 Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: 0.02em;
+  transition:
+    background 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Home hero: light language control over the photo */
+body.svs-page-home .svs-shell-header:not(.is-scrolled) .svs-lang-dd__btn {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
 }
 
 .svs-lang-dd__btn::-webkit-details-marker {

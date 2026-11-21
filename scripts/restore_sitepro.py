@@ -151,15 +151,6 @@ MAP_CLICK = {
 }
 
 
-def lang_dd(lang: str, path_after: str, aria: str) -> str:
-    import sys
-
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from lang_switcher import lang_dropdown
-
-    return lang_dropdown(lang, path_after, aria, LANG_NAMES, sitepro=True)
-
-
 def hreflang(path_after: str) -> str:
     lines = []
     for loc in LOCALES:
@@ -199,15 +190,7 @@ def fix_nav(html: str, lang: str, ui: dict, active: str, path_after: str = "") -
     html = html.replace('href="Book-now/"', f'href="/{lang}/Book-now/"')
     html = html.replace('href="Articles/"', f'href="/{lang}/Articles/"')
     html = html.replace("><span>Book Now</span>", f"><span>{ui['home_book_cta']}</span>")
-    # Language dropdown OUTSIDE wb-menu so it never sits inside the 32px burger box
-    dd = lang_dd(lang, path_after, ui["switcher_aria"])
-    html = re.sub(
-        r'(class="wb_element wb-menu[^"]*"[^>]*>[\s\S]*?<div class="clearfix"></div></div>)',
-        rf"\1{dd}",
-        html,
-        count=1,
-    )
-    # Remove unused Site.pro Languages plugin slot (Book page)
+    # Site-wide chrome replaces Site.pro header + lang slot
     html = re.sub(
         r'<div id="[^"]+" class="wb_element wb-prevent-layout-click" data-plugin="Languages"></div>',
         "",
@@ -301,7 +284,9 @@ def translate_book(html: str, lang: str, ui: dict) -> str:
     return html
 
 
-def inject_head_body(html: str, lang: str, path_after: str, ui: dict, canonical: str) -> str:
+def inject_head_body(
+    html: str, lang: str, path_after: str, ui: dict, canonical: str, active: str
+) -> str:
     # Keep LTR Site.pro layout for all locales (including Hebrew) so absolute positions hold
     html = re.sub(r"<html[^>]*>", f'<html lang="{lang}">', html, count=1)
     html = re.sub(
@@ -310,12 +295,9 @@ def inject_head_body(html: str, lang: str, path_after: str, ui: dict, canonical:
         html,
         count=1,
     )
-    inject = (
-        f"{hreflang(path_after)}\n"
-        f'  <link href="/css/i18n.css" rel="stylesheet" type="text/css" />\n'
-        f'  <link href="/css/sitepro-i18n.css" rel="stylesheet" type="text/css" />\n'
-        f'  <link href="/css/footer.css" rel="stylesheet" type="text/css" />\n'
-    )
+    from site_chrome import css_head_links
+
+    inject = f"{hreflang(path_after)}\n{css_head_links(sitepro=True)}\n"
     html = html.replace(
         f'<link rel="canonical" href="{canonical}" />',
         f'<link rel="canonical" href="{canonical}" />\n{inject}',
@@ -327,11 +309,20 @@ def inject_head_body(html: str, lang: str, path_after: str, ui: dict, canonical:
         html,
         count=1,
     )
-    # Full site footer as sibling after #wb_root (Site.pro absolute layout)
     import sys
 
     sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_chrome import build_chrome
     from site_footer import site_footer
+
+    chrome = build_chrome(lang, ui, active, path_after, LANG_NAMES)
+    # Inject Articles-style header as first body child (Site.pro wb_header is CSS-hidden)
+    html = re.sub(
+        r"(<body[^>]*>)",
+        rf"\1\n{chrome}\n",
+        html,
+        count=1,
+    )
 
     foot = site_footer(lang, ui)
     if re.search(r'</div>\s*<script src="/js/jquery', html):
@@ -369,7 +360,7 @@ def build_page(page: str, lang: str) -> str:
         active, path_after, canonical = "book", "Book-now/", f"{SITE}/{lang}/Book-now/"
         html = fix_nav(html, lang, ui, active, path_after)
         html = translate_book(html, lang, ui)
-    html = inject_head_body(html, lang, path_after, ui, canonical)
+    html = inject_head_body(html, lang, path_after, ui, canonical, active)
     html = re.sub(r'<base href="[^"]*"\s*/?>', '<base href="/" />', html)
     return html
 

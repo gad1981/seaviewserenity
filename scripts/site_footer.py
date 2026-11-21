@@ -54,7 +54,7 @@ def site_footer(lang: str, ui: dict) -> str:
   <div class="svs-site-footer__inner">
     <div class="svs-site-footer__brand">
       <a class="svs-site-footer__logo" href="{home}">
-        <img src="/gallery/Picture 1.png" alt="{brand}" width="48" height="48" loading="lazy" />
+        <img src="/gallery/Picture 1.png" alt="{brand}" width="42" height="42" loading="lazy" />
         <span>{brand}</span>
       </a>
       <p class="svs-site-footer__tagline">{esc(ui["footer_tagline"])}</p>
@@ -66,45 +66,34 @@ def site_footer(lang: str, ui: dict) -> str:
           <li><a href="{home}">{esc(ui["nav_home"])}</a></li>
           <li><a href="{villa}">{esc(ui["nav_villa"])}</a></li>
           <li><a href="{articles}">{esc(ui["nav_articles"])}</a></li>
-          <li><a href="{book}">{esc(ui["nav_book"])}</a></li>
         </ul>
       </nav>
       <nav class="svs-site-footer__col" aria-label="{esc(ui["footer_book"])}">
         <h2 class="svs-site-footer__heading">{esc(ui["footer_book"])}</h2>
         <ul>
           <li><a href="{book}">{esc(ui["nav_book"])}</a></li>
-          <li><a href="{BOOKING}" target="_blank" rel="noopener">Booking.com</a></li>
           <li><a href="{AIRBNB}" target="_blank" rel="noopener">Airbnb</a></li>
+          <li><a href="{BOOKING}" target="_blank" rel="noopener">Booking.com</a></li>
           <li><a href="{VRBO}" target="_blank" rel="noopener">Vrbo</a></li>
         </ul>
       </nav>
-      <div class="svs-site-footer__col">
+      <nav class="svs-site-footer__col" aria-label="{esc(ui["footer_contact"])}">
         <h2 class="svs-site-footer__heading">{esc(ui["footer_contact"])}</h2>
         <ul>
-          <li><a href="{WHATSAPP}" target="_blank" rel="noopener">{esc(ui["footer_phone_label"])}: {PHONE_DISPLAY}</a></li>
-          <li><a href="{INSTAGRAM}" target="_blank" rel="noopener">@seaviewserenityatsyros</a></li>
-          <li><a href="{MAPS}" target="_blank" rel="noopener">{esc(ui["footer_maps"])}</a></li>
-          <li><span class="svs-site-footer__muted">{esc(ui["footer_address_label"])}: {esc(ADDRESS)}</span></li>
+          <li><a href="{FACEBOOK}" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
-      </div>
+      </nav>
       <nav class="svs-site-footer__col" aria-label="{esc(L["legal_heading"])}">
         <h2 class="svs-site-footer__heading">{esc(L["legal_heading"])}</h2>
         <ul>
           <li><a href="{terms}">{esc(L["terms_nav"])}</a></li>
           <li><a href="{cookies}">{esc(L["cookies_nav"])}</a></li>
-          <li><a href="{FACEBOOK}" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a></li>
         </ul>
       </nav>
     </div>
     <div class="svs-site-footer__bottom">
-      <div>
-        <p>{esc(ui["footer_copy"]).replace("seaviewserenity.gr", f'<a href="{home}">seaviewserenity.gr</a>')}</p>
-        <nav class="svs-site-footer__legal" aria-label="{esc(L["legal_heading"])}">
-          <a href="{terms}">{esc(L["terms_nav"])}</a>
-          <a href="{cookies}">{esc(L["cookies_nav"])}</a>
-        </nav>
-      </div>
+      <p>{esc(ui["footer_copy"]).replace("seaviewserenity.gr", f'<a href="{home}">seaviewserenity.gr</a>')}</p>
       <p>{esc(ui["footer_designed"]).replace("georgegad.com", '<a href="https://georgegad.com" target="_blank" rel="noopener">georgegad.com</a>')}</p>
     </div>
   </div>

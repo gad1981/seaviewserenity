@@ -15,6 +15,63 @@ ART_I18N = json.loads((ROOT / "i18n" / "articles.json").read_text(encoding="utf-
 LEGAL = json.loads((ROOT / "i18n" / "legal.json").read_text(encoding="utf-8"))
 LANG_NAMES = UI["language_names"]
 
+# Home photos from original Site.pro (only files present in the repo mirror)
+HOME_HERO_IMG = "/gallery_gen/d9a25b075f62f8d817a4f599e5f5010c_fit.png"
+HOME_WELCOME_IMG = "/gallery_gen/c0901f857a87ad3da5b8c683d0235ea7_fit.png"
+HOME_VIEW_IMG = "/gallery_gen/6fa96ad5387e85756c23e25cd3d92b6f_fit.png"
+HOME_AMENITIES_IMG = "/gallery_gen/27ead61515651f1d2332b229a59fe91b_fit.png"
+# Original slideshow slides that exist locally + home section photos
+HOME_CAROUSEL = [
+    "/gallery_gen/9c6da47c9cdd25d963f8ee8945686e53_fit.png",
+    "/gallery_gen/36e253b50e0f85dd754b90e310611360_fit.png",
+    "/gallery_gen/53c40bb5e4411ffb3c88abd37c52f3b0_fit.png",
+    HOME_HERO_IMG,
+    HOME_WELCOME_IMG,
+    HOME_VIEW_IMG,
+    HOME_AMENITIES_IMG,
+]
+
+# Villa photos from original Site.pro
+VILLA_HERO_IMG = "/gallery_gen/3b28058ac52b3397cb232a1976b9713c_fit.png"
+VILLA_BEDROOMS_IMG = "/gallery_gen/9c6da47c9cdd25d963f8ee8945686e53_fit.png"
+VILLA_BATHROOMS_IMG = "/gallery_gen/99a8d7bd813690de25cbe2bb5c3a45c3_fit.png"
+VILLA_DINNER_IMG = "/gallery_gen/3b28058ac52b3397cb232a1976b9713c_fit.png"
+VILLA_LIVING_IMG = "/gallery_gen/36e253b50e0f85dd754b90e310611360_fit.png"
+VILLA_KITCHEN_IMG = "/gallery_gen/53c40bb5e4411ffb3c88abd37c52f3b0_fit.png"
+
+
+def home_carousel_html(ui: dict) -> str:
+    slides = []
+    dots = []
+    for i, src in enumerate(HOME_CAROUSEL):
+        eager = ' loading="eager" fetchpriority="high"' if i == 0 else ' loading="lazy"'
+        hidden = "false" if i == 0 else "true"
+        active = " is-active" if i == 0 else ""
+        current = ' aria-current="true"' if i == 0 else ' aria-current="false"'
+        slides.append(
+            f'<div class="svs-carousel__slide" aria-hidden="{hidden}">'
+            f'<img src="{src}" alt=""{eager} width="1448" height="1086" /></div>'
+        )
+        dots.append(
+            f'<button type="button" class="svs-carousel__dot{active}" '
+            f'data-svs-carousel-dot aria-label="{i + 1}"{current}></button>'
+        )
+    label = esc(ui.get("home_gallery", "Gallery"))
+    return f'''
+    <section class="svs-shell svs-carousel" data-svs-carousel data-interval="3000" aria-roledescription="carousel" aria-label="{label}">
+      <div class="svs-carousel__viewport">
+        <div class="svs-carousel__track">
+          {"".join(slides)}
+        </div>
+      </div>
+      <button type="button" class="svs-carousel__nav svs-carousel__nav--prev" data-svs-carousel-prev aria-label="Previous">‹</button>
+      <button type="button" class="svs-carousel__nav svs-carousel__nav--next" data-svs-carousel-next aria-label="Next">›</button>
+      <div class="svs-carousel__dots" role="group" aria-label="{label}">
+        {"".join(dots)}
+      </div>
+    </section>'''
+
+
 # Image map per article (shared media at /Articles/media/)
 ARTICLE_MEDIA = {
     "seaside-accommodation-syros-delfini-beach": ("villa-bedroom-sea-view.jpg", "villa-terrace-sunset.jpg"),
@@ -91,20 +148,25 @@ def lang_switcher(lang: str, path_after_locale: str, aria: str) -> str:
     return lang_dropdown(lang, path_after_locale, aria, LANG_NAMES, sitepro=False)
 
 
-def site_chrome(lang: str, ui: dict, active: str, path_after: str, switcher: str, nav: str) -> str:
-    """Brand + primary nav + language dropdown on the right."""
-    return f'''  <header class="svs-shell svs-shell-header">
-    <a class="svs-shell-brand" href="/{lang}/">
-      <img src="/gallery/Picture 1.png" alt="{esc(ui["brand"])}" />
-      <span>{esc(ui["brand"])}</span>
-    </a>
-    <div class="svs-shell-header-right">
-      <nav class="svs-shell-nav" aria-label="Primary">
-        {nav}
-      </nav>
-      {switcher}
-    </div>
-  </header>'''
+def css_links() -> str:
+    """Articles-prototype stylesheet stack for shell pages."""
+    import sys
+    from pathlib import Path as _P
+    sys.path.insert(0, str(_P(__file__).resolve().parent))
+    from site_chrome import css_head_links
+    return css_head_links(articles=True)
+
+
+def site_chrome(lang: str, ui: dict, active: str, path_after: str, switcher: str = "", nav: str = "") -> str:
+    """Articles-style top nav — site-wide norm."""
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_chrome import build_chrome, site_chrome_with_switcher, nav_html as shared_nav
+
+    if switcher and nav:
+        return site_chrome_with_switcher(lang, ui, active, path_after, switcher, nav)
+    return build_chrome(lang, ui, active, path_after, LANG_NAMES)
 
 
 def article_page(lang: str, slug: str) -> str:
@@ -208,9 +270,7 @@ def article_page(lang: str, slug: str) -> str:
   <meta property="og:image" content="{SITE}/Articles/media/{hero}" />
   <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
-  <link href="/css/articles.css" rel="stylesheet" />
-  <link href="/css/i18n.css" rel="stylesheet" />
-  <link href="/css/footer.css" rel="stylesheet" />
+{css_links()}
   <script type="application/ld+json">
 {json.dumps(json_ld, ensure_ascii=False, indent=2)}
   </script>
@@ -236,6 +296,7 @@ def article_page(lang: str, slug: str) -> str:
     </article>
   </main>
   {foot}
+  <script src="/js/site-header.js" defer></script>
   <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
@@ -256,17 +317,12 @@ def og_locale(lang: str) -> str:
 
 
 def nav_html(lang: str, ui: dict, active: str) -> str:
-    items = [
-        ("home", f"/{lang}/", ui["nav_home"]),
-        ("villa", f"/{lang}/The-Villa/", ui["nav_villa"]),
-        ("articles", f"/{lang}/Articles/", ui["nav_articles"]),
-        ("book", f"/{lang}/Book-now/", ui["nav_book"]),
-    ]
-    out = []
-    for key, href, label in items:
-        cur = ' aria-current="page"' if key == active else ""
-        out.append(f'<a href="{href}"{cur}>{label}</a>')
-    return "\n      ".join(out)
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_chrome import nav_html as shared_nav
+
+    return shared_nav(lang, ui, active)
 
 
 def articles_index(lang: str) -> str:
@@ -314,9 +370,7 @@ def articles_index(lang: str) -> str:
   <meta property="og:image" content="{SITE}/Articles/media/villa-terrace-sunset.jpg" />
   <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
-  <link href="/css/articles.css" rel="stylesheet" />
-  <link href="/css/i18n.css" rel="stylesheet" />
-  <link href="/css/footer.css" rel="stylesheet" />
+{css_links()}
 </head>
 <body class="svs-articles">
   {site_chrome(lang, ui, "articles", "Articles/", switcher, nav_html(lang, ui, "articles"))}
@@ -340,6 +394,7 @@ def articles_index(lang: str) -> str:
     </div>
   </main>
   {foot}
+  <script src="/js/site-header.js" defer></script>
   <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
@@ -347,75 +402,144 @@ def articles_index(lang: str) -> str:
 
 
 def marketing_page(lang: str, page: str) -> str:
-    """Clean i18n marketing pages (Home / Villa / Book) using articles shell."""
+    """Home / Villa / Book — Articles shell prototype (Home keeps full-bleed hero)."""
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from site_footer import site_footer
+
     ui = UI[lang]
     rtl_attr = ' dir="rtl"' if lang == "he" else ""
     fonts = "Heebo:400,600,700|Open+Sans:400,600,700" if lang == "he" else "Roboto:400,500,700|Open+Sans:400,600,700"
+    body_class = "svs-articles"
+    og_image = f"{SITE}/Articles/media/villa-terrace-sunset.jpg"
 
     if page == "home":
         active, path_after = "home", ""
         canonical = f"{SITE}/{lang}/"
         title, desc = ui["home_title"], ui["home_description"]
-        h1 = ui["home_h1"]
+        body_class = "svs-articles svs-page-home"
+        og_image = f"{SITE}{HOME_HERO_IMG}"
+        book = f"/{lang}/Book-now/"
+        cta = esc(ui["home_book_cta"])
         body = f'''
-    <div class="svs-shell svs-hero">
-      <p class="svs-kicker">{esc(ui["brand"])}</p>
-      <h1>{esc(h1)}</h1>
-      <p class="svs-lede">{esc(desc)}</p>
-      <p style="margin-top:1rem"><a class="svs-cta" href="/{lang}/Book-now/">{esc(ui["home_book_cta"])}</a></p>
-    </div>
-    <figure class="svs-figure svs-hero-figure svs-shell">
-      <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui["brand"])}" loading="lazy" width="1200" height="675" />
-    </figure>
-    <article class="svs-article-wrap"><div class="svs-article">
-      <h2>{esc(ui["home_welcome_h2"])}</h2>
-      <p>{esc(ui["home_welcome_p"])}</p>
-      <figure class="svs-figure">
-        <img src="/Articles/media/villa-bedroom-sea-view.jpg" alt="" loading="lazy" width="1200" height="675" />
-      </figure>
-      <h2>{esc(ui["home_view_h2"])}</h2>
-      <p>{esc(ui["home_view_p"])}</p>
-      <h2>{esc(ui["home_amenities_h2"])}</h2>
-      <p>{esc(ui["home_amenities_p"])}</p>
-      <div class="svs-callout">
-        <strong>{esc(ui["brand"])}</strong>
-        {esc(ui["articles_ready_text"])}
-        <a class="svs-cta" href="/{lang}/Book-now/">{esc(ui["home_book_cta"])}</a>
-        <a class="svs-cta" href="/{lang}/The-Villa/" style="margin-inline-start:0.5rem;background:#13161a">{esc(ui["nav_villa"])}</a>
+    <section class="svs-bleed-hero" aria-label="{esc(ui["brand"])}">
+      <img class="svs-bleed-hero__media" src="{HOME_HERO_IMG}" alt="" width="1448" height="1086" loading="eager" fetchpriority="high" />
+      <div class="svs-bleed-hero__scrim" aria-hidden="true"></div>
+      <div class="svs-bleed-hero__content svs-shell">
+        <h1 class="svs-brand">{esc(ui["home_h1"])}</h1>
+        <p class="svs-lede">{esc(desc)}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
-    </div></article>'''
+      <a class="svs-bleed-hero__scroll" href="#welcome" aria-label="{esc(ui["scroll_cue"])}">
+        <span class="svs-bleed-hero__scroll-mouse" aria-hidden="true"><span class="svs-bleed-hero__scroll-wheel"></span></span>
+        <span>{esc(ui["scroll_cue"])}</span>
+        <span class="svs-bleed-hero__scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+    <section class="svs-shell svs-home-block" id="welcome">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["home_welcome_h2"])}</h2>
+        <p>{esc(ui["home_welcome_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{HOME_WELCOME_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block svs-home-block--flip">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["home_view_h2"])}</h2>
+        <p>{esc(ui["home_view_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{HOME_VIEW_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["home_amenities_h2"])}</h2>
+        <p>{esc(ui["home_amenities_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{HOME_AMENITIES_IMG}" alt="" loading="lazy" width="1536" height="1024" />
+      </figure>
+    </section>
+{home_carousel_html(ui)}'''
     elif page == "villa":
         active, path_after = "villa", "The-Villa/"
         canonical = f"{SITE}/{lang}/The-Villa/"
         title, desc = ui["villa_title"], ui["villa_description"]
+        og_image = f"{SITE}{VILLA_HERO_IMG}"
+        book = f"/{lang}/Book-now/"
+        cta = esc(ui["villa_cta"])
         body = f'''
     <div class="svs-shell svs-hero">
       <p class="svs-kicker">{esc(ui["brand"])}</p>
       <h1>{esc(ui["villa_h1"])}</h1>
       <p class="svs-lede">{esc(ui["villa_intro"])}</p>
-      <p style="margin-top:1rem"><a class="svs-cta" href="/{lang}/Book-now/">{esc(ui["villa_cta"])}</a></p>
+      <p style="margin-top:1rem"><a class="svs-cta" href="{book}">{cta}</a></p>
     </div>
     <figure class="svs-figure svs-hero-figure svs-shell">
-      <img src="/Articles/media/villa-dining-living.jpg" alt="" loading="lazy" width="1200" height="675" />
+      <img src="{VILLA_HERO_IMG}" alt="" loading="eager" width="1448" height="1086" />
     </figure>
-    <article class="svs-article-wrap"><div class="svs-article">
-      <p>{esc(ui["villa_description"])}</p>
-      <figure class="svs-figure">
-        <img src="/Articles/media/villa-kitchen.jpg" alt="" loading="lazy" width="1200" height="675" />
-      </figure>
-      <figure class="svs-figure">
-        <img src="/Articles/media/villa-bedroom-balcony.jpg" alt="" loading="lazy" width="1200" height="675" />
-      </figure>
-      <div class="svs-callout">
-        <strong>{esc(ui["villa_cta"])}</strong>
-        {esc(ui["articles_ready_text"])}
-        <a class="svs-cta" href="/{lang}/Book-now/">{esc(ui["villa_cta"])}</a>
+    <section class="svs-shell svs-home-block">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_bedrooms_h2"])}</h2>
+        <p>{esc(ui["villa_bedrooms_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
-    </div></article>'''
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_BEDROOMS_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block svs-home-block--flip">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_bathrooms_h2"])}</h2>
+        <p>{esc(ui["villa_bathrooms_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_BATHROOMS_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_dinner_h2"])}</h2>
+        <p>{esc(ui["villa_dinner_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_DINNER_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block svs-home-block--flip">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_living_h2"])}</h2>
+        <p>{esc(ui["villa_living_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_LIVING_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_kitchen_h2"])}</h2>
+        <p>{esc(ui["villa_kitchen_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_KITCHEN_IMG}" alt="" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>'''
     else:  # book
         active, path_after = "book", "Book-now/"
         canonical = f"{SITE}/{lang}/Book-now/"
         title, desc = ui["book_title"], ui["book_description"]
+        og_image = f"{SITE}/gallery_gen/813a875966b2335423d49b510d298d8c_fit.png"
         body = f'''
     <div class="svs-shell svs-hero">
       <p class="svs-kicker">{esc(ui["brand"])}</p>
@@ -424,7 +548,7 @@ def marketing_page(lang: str, page: str) -> str:
     </div>
     <section class="svs-shell svs-book-hero" aria-label="{esc(ui["book_platforms_title"])}">
       <div class="svs-book-hero-media">
-        <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui["brand"])}" loading="eager" width="1200" height="675" />
+        <img src="/gallery_gen/813a875966b2335423d49b510d298d8c_fit.png" alt="{esc(ui["brand"])}" loading="eager" width="1200" height="675" />
       </div>
       <div class="svs-book-hero-panel">
         <p class="svs-kicker">{esc(ui["book_platforms_title"])}</p>
@@ -491,12 +615,14 @@ def marketing_page(lang: str, page: str) -> str:
     </section>'''
 
     switcher = lang_switcher(lang, path_after, ui["switcher_aria"])
+    page_title = esc(title) if "Sea View Serenity" in title else f'{esc(title)} | Sea View Serenity'
+    foot = site_footer(lang, ui)
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{esc(title) if "Sea View Serenity" in title else esc(title) + " | Sea View Serenity"}</title>
+  <title>{page_title}</title>
   <meta name="description" content="{esc(desc)}" />
   <link rel="canonical" href="{canonical}" />
 {hreflang_links(path_after)}
@@ -505,21 +631,20 @@ def marketing_page(lang: str, page: str) -> str:
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{canonical}" />
   <meta property="og:locale" content="{og_locale(lang)}" />
-  <meta property="og:image" content="{SITE}/Articles/media/villa-terrace-sunset.jpg" />
+  <meta property="og:image" content="{og_image}" />
   <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
-  <link href="/css/articles.css" rel="stylesheet" />
-  <link href="/css/i18n.css" rel="stylesheet" />
+{css_links()}
 </head>
-<body class="svs-articles">
+<body class="{body_class}">
   {site_chrome(lang, ui, active, path_after, switcher, nav_html(lang, ui, active))}
   <main>
 {body}
   </main>
-  <footer class="svs-shell svs-shell-footer">
-    <p>{ui["footer_copy"].replace("seaviewserenity.gr", '<a href="/' + lang + '/">seaviewserenity.gr</a>')}</p>
-    <p>{ui["footer_designed"].replace("georgegad.com", '<a href="https://georgegad.com" target="_blank" rel="noopener">georgegad.com</a>')}</p>
-  </footer>
+  {foot}
+  <script src="/js/site-header.js" defer></script>
+  <script src="/js/home-carousel.js" defer></script>
+  <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
 '''
@@ -585,9 +710,7 @@ def legal_page(lang: str, kind: str) -> str:
   <meta property="og:locale" content="{og_locale(lang)}" />
   <link rel="icon" type="image/png" href="/gallery/favicons/favicon.png" />
   <link href="https://fonts.googleapis.com/css?family={fonts}&display=swap" rel="stylesheet" />
-  <link href="/css/articles.css" rel="stylesheet" />
-  <link href="/css/i18n.css" rel="stylesheet" />
-  <link href="/css/footer.css" rel="stylesheet" />
+{css_links()}
 </head>
 <body class="svs-articles">
   {site_chrome(lang, ui, active, path_after, switcher, nav_html(lang, ui, active))}
@@ -605,6 +728,7 @@ def legal_page(lang: str, kind: str) -> str:
     </article>
   </main>
   {foot}
+  <script src="/js/site-header.js" defer></script>
   <script src="/js/lang-switcher.js" defer></script>
 </body>
 </html>
@@ -690,15 +814,11 @@ def build_vercel() -> None:
 
 def main() -> None:
     extract_en_articles()
-    # Home / Villa / Book: restore original Site.pro layouts (hero, gallery, absolute CSS)
-    import sys
-
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from restore_sitepro import write_pages as write_sitepro_pages
-
-    write_sitepro_pages()
 
     for lang in LOCALES:
+        write(ROOT / lang / "index.html", marketing_page(lang, "home"))
+        write(ROOT / lang / "The-Villa" / "index.html", marketing_page(lang, "villa"))
+        write(ROOT / lang / "Book-now" / "index.html", marketing_page(lang, "book"))
         write(ROOT / lang / "Articles" / "index.html", articles_index(lang))
         for slug in ARTICLE_MEDIA:
             write(ROOT / lang / "Articles" / slug / "index.html", article_page(lang, slug))
