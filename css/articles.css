@@ -93,16 +93,52 @@
   isolation: isolate;
 }
 
-.svs-bleed-hero__media {
+.svs-bleed-hero__stage {
   position: fixed;
   inset: 0;
   z-index: 0;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(0, var(--svs-hero-parallax, 0%), 0);
+  opacity: var(--svs-hero-fade, 1);
+  will-change: transform, opacity;
+}
+
+.svs-bleed-hero__media {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
   object-fit: cover;
   object-position: center;
   pointer-events: none;
+  opacity: 0;
+  transform: scale(1.14) translate3d(0, 1.5%, 0);
+  transform-origin: 58% 42%;
+  will-change: transform, opacity;
+  animation:
+    svs-hero-enter 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    svs-hero-drift 42s ease-in-out 2.2s infinite alternate;
+}
+
+@keyframes svs-hero-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.14) translate3d(0, 1.5%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes svs-hero-drift {
+  from {
+    transform: scale(1.06) translate3d(-1.4%, 0.8%, 0);
+  }
+  to {
+    transform: scale(1.13) translate3d(1.6%, -1.2%, 0);
+  }
 }
 
 .svs-bleed-hero__scrim {
@@ -110,8 +146,32 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(15, 30, 45, 0.35) 0%, rgba(15, 30, 45, 0.15) 42%, rgba(15, 30, 45, 0.72) 100%);
+    linear-gradient(180deg, rgba(15, 30, 45, 0.38) 0%, rgba(15, 30, 45, 0.12) 40%, rgba(15, 30, 45, 0.78) 100%);
   pointer-events: none;
+}
+
+.svs-bleed-hero__glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 72% 38%, rgba(255, 176, 96, 0.28), transparent 62%),
+    radial-gradient(ellipse 55% 45% at 18% 78%, rgba(124, 170, 229, 0.16), transparent 70%);
+  opacity: 0.55;
+  mix-blend-mode: soft-light;
+  animation: svs-hero-glow 14s ease-in-out infinite alternate;
+}
+
+@keyframes svs-hero-glow {
+  from {
+    opacity: 0.35;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.7;
+    transform: scale(1.05) translate3d(-1.5%, 1%, 0);
+  }
 }
 
 .svs-bleed-hero__content {
@@ -121,21 +181,24 @@
 }
 
 .svs-bleed-hero__content .svs-brand {
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.75rem;
   font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-size: clamp(2.2rem, 5.2vw, 4.25rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
   color: var(--svs-white);
-  max-width: 14ch;
+  white-space: nowrap;
+  text-shadow: 0 1px 24px rgba(10, 18, 28, 0.28);
 }
 
 .svs-bleed-hero__content .svs-lede {
   margin: 0;
-  max-width: 36ch;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  max-width: min(48rem, 96%);
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(1.08rem, 2.1vw, 1.28rem);
+  line-height: 1.45;
+  text-shadow: 0 1px 16px rgba(10, 18, 28, 0.35);
 }
 
 .svs-bleed-hero__content .svs-cta {
@@ -254,6 +317,28 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .svs-bleed-hero__stage {
+    transform: none;
+    opacity: 1;
+    will-change: auto;
+  }
+
+  .svs-bleed-hero__media {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  .svs-bleed-hero__glow {
+    animation: none;
+    opacity: 0.45;
+    transform: none;
+  }
+
   .svs-bleed-hero__scroll {
     opacity: 1;
     animation: none;
@@ -303,16 +388,16 @@
 .svs-hero h1 {
   margin: 0 0 0.85rem;
   font-size: clamp(1.85rem, 4vw, 2.6rem);
-  max-width: 18ch;
+  max-width: min(48rem, 96%);
 }
 
 .svs-hero--article h1 {
-  max-width: 22ch;
+  max-width: min(48rem, 96%);
 }
 
 .svs-lede {
   margin: 0;
-  max-width: 58ch;
+  max-width: min(48rem, 96%);
   color: var(--svs-muted);
   font-size: 1.05rem;
 }

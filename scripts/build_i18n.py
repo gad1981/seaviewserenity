@@ -454,7 +454,7 @@ def articles_index(lang: str) -> str:
   <main class="svs-shell">
     <div class="svs-hero">
       <p class="svs-kicker">{esc(ui["articles_kicker"])}</p>
-      <h1>{esc(ui["articles_index_h1"])}</h1>
+      <h1>{esc(ui["articles_index_h1"]).replace(chr(10), "<br />")}</h1>
       <p class="svs-lede">{esc(ui["articles_index_lede"])}</p>
     </div>
     <figure class="svs-figure svs-hero-figure">
@@ -499,14 +499,18 @@ def marketing_page(lang: str, page: str) -> str:
         og_image = f"{SITE}{HOME_HERO_IMG}"
         book = f"/{lang}/Book-now/"
         cta = esc(ui["home_book_cta"])
+        hero_lede = ui.get("home_hero_lede") or desc
         body = f'''
     <section class="svs-bleed-hero" aria-label="{esc(ui["brand"])}">
-      <img class="svs-bleed-hero__media" src="{HOME_HERO_IMG}" alt="{esc(ui.get("og_image_alt_home") or ui["brand"])}" width="1448" height="1086" loading="eager" fetchpriority="high" />
+      <div class="svs-bleed-hero__stage" aria-hidden="true">
+        <img class="svs-bleed-hero__media" src="{HOME_HERO_IMG}" alt="{esc(ui.get("og_image_alt_home") or ui["brand"])}" width="1448" height="1086" loading="eager" fetchpriority="high" />
+      </div>
       <div class="svs-bleed-hero__scrim" aria-hidden="true"></div>
+      <div class="svs-bleed-hero__glow" aria-hidden="true"></div>
       <div class="svs-bleed-hero__content svs-shell">
-        <h1 class="svs-brand svs-reveal svs-reveal--fade" data-reveal-delay="0.2">{esc(ui["home_h1"])}</h1>
-        <p class="svs-lede svs-reveal" data-reveal-delay="0.45">{esc(desc)}</p>
-        <p class="svs-reveal svs-reveal--zoom" data-reveal-delay="0.7"><a class="svs-cta" href="{book}">{cta}</a></p>
+        <h1 class="svs-brand svs-reveal svs-reveal--fade" data-reveal-delay="0.15">{esc(ui["home_h1"])}</h1>
+        <p class="svs-lede svs-reveal" data-reveal-delay="0.4">{esc(hero_lede)}</p>
+        <p class="svs-reveal svs-reveal--zoom" data-reveal-delay="0.65"><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <a class="svs-bleed-hero__scroll" href="#welcome" aria-label="{esc(ui["scroll_cue"])}">
         <span class="svs-bleed-hero__scroll-mouse" aria-hidden="true"><span class="svs-bleed-hero__scroll-wheel"></span></span>
@@ -747,6 +751,10 @@ def marketing_page(lang: str, page: str) -> str:
         keywords=kw,
         json_ld=ld,
     )
+    v = js_v()
+    home_hero_script = (
+        f'  <script src="/js/home-hero.js?v={v}" defer></script>\n' if page == "home" else ""
+    )
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
@@ -762,10 +770,10 @@ def marketing_page(lang: str, page: str) -> str:
 {body}
   </main>
   {foot}
-  <script src="/js/site-header.js?v={js_v()}" defer></script>
-  <script src="/js/reveal.js?v={js_v()}" defer></script>
-  <script src="/js/home-carousel.js?v={js_v()}" defer></script>
-  <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
+  <script src="/js/site-header.js?v={v}" defer></script>
+  <script src="/js/reveal.js?v={v}" defer></script>
+  <script src="/js/home-carousel.js?v={v}" defer></script>
+{home_hero_script}  <script src="/js/lang-switcher.js?v={v}" defer></script>
 </body>
 </html>
 '''
