@@ -1,35 +1,165 @@
+const SITE = "https://seaviewserenity.gr";
+const LOGO = `${SITE}/gallery/Picture%201.png`;
+const HERO = `${SITE}/gallery_gen/d9a25b075f62f8d817a4f599e5f5010c_fit.png`;
+
 const AUTO_REPLY = {
   en: {
     subject: "We received your message — Sea View Serenity",
-    text: (name) =>
-      `Hello${name ? ` ${name}` : ""},\n\nThank you for contacting Sea View Serenity. Your request has been submitted successfully.\n\nSomeone from our team will reply as soon as possible.\n\nWarm regards,\nSea View Serenity\nDelfini Beach, Syros\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `Hello ${name},` : "Hello,"),
+    lead: "Thank you for contacting Sea View Serenity.",
+    body: "Your request has been submitted successfully. Someone from our team will reply as soon as possible.",
+    cta: "Visit the website",
+    regards: "Warm regards,",
+    place: "Delfini Beach, Syros",
   },
   el: {
     subject: "Λάβαμε το μήνυμά σας — Sea View Serenity",
-    text: (name) =>
-      `Γεια σας${name ? ` ${name}` : ""},\n\nΣας ευχαριστούμε που επικοινωνήσατε με το Sea View Serenity. Το αίτημά σας υποβλήθηκε με επιτυχία.\n\nΚάποιος από την ομάδα μας θα σας απαντήσει το συντομότερο δυνατό.\n\nΜε εκτίμηση,\nSea View Serenity\nΠαραλία Δελφίνι, Σύρος\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `Γεια σας ${name},` : "Γεια σας,"),
+    lead: "Σας ευχαριστούμε που επικοινωνήσατε με το Sea View Serenity.",
+    body: "Το αίτημά σας υποβλήθηκε με επιτυχία. Κάποιος από την ομάδα μας θα σας απαντήσει το συντομότερο δυνατό.",
+    cta: "Επισκεφθείτε τον ιστότοπο",
+    regards: "Με εκτίμηση,",
+    place: "Παραλία Δελφίνι, Σύρος",
   },
   fr: {
     subject: "Nous avons bien reçu votre message — Sea View Serenity",
-    text: (name) =>
-      `Bonjour${name ? ` ${name}` : ""},\n\nMerci d’avoir contacté Sea View Serenity. Votre demande a bien été envoyée.\n\nQuelqu’un de notre équipe vous répondra dès que possible.\n\nCordialement,\nSea View Serenity\nPlage de Delfini, Syros\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `Bonjour ${name},` : "Bonjour,"),
+    lead: "Merci d’avoir contacté Sea View Serenity.",
+    body: "Votre demande a bien été envoyée. Quelqu’un de notre équipe vous répondra dès que possible.",
+    cta: "Visiter le site",
+    regards: "Cordialement,",
+    place: "Plage de Delfini, Syros",
   },
   de: {
     subject: "Wir haben Ihre Nachricht erhalten — Sea View Serenity",
-    text: (name) =>
-      `Hallo${name ? ` ${name}` : ""},\n\nvielen Dank, dass Sie Sea View Serenity kontaktiert haben. Ihre Anfrage wurde erfolgreich übermittelt.\n\nJemand aus unserem Team meldet sich so bald wie möglich bei Ihnen.\n\nHerzliche Grüße\nSea View Serenity\nDelfini Beach, Syros\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `Hallo ${name},` : "Hallo,"),
+    lead: "Vielen Dank, dass Sie Sea View Serenity kontaktiert haben.",
+    body: "Ihre Anfrage wurde erfolgreich übermittelt. Jemand aus unserem Team meldet sich so bald wie möglich bei Ihnen.",
+    cta: "Zur Website",
+    regards: "Herzliche Grüße,",
+    place: "Delfini Beach, Syros",
   },
   it: {
     subject: "Abbiamo ricevuto il suo messaggio — Sea View Serenity",
-    text: (name) =>
-      `Buongiorno${name ? ` ${name}` : ""},\n\nGrazie per aver contattato Sea View Serenity. La sua richiesta è stata inviata correttamente.\n\nQualcuno del nostro team le risponderà al più presto.\n\nCordiali saluti,\nSea View Serenity\nSpiaggia di Delfini, Syros\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `Buongiorno ${name},` : "Buongiorno,"),
+    lead: "Grazie per aver contattato Sea View Serenity.",
+    body: "La sua richiesta è stata inviata correttamente. Qualcuno del nostro team le risponderà al più presto.",
+    cta: "Visita il sito",
+    regards: "Cordiali saluti,",
+    place: "Spiaggia di Delfini, Syros",
   },
   he: {
     subject: "קיבלנו את ההודעה שלך — Sea View Serenity",
-    text: (name) =>
-      `שלום${name ? ` ${name}` : ""},\n\nתודה שפנית ל-Sea View Serenity. הבקשה שלך נשלחה בהצלחה.\n\nמישהו מהצוות שלנו יחזור אליך בהקדם.\n\nבברכה,\nSea View Serenity\nחוף דלפיני, סירוס\nhttps://seaviewserenity.gr/`,
+    greeting: (name) => (name ? `שלום ${name},` : "שלום,"),
+    lead: "תודה שפנית ל-Sea View Serenity.",
+    body: "הבקשה שלך נשלחה בהצלחה. מישהו מהצוות שלנו יחזור אליך בהקדם.",
+    cta: "לאתר",
+    regards: "בברכה,",
+    place: "חוף דלפיני, סירוס",
+    rtl: true,
   },
 };
+
+function escHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function buildAutoReplyText(copy, name) {
+  return [
+    copy.greeting(name),
+    "",
+    copy.lead,
+    copy.body,
+    "",
+    copy.regards,
+    "Sea View Serenity",
+    copy.place,
+    SITE,
+  ].join("\n");
+}
+
+function buildAutoReplyHtml(copy, name, lang) {
+  const dir = copy.rtl ? "rtl" : "ltr";
+  const align = copy.rtl ? "right" : "left";
+  const greeting = escHtml(copy.greeting(name));
+  const home = lang === "en" ? `${SITE}/en/` : `${SITE}/${lang}/`;
+
+  return `<!DOCTYPE html>
+<html lang="${escHtml(lang)}" dir="${dir}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${escHtml(copy.subject)}</title>
+</head>
+<body style="margin:0;padding:0;background:#e8f1fa;color:#333c44;font-family:'Open Sans','Helvetica Neue',Arial,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:linear-gradient(180deg,#e8f1fa 0%,#f3f6f9 45%,#ffffff 100%);background-color:#e8f1fa;">
+    <tr>
+      <td align="center" style="padding:28px 16px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:#ffffff;border:1px solid #d9e2ec;overflow:hidden;">
+          <tr>
+            <td style="padding:0;line-height:0;font-size:0;">
+              <img src="${HERO}" alt="Sea View Serenity terrace at sunset, Syros" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:28px 28px 8px ${align === "right" ? "28px" : "28px"};text-align:${align};">
+              <img src="${LOGO}" alt="Sea View Serenity" width="56" height="56" style="display:block;width:56px;height:56px;border-radius:50%;border:0;margin:0 0 18px;" />
+              <h1 style="margin:0 0 10px;font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-size:24px;line-height:1.25;font-weight:700;color:#13161a;">
+                Sea View Serenity
+              </h1>
+              <p style="margin:0 0 18px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:#3d6fa8;">
+                ${escHtml(copy.place)}
+              </p>
+              <p style="margin:0 0 12px;font-size:16px;line-height:1.6;color:#13161a;">
+                ${greeting}
+              </p>
+              <p style="margin:0 0 12px;font-size:16px;line-height:1.7;color:#333c44;">
+                ${escHtml(copy.lead)}
+              </p>
+              <p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:#5c6670;">
+                ${escHtml(copy.body)}
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;">
+                <tr>
+                  <td style="background:#3d6fa8;">
+                    <a href="${home}" style="display:inline-block;padding:12px 18px;font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;">
+                      ${escHtml(copy.cta)}
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:0 0 4px;font-size:15px;line-height:1.6;color:#13161a;">
+                ${escHtml(copy.regards)}
+              </p>
+              <p style="margin:0 0 2px;font-family:Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:700;color:#13161a;">
+                Sea View Serenity
+              </p>
+              <p style="margin:0;font-size:14px;line-height:1.6;color:#5c6670;">
+                ${escHtml(copy.place)}<br />
+                <a href="${SITE}/" style="color:#3d6fa8;text-decoration:none;">seaviewserenity.gr</a>
+                &nbsp;·&nbsp;
+                <a href="mailto:info@seaviewserenity.gr" style="color:#3d6fa8;text-decoration:none;">info@seaviewserenity.gr</a>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:18px 28px 24px;border-top:1px solid #d9e2ec;background:#f7fbff;text-align:${align};">
+              <p style="margin:0;font-size:12px;line-height:1.55;color:#5c6670;">
+                Sea View Serenity · Delfini Beach, Ano Syros 81400, Syros, Greece
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
 
 function json(res, status, body) {
   res.statusCode = status;
@@ -160,7 +290,8 @@ module.exports = async (req, res) => {
       to: [email],
       reply_to: "info@seaviewserenity.gr",
       subject: reply.subject,
-      text: reply.text(name),
+      text: buildAutoReplyText(reply, name),
+      html: buildAutoReplyHtml(reply, name, lang),
     });
 
     return json(res, 200, { ok: true });
