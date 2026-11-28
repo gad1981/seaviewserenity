@@ -36,61 +36,77 @@ HOME_HERO_IMG = "/gallery_gen/d9a25b075f62f8d817a4f599e5f5010c_fit.png"
 HOME_WELCOME_IMG = "/gallery_gen/c0901f857a87ad3da5b8c683d0235ea7_fit.png"
 HOME_VIEW_IMG = "/gallery_gen/6fa96ad5387e85756c23e25cd3d92b6f_fit.png"
 HOME_AMENITIES_IMG = "/gallery_gen/27ead61515651f1d2332b229a59fe91b_fit.png"
-# Original slideshow slides that exist locally + home section photos
-HOME_CAROUSEL = [
-    "/gallery_gen/9c6da47c9cdd25d963f8ee8945686e53_fit.png",
-    "/gallery_gen/36e253b50e0f85dd754b90e310611360_fit.png",
-    "/gallery_gen/53c40bb5e4411ffb3c88abd37c52f3b0_fit.png",
-    HOME_HERO_IMG,
-    HOME_WELCOME_IMG,
-    HOME_VIEW_IMG,
-    HOME_AMENITIES_IMG,
-]
+# Full Airbnb listing gallery (labels + descriptions in i18n/carousel.json)
+HOME_CAROUSEL = json.loads((ROOT / "i18n" / "carousel.json").read_text(encoding="utf-8"))
 
 # Villa photos from original Site.pro
 VILLA_HERO_IMG = "/gallery_gen/3b28058ac52b3397cb232a1976b9713c_fit.png"
 VILLA_BEDROOMS_IMG = "/gallery_gen/9c6da47c9cdd25d963f8ee8945686e53_fit.png"
 VILLA_BATHROOMS_IMG = "/gallery_gen/99a8d7bd813690de25cbe2bb5c3a45c3_fit.png"
-VILLA_DINNER_IMG = "/gallery_gen/3b28058ac52b3397cb232a1976b9713c_fit.png"
+VILLA_DINNER_IMG = "/Articles/media/villa-dining-living.jpg"
 VILLA_LIVING_IMG = "/gallery_gen/36e253b50e0f85dd754b90e310611360_fit.png"
 VILLA_KITCHEN_IMG = "/gallery_gen/53c40bb5e4411ffb3c88abd37c52f3b0_fit.png"
+VILLA_WORKSPACE_IMG = "/gallery/villa/workspace-desk.jpg"
 
 
-def home_carousel_html(ui: dict) -> str:
+def home_carousel_html(ui: dict, lang: str = "en") -> str:
     slides = []
     dots = []
-    label = esc(ui.get("home_gallery", "Gallery"))
-    for i, src in enumerate(HOME_CAROUSEL):
+    gallery = esc(ui.get("home_gallery", "Gallery"))
+    total = len(HOME_CAROUSEL)
+    for i, item in enumerate(HOME_CAROUSEL):
         eager = ' loading="eager" fetchpriority="high"' if i == 0 else ' loading="lazy"'
         hidden = "false" if i == 0 else "true"
         active = " is-active" if i == 0 else ""
         current = ' aria-current="true"' if i == 0 else ' aria-current="false"'
-        slide_alt = f"{label} — {i + 1}"
+        labels = item.get("label") or {}
+        descs = item.get("description") or {}
+        caption = esc(labels.get(lang) or labels.get("en") or f"{i + 1}")
+        description = esc(descs.get(lang) or descs.get("en") or "")
+        slide_alt = f"{caption} — {esc(ui['brand'])}"
+        src = item["src"]
+        desc_html = (
+            f'<p class="svs-carousel__caption-desc">{description}</p>' if description else ""
+        )
         slides.append(
             f'<div class="svs-carousel__slide" aria-hidden="{hidden}">'
-            f'<img src="{src}" alt="{slide_alt}"{eager} width="1448" height="1086" /></div>'
+            f'<img src="{src}" alt="{slide_alt}"{eager} width="1200" height="900" />'
+            f'<div class="svs-carousel__caption">'
+            f'<p class="svs-carousel__caption-label">{caption}</p>'
+            f"{desc_html}"
+            f"</div></div>"
         )
         dots.append(
             f'<button type="button" class="svs-carousel__dot{active}" '
-            f'data-svs-carousel-dot aria-label="{i + 1}"{current}></button>'
+            f'data-svs-carousel-dot aria-label="{caption}"{current}></button>'
         )
+    # Dense galleries use the counter + arrows instead of 40+ dots.
+    dots_html = (
+        f'<div class="svs-carousel__dots" role="group" aria-label="{gallery}">'
+        f'{"".join(dots)}</div>'
+        if total <= 12
+        else ""
+    )
     return f'''
-    <section class="svs-shell svs-carousel svs-reveal svs-reveal--zoom" data-reveal-delay="0.15" data-svs-carousel data-interval="3000" aria-roledescription="carousel" aria-label="{label}">
-      <div class="svs-carousel__viewport">
-        <div class="svs-carousel__track">
-          {"".join(slides)}
+    <section class="svs-shell svs-carousel-section svs-reveal" data-reveal-delay="0.15" aria-labelledby="home-gallery-title">
+      <h2 id="home-gallery-title" class="svs-carousel-section__title">{gallery}</h2>
+      <div class="svs-carousel svs-reveal--zoom" data-svs-carousel data-interval="4500" aria-roledescription="carousel" aria-label="{gallery}">
+        <div class="svs-carousel__viewport">
+          <div class="svs-carousel__track">
+            {"".join(slides)}
+          </div>
         </div>
-      </div>
-      <button type="button" class="svs-carousel__nav svs-carousel__nav--prev" data-svs-carousel-prev aria-label="Previous">‹</button>
-      <button type="button" class="svs-carousel__nav svs-carousel__nav--next" data-svs-carousel-next aria-label="Next">›</button>
-      <div class="svs-carousel__dots" role="group" aria-label="{label}">
-        {"".join(dots)}
+        <button type="button" class="svs-carousel__nav svs-carousel__nav--prev" data-svs-carousel-prev aria-label="Previous">‹</button>
+        <button type="button" class="svs-carousel__nav svs-carousel__nav--next" data-svs-carousel-next aria-label="Next">›</button>
+        <p class="svs-carousel__count" data-svs-carousel-count aria-live="polite"><span data-svs-carousel-index>1</span> / {total}</p>
+        {dots_html}
       </div>
     </section>'''
 
 
 # Image map per article (shared media at /Articles/media/)
 ARTICLE_MEDIA = {
+    "digital-nomad-syros-delfini-remote-work": ("villa-workspace-desk.jpg", "syros-delfini-beach.jpg"),
     "seaside-accommodation-syros-delfini-beach": ("villa-bedroom-sea-view.jpg", "villa-terrace-sunset.jpg"),
     "syros-vs-santorini-mykonos-calmer-cyclades": ("syros-ermoupoli-view.jpg", "villa-terrace-sunset.jpg"),
     "best-time-to-visit-syros-seaside-holiday": ("villa-terrace-sunset.jpg", "syros-delfini-beach.jpg"),
@@ -101,6 +117,47 @@ ARTICLE_MEDIA = {
     "syros-food-guide-for-villa-guests": ("loukoumi-coffee-real.jpg", "villa-kitchen.jpg"),
     "greece-vacation-rental-checklist-before-you-book": ("villa-living-fireplace.jpg", "villa-kitchen.jpg"),
     "kini-delfini-galissas-syros-beaches-guide": ("syros-delfini-beach.jpg", "syros-galissas-beach.jpg"),
+    "where-to-stay-syros-areas-compared": ("syros-ano-ermoupoli.jpg", "syros-delfini-beach.jpg"),
+    "seven-day-syros-itinerary-villa-base": ("villa-terrace-sunset.jpg", "syros-ermoupoli-view.jpg"),
+    "getting-around-syros-car-rental-bus": ("syros-ferry-port.jpg", "syros-harbour.jpg"),
+    "kini-restaurants-sunset-dining": ("syros-kini-sunset.jpg", "syros-kini-beach.jpg"),
+    "syros-in-may-june-september": ("villa-bedroom-balcony.jpg", "syros-kini-sunset.jpg"),
+    "things-to-do-on-syros": ("syros-ermoupoli-pano.jpg", "syros-kini-beach.jpg"),
+    "ano-syros-ermoupoli-walking-guide": ("syros-ano-syros-view.jpg", "syros-ermoupoli-street.jpg"),
+    "day-trips-from-syros-tinos-mykonos": ("tinos-sunset-over-syros.jpg", "syros-ferry-port.jpg"),
+    "pet-friendly-syros-villa-stay": ("villa-terrace-sunset.jpg", "syros-delfini-beach.jpg"),
+    "packing-meltemi-wind-guide-syros": ("syros-kini-sunset.jpg", "syros-galissas-beach.jpg"),
+    "grocery-self-catering-delfini-kini": ("villa-kitchen.jpg", "villa-dining-living.jpg"),
+    "winter-year-round-syros": ("villa-living-fireplace.jpg", "syros-ermoupoli-view.jpg"),
+    "multi-gen-group-villa-syros": ("villa-dining-living.jpg", "villa-bedroom-sea-view.jpg"),
+}
+
+# Topic tags for Articles index filter (search also uses title + description)
+ARTICLE_TOPICS = {
+    "digital-nomad-syros-delfini-remote-work": ("stay", "tips"),
+    "seaside-accommodation-syros-delfini-beach": ("stay",),
+    "syros-vs-santorini-mykonos-calmer-cyclades": ("plan",),
+    "best-time-to-visit-syros-seaside-holiday": ("plan",),
+    "greece-short-term-rentals-2026-what-travellers-want": ("tips",),
+    "how-to-get-to-syros-from-athens-ferry-flight": ("plan",),
+    "family-vacation-syros-seaside-house": ("stay",),
+    "ermoupoli-and-beach-day-syros-itinerary": ("town", "plan"),
+    "syros-food-guide-for-villa-guests": ("food",),
+    "greece-vacation-rental-checklist-before-you-book": ("tips",),
+    "kini-delfini-galissas-syros-beaches-guide": ("beaches",),
+    "where-to-stay-syros-areas-compared": ("stay",),
+    "seven-day-syros-itinerary-villa-base": ("plan",),
+    "getting-around-syros-car-rental-bus": ("plan",),
+    "kini-restaurants-sunset-dining": ("food",),
+    "syros-in-may-june-september": ("plan",),
+    "things-to-do-on-syros": ("plan",),
+    "ano-syros-ermoupoli-walking-guide": ("town",),
+    "day-trips-from-syros-tinos-mykonos": ("plan",),
+    "pet-friendly-syros-villa-stay": ("stay",),
+    "packing-meltemi-wind-guide-syros": ("beaches", "tips"),
+    "grocery-self-catering-delfini-kini": ("food",),
+    "winter-year-round-syros": ("plan",),
+    "multi-gen-group-villa-syros": ("stay",),
 }
 
 # English article fallbacks extracted from current EN HTML at build time
@@ -120,13 +177,15 @@ def extract_en_articles() -> None:
         kw = re.search(r'name="keywords" content="([^"]*)"', html)
         body_m = re.search(r'<div class="svs-article">(.*?)<section class="svs-sources"', html, re.S)
         sources_m = re.search(r'(<section class="svs-sources".*?</section>)', html, re.S)
-        hero_alt = re.search(r'class="svs-figure svs-hero-figure">\s*<img[^>]*alt="([^"]*)"', html, re.S)
-        hero_cap = re.search(r'class="svs-figure svs-hero-figure">.*?<figcaption>(.*?)</figcaption>', html, re.S)
+        hero_alt = re.search(r'class="svs-figure svs-hero-figure[^"]*"\s*>\s*<img[^>]*alt="([^"]*)"', html, re.S)
+        hero_cap = re.search(r'class="svs-figure svs-hero-figure[^"]*"\s*>.*?<figcaption>(.*?)</figcaption>', html, re.S)
         # second figure
         figs = re.findall(r'<figure class="svs-figure(?! svs-hero)[^"]*">\s*<img[^>]*alt="([^"]*)"[^>]*>\s*<figcaption>(.*?)</figcaption>', html, re.S)
         mid_alt = figs[0][0] if figs else ""
         mid_cap = figs[0][1] if figs else ""
         body = body_m.group(1) if body_m else ""
+        pub = re.search(r'property="article:published_time" content="([^"T]+)', html)
+        mod = re.search(r'property="article:modified_time" content="([^"T]+)', html)
         # Keep all inline figures — EN bodies are the photo-illustrated source of truth
         EN_META[slug] = {
             "title": re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", title.group(1) if title else slug),
@@ -138,6 +197,8 @@ def extract_en_articles() -> None:
             "hero_caption": hero_cap.group(1) if hero_cap else "",
             "mid_alt": mid_alt,
             "mid_caption": mid_cap,
+            "published": (pub.group(1) if pub else "2026-11-07"),
+            "modified": (mod.group(1) if mod else "2026-11-21"),
         }
         if sources_m:
             EN_SOURCES[slug] = sources_m.group(1)
@@ -219,6 +280,7 @@ def article_page(lang: str, slug: str) -> str:
         .replace("href='BOOK'", f'href="{book}"')
         .replace('href="/en/Book-now/"', f'href="{book}"')
         .replace('href="/en/The-Villa/"', f'href="{villa}"')
+        .replace('href="/en/Articles/', f'href="/{lang}/Articles/')
     )
     # Only inject the legacy mid image when the body has no inline figures yet
     if '<figure class="svs-figure"' not in body:
@@ -265,8 +327,8 @@ def article_page(lang: str, slug: str) -> str:
         fonts = "Heebo:400,600,700|Open+Sans:400,600,700"
 
     hero_url = f"{SITE}/Articles/media/{hero}"
-    published = "2026-11-07"
-    modified = "2026-11-21"
+    published = en_meta.get("published") or "2026-11-07"
+    modified = en_meta.get("modified") or published
     article_ld = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -338,7 +400,7 @@ def article_page(lang: str, slug: str) -> str:
     <div class="svs-shell svs-hero svs-hero--article">
       <p class="svs-kicker">{esc(meta.get("kicker") or ui["articles_kicker"])}</p>
       <h1>{esc(meta["title"])}</h1>
-      <p class="svs-meta">{esc(ui["articles_meta_by"])} · {esc(ui["articles_meta_updated"])} 2026-11-21 · {esc(ui["articles_meta_read"])}</p>
+      <p class="svs-meta">{esc(ui["articles_meta_by"])} · {esc(ui["articles_meta_updated"])} {modified} · {esc(ui["articles_meta_read"])}</p>
     </div>
     <figure class="svs-figure svs-hero-figure svs-shell">
   <img src="/Articles/media/{hero}" alt="{esc(meta.get("hero_alt",""))}" loading="lazy" width="1200" height="675" />
@@ -382,24 +444,120 @@ def nav_html(lang: str, ui: dict, active: str) -> str:
     return shared_nav(lang, ui, active)
 
 
+def _topic_label(ui: dict, key: str) -> str:
+    return ui.get(
+        f"articles_filter_{key}",
+        {
+            "stay": "Stay & villa",
+            "beaches": "Beaches",
+            "plan": "Planning",
+            "food": "Food",
+            "town": "Town & culture",
+            "tips": "Practical tips",
+        }.get(key, key),
+    )
+
+
+def _format_card_date(lang: str, iso_day: str) -> str:
+    """Locale-friendly short date for article cards (e.g. 20 Nov 2026)."""
+    months = {
+        "en": ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
+        "el": ("Ιαν", "Φεβ", "Μαρ", "Απρ", "Μαΐ", "Ιουν", "Ιουλ", "Αυγ", "Σεπ", "Οκτ", "Νοε", "Δεκ"),
+        "fr": ("janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."),
+        "de": ("Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."),
+        "it": ("gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"),
+        "he": ("ינו׳", "פבר׳", "מרץ", "אפר׳", "מאי", "יונ׳", "יול׳", "אוג׳", "ספט׳", "אוק׳", "נוב׳", "דצמ׳"),
+    }
+    try:
+        y, m, d = iso_day[:10].split("-")
+        mon = months.get(lang, months["en"])[int(m) - 1]
+        day = str(int(d))
+        if lang == "de":
+            return f"{day}. {mon} {y}"
+        if lang == "he":
+            return f"{day} ב{mon} {y}"
+        return f"{day} {mon} {y}"
+    except Exception:
+        return iso_day[:10]
+
+
 def articles_index(lang: str) -> str:
     ui = UI[lang]
+    # Newest published first — standard practice for an articles index
+    ordered = sorted(
+        ARTICLE_MEDIA.items(),
+        key=lambda item: EN_META.get(item[0], {}).get("published", "1970-01-01"),
+        reverse=True,
+    )
     cards = []
-    for slug, (hero, _) in ARTICLE_MEDIA.items():
+    for slug, (hero, _) in ordered:
         if lang == "en":
             meta = dict(EN_META[slug])
         else:
             meta = dict(ART_I18N[slug][lang])
         meta["title"] = re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", meta["title"]).strip()
+        topics = ARTICLE_TOPICS.get(slug, ("plan",))
+        topics_attr = " ".join(topics)
+        topic_labels = [_topic_label(ui, t) for t in topics]
+        published = (EN_META.get(slug) or {}).get("published") or meta.get("published") or "2026-11-07"
+        published = published[:10]
+        date_label = _format_card_date(lang, published)
+        # Search index: title, description, keywords, topic ids + localized labels, date
+        search_parts = [
+            meta["title"],
+            meta.get("description", ""),
+            meta.get("keywords", ""),
+            topics_attr,
+            " ".join(topic_labels),
+            published,
+            date_label,
+            slug.replace("-", " "),
+        ]
+        search_blob = esc(" ".join(p for p in search_parts if p))
+        tags_html = "".join(
+            f'<li><span class="svs-card-tag">{esc(label)}</span></li>' for label in topic_labels
+        )
         cards.append(
-            f'''    <a class="svs-card" href="/{lang}/Articles/{slug}/">
-      <div class="svs-card-media"><img src="/Articles/media/{hero}" alt="{esc(meta["title"])}" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+            f'''    <a class="svs-card" href="/{lang}/Articles/{slug}/" data-svs-article-card data-topics="{topics_attr}" data-published="{published}" data-search="{search_blob}">
+      <div class="svs-card-media">
+        <img src="/Articles/media/{hero}" alt="{esc(meta["title"])}" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="{published}">{esc(date_label)}</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="{esc(ui.get("articles_filter_label", "Topics"))}">{tags_html}</ul>
       <h2>{esc(meta["title"])}</h2>
       <p>{esc(meta["description"])}</p>
       <span class="svs-card-link">{esc(ui["articles_read"])}</span>
     </a>'''
         )
+    topic_keys = (
+        ("all", ui.get("articles_filter_all", "All")),
+        ("stay", ui.get("articles_filter_stay", "Stay & villa")),
+        ("beaches", ui.get("articles_filter_beaches", "Beaches")),
+        ("plan", ui.get("articles_filter_plan", "Planning")),
+        ("food", ui.get("articles_filter_food", "Food")),
+        ("town", ui.get("articles_filter_town", "Town & culture")),
+        ("tips", ui.get("articles_filter_tips", "Practical tips")),
+    )
+    topic_btns = []
+    for key, label in topic_keys:
+        active = " is-active" if key == "all" else ""
+        pressed = "true" if key == "all" else "false"
+        topic_btns.append(
+            f'<button type="button" class="svs-articles-filter__topic{active}" '
+            f'data-svs-topic="{key}" aria-pressed="{pressed}">{esc(label)}</button>'
+        )
+    filter_bar = f'''    <div class="svs-articles-filter" data-svs-articles-filter>
+      <label class="svs-articles-filter__search">
+        <span class="svs-articles-filter__search-label">{esc(ui.get("articles_search_label", "Search articles"))}</span>
+        <input type="search" data-svs-articles-search autocomplete="off"
+          placeholder="{esc(ui.get("articles_search_placeholder", "Search by topic, beach, ferry…"))}"
+          aria-label="{esc(ui.get("articles_search_label", "Search articles"))}" />
+      </label>
+      <div class="svs-articles-filter__topics" role="group" aria-label="{esc(ui.get("articles_filter_label", "Filter by topic"))}">
+        {"".join(topic_btns)}
+      </div>
+      <p class="svs-articles-filter__status" data-svs-articles-status aria-live="polite"></p>
+    </div>'''
     canonical = f"{SITE}/{lang}/Articles/"
     rtl_attr = ' dir="rtl"' if lang == "he" else ""
     fonts = "Heebo:400,600,700|Open+Sans:400,600,700" if lang == "he" else "Roboto:400,500,700|Open+Sans:400,600,700"
@@ -410,7 +568,7 @@ def articles_index(lang: str) -> str:
     from site_footer import site_footer
 
     foot = site_footer(lang, ui)
-    og_img = f"{SITE}/Articles/media/villa-terrace-sunset.jpg"
+    og_img = f"{SITE}/Articles/media/villa-bedroom-balcony.jpg"
     head_seo = seo_head(
         lang=lang,
         title=ui["articles_index_title"],
@@ -458,12 +616,14 @@ def articles_index(lang: str) -> str:
       <p class="svs-lede">{esc(ui["articles_index_lede"])}</p>
     </div>
     <figure class="svs-figure svs-hero-figure">
-  <img src="/Articles/media/villa-terrace-sunset.jpg" alt="{esc(ui.get("og_image_alt_articles") or ui["brand"])}" loading="lazy" width="1200" height="675" />
+  <img src="/Articles/media/villa-bedroom-balcony.jpg" alt="{esc(ui.get("og_image_alt_articles") or ui["brand"])}" loading="lazy" width="1200" height="675" />
   <figcaption>{esc(ui["articles_ready_text"])}</figcaption>
 </figure>
-    <section class="svs-grid" aria-label="Article list">
+{filter_bar}
+    <section class="svs-grid" data-svs-articles-grid aria-label="Article list">
 {chr(10).join(cards)}
     </section>
+    <p class="svs-articles-filter__empty" data-svs-articles-empty hidden>{esc(ui.get("articles_filter_empty", "No articles match that search."))}</p>
     <div class="svs-callout" style="margin-bottom:2.5rem">
       <strong>{esc(ui["articles_ready_title"])}</strong>
       {esc(ui["articles_ready_text"])}
@@ -472,6 +632,7 @@ def articles_index(lang: str) -> str:
   </main>
   {foot}
   <script src="/js/site-header.js?v={js_v()}" defer></script>
+  <script src="/js/articles-filter.js?v={js_v()}" defer></script>
   <script src="/js/lang-switcher.js?v={js_v()}" defer></script>
 </body>
 </html>
@@ -548,7 +709,7 @@ def marketing_page(lang: str, page: str) -> str:
         <img src="{HOME_AMENITIES_IMG}" alt="{esc(ui["home_amenities_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1536" height="1024" />
       </figure>
     </section>
-{home_carousel_html(ui)}'''
+{home_carousel_html(ui, lang)}'''
     elif page == "villa":
         active, path_after = "villa", "The-Villa/"
         canonical = f"{SITE}/{lang}/The-Villa/"
@@ -593,7 +754,7 @@ def marketing_page(lang: str, page: str) -> str:
         <p><a class="svs-cta" href="{book}">{cta}</a></p>
       </div>
       <figure class="svs-home-block__media">
-        <img src="{VILLA_DINNER_IMG}" alt="{esc(ui["villa_dinner_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
+        <img src="{VILLA_DINNER_IMG}" alt="{esc(ui["villa_dinner_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1600" height="1066" />
       </figure>
     </section>
     <section class="svs-shell svs-home-block svs-home-block--flip svs-reveal" data-reveal-delay="0.08">
@@ -614,6 +775,16 @@ def marketing_page(lang: str, page: str) -> str:
       </div>
       <figure class="svs-home-block__media">
         <img src="{VILLA_KITCHEN_IMG}" alt="{esc(ui["villa_kitchen_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1448" height="1086" />
+      </figure>
+    </section>
+    <section class="svs-shell svs-home-block svs-home-block--flip svs-reveal" data-reveal-delay="0.08">
+      <div class="svs-home-block__copy">
+        <h2>{esc(ui["villa_workspace_h2"])}</h2>
+        <p>{esc(ui["villa_workspace_p"])}</p>
+        <p><a class="svs-cta" href="{book}">{cta}</a></p>
+      </div>
+      <figure class="svs-home-block__media">
+        <img src="{VILLA_WORKSPACE_IMG}" alt="{esc(ui["villa_workspace_h2"])} — {esc(ui["brand"])}" loading="lazy" width="1440" height="1211" />
       </figure>
     </section>'''
     else:  # book

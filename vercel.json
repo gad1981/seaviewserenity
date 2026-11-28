@@ -68,6 +68,16 @@
       "permanent": true
     },
     {
+      "source": "/Articles/digital-nomad-syros-delfini-remote-work",
+      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/digital-nomad-syros-delfini-remote-work/",
+      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
+      "permanent": true
+    },
+    {
       "source": "/Articles/seaside-accommodation-syros-delfini-beach",
       "destination": "/en/Articles/seaside-accommodation-syros-delfini-beach/",
       "permanent": true
@@ -165,6 +175,136 @@
     {
       "source": "/Articles/kini-delfini-galissas-syros-beaches-guide/",
       "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/where-to-stay-syros-areas-compared",
+      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/where-to-stay-syros-areas-compared/",
+      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seven-day-syros-itinerary-villa-base",
+      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seven-day-syros-itinerary-villa-base/",
+      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/getting-around-syros-car-rental-bus",
+      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/getting-around-syros-car-rental-bus/",
+      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-restaurants-sunset-dining",
+      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-restaurants-sunset-dining/",
+      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-in-may-june-september",
+      "destination": "/en/Articles/syros-in-may-june-september/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-in-may-june-september/",
+      "destination": "/en/Articles/syros-in-may-june-september/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/things-to-do-on-syros",
+      "destination": "/en/Articles/things-to-do-on-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/things-to-do-on-syros/",
+      "destination": "/en/Articles/things-to-do-on-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ano-syros-ermoupoli-walking-guide",
+      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ano-syros-ermoupoli-walking-guide/",
+      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/day-trips-from-syros-tinos-mykonos",
+      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/day-trips-from-syros-tinos-mykonos/",
+      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/pet-friendly-syros-villa-stay",
+      "destination": "/en/Articles/pet-friendly-syros-villa-stay/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/pet-friendly-syros-villa-stay/",
+      "destination": "/en/Articles/pet-friendly-syros-villa-stay/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/packing-meltemi-wind-guide-syros",
+      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/packing-meltemi-wind-guide-syros/",
+      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/grocery-self-catering-delfini-kini",
+      "destination": "/en/Articles/grocery-self-catering-delfini-kini/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/grocery-self-catering-delfini-kini/",
+      "destination": "/en/Articles/grocery-self-catering-delfini-kini/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/winter-year-round-syros",
+      "destination": "/en/Articles/winter-year-round-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/winter-year-round-syros/",
+      "destination": "/en/Articles/winter-year-round-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/multi-gen-group-villa-syros",
+      "destination": "/en/Articles/multi-gen-group-villa-syros/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/multi-gen-group-villa-syros/",
+      "destination": "/en/Articles/multi-gen-group-villa-syros/",
       "permanent": true
     }
   ],

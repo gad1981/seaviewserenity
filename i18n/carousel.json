@@ -1,0 +1,674 @@
+[
+  {
+    "id": "5785e6a0-d722-4740-98ba-c3f8d0228392",
+    "src": "/gallery/villa/airbnb/5785e6a0-d722-4740-98ba-c3f8d0228392.jpg",
+    "label": {
+      "en": "Exterior",
+      "el": "Εξωτερικό",
+      "fr": "Extérieur",
+      "de": "Außenbereich",
+      "it": "Esterno",
+      "he": "חוץ"
+    },
+    "description": {
+      "en": "The villa at golden hour—stone terraces, green shutters, and the Aegean stretching toward the horizon.",
+      "el": "Η βίλα στο χρυσό φως—πέτρινα επίπεδα, πράσινα παντζούρια και το Αιγαίο στον ορίζοντα."
+    }
+  },
+  {
+    "id": "87570e54-85cf-49b6-a304-f590f28dea10",
+    "src": "/gallery/villa/airbnb/87570e54-85cf-49b6-a304-f590f28dea10.jpg",
+    "label": {
+      "en": "Sea-view deck",
+      "el": "Κατάστρωμα με θέα",
+      "fr": "Terrasse vue mer",
+      "de": "Terrasse mit Meerblick",
+      "it": "Terrazza vista mare",
+      "he": "מרפסת עם נוף לים"
+    },
+    "description": {
+      "en": "Pull up a deck chair on the stone patio and watch the sun slip into the sea.",
+      "el": "Καθίστε στην πέτρινη βεράντα και δείτε τον ήλιο να βυθίζεται στη θάλασσα."
+    }
+  },
+  {
+    "id": "2c366b61-197b-472b-b522-21d50ba066c3",
+    "src": "/gallery/villa/airbnb/2c366b61-197b-472b-b522-21d50ba066c3.jpg",
+    "label": {
+      "en": "Bedroom 1",
+      "el": "Υπνοδωμάτιο 1",
+      "fr": "Chambre 1",
+      "de": "Schlafzimmer 1",
+      "it": "Camera 1",
+      "he": "חדר שינה 1"
+    },
+    "description": {
+      "en": "Master bedroom with wide-open shutters framing bougainvillea, hills, and deep blue water.",
+      "el": "Κύριο υπνοδωμάτιο με ανοιχτά παντζούρια σε μπουκαμβίλια, λόφους και βαθύ μπλε νερό."
+    }
+  },
+  {
+    "id": "0a1d4787-f2f8-4c9d-b4d6-0c687cbf556e",
+    "src": "/gallery/villa/airbnb/0a1d4787-f2f8-4c9d-b4d6-0c687cbf556e.jpg",
+    "label": {
+      "en": "Dining area",
+      "el": "Τραπεζαρία",
+      "fr": "Salle à manger",
+      "de": "Essbereich",
+      "it": "Zona pranzo",
+      "he": "פינת אוכל"
+    },
+    "description": {
+      "en": "Dine by a stone arch with beamed ceilings and the living room’s fireplace just beyond.",
+      "el": "Γεύμα δίπλα σε πέτρινη καμάρα, δοκάρια και το τζάκι του σαλονιού πιο πέρα."
+    }
+  },
+  {
+    "id": "04c6f7be-82f6-4d26-9146-3d6963c550f0",
+    "src": "/gallery/villa/airbnb/04c6f7be-82f6-4d26-9146-3d6963c550f0.jpg",
+    "label": {
+      "en": "Living room",
+      "el": "Σαλόνι",
+      "fr": "Salon",
+      "de": "Wohnzimmer",
+      "it": "Soggiorno",
+      "he": "סלון"
+    },
+    "description": {
+      "en": "Traditional sitting room with stone floors, carved pillars, and soft yellow upholstered seating.",
+      "el": "Παραδοσιακό καθιστικό με πέτρινα δάπεδα, σκαλιστούς στύλους και απαλά καθίσματα."
+    }
+  },
+  {
+    "id": "e5ab6af7-c290-42d8-be6c-ca4055ceb86a",
+    "src": "/gallery/villa/airbnb/e5ab6af7-c290-42d8-be6c-ca4055ceb86a.jpg",
+    "label": {
+      "en": "Living room",
+      "el": "Σαλόνι",
+      "fr": "Salon",
+      "de": "Wohnzimmer",
+      "it": "Soggiorno",
+      "he": "סלון"
+    },
+    "description": {
+      "en": "Bright lounge with classic wooden sofa set, flagstone floors, and Cycladic light all day.",
+      "el": "Φωτεινό σαλόνι με κλασικό ξύλινο καναπέ, πλάκες και κυκλαδίτικο φως."
+    }
+  },
+  {
+    "id": "a6f019b3-978a-4b0b-8b2b-5e65f883c68a",
+    "src": "/gallery/villa/airbnb/a6f019b3-978a-4b0b-8b2b-5e65f883c68a.jpg",
+    "label": {
+      "en": "Kitchen",
+      "el": "Κουζίνα",
+      "fr": "Cuisine",
+      "de": "Küche",
+      "it": "Cucina",
+      "he": "מטבח"
+    },
+    "description": {
+      "en": "Fully equipped kitchen with wood cabinetry, blue tile backsplash, and a garden view at the sink.",
+      "el": "Πλήρως εξοπλισμένη κουζίνα με ξύλινα ντουλάπια, μπλε πλακάκια και θέα στον κήπο."
+    }
+  },
+  {
+    "id": "770bba68-1422-4e52-a2bd-26f925b0c34a",
+    "src": "/gallery/villa/airbnb/770bba68-1422-4e52-a2bd-26f925b0c34a.jpg",
+    "label": {
+      "en": "Dining area",
+      "el": "Τραπεζαρία",
+      "fr": "Salle à manger",
+      "de": "Essbereich",
+      "it": "Zona pranzo",
+      "he": "פינת אוכל"
+    },
+    "description": {
+      "en": "Wooden dining table with embroidered linens, banquette cushions, and the kitchen steps away.",
+      "el": "Ξύλινο τραπέζι με κεντημένα υφάσματα και την κουζίνα δίπλα."
+    }
+  },
+  {
+    "id": "abed6b15-de09-4aab-aa07-65dc85188b83",
+    "src": "/gallery/villa/airbnb/abed6b15-de09-4aab-aa07-65dc85188b83.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Stone-topped vanity, arched carved mirror, shell wall hanging, and cool flagstone underfoot.",
+      "el": "Νιπτήρας με πέτρα, τοξωτός καθρέφτης και δροσερές πλάκες κάτω από τα πόδια."
+    }
+  },
+  {
+    "id": "d9a5fac9-5e4a-4990-96be-82bf5f245adb",
+    "src": "/gallery/villa/airbnb/d9a5fac9-5e4a-4990-96be-82bf5f245adb.jpg",
+    "label": {
+      "en": "Sea view",
+      "el": "Θέα στη θάλασσα",
+      "fr": "Vue mer",
+      "de": "Meerblick",
+      "it": "Vista mare",
+      "he": "נוף לים"
+    },
+    "description": {
+      "en": "Framed from indoors: Delfini Bay, sailboats, and the islands beyond—your daily postcard.",
+      "el": "Από μέσα: ο κόλπος του Δελφινιού, ιστιοπλοϊκά και τα νησάκια—η καθημερινή σας καρτ ποστάλ."
+    }
+  },
+  {
+    "id": "8f8c294a-795c-4553-99e1-552e59917a0b",
+    "src": "/gallery/villa/airbnb/8f8c294a-795c-4553-99e1-552e59917a0b.jpg",
+    "label": {
+      "en": "Bedroom 1",
+      "el": "Υπνοδωμάτιο 1",
+      "fr": "Chambre 1",
+      "de": "Schlafzimmer 1",
+      "it": "Camera 1",
+      "he": "חדר שינה 1"
+    },
+    "description": {
+      "en": "King bed, built-in wardrobes, wood-beamed ceiling, and glass doors onto the sunny terrace.",
+      "el": "King κρεβάτι, εντοιχισμένες ντουλάπες, δοκάρια και πόρτες στη λιακάδα της βεράντας."
+    }
+  },
+  {
+    "id": "71e707ee-002a-450d-93e4-573660a601a3",
+    "src": "/gallery/villa/airbnb/71e707ee-002a-450d-93e4-573660a601a3.jpg",
+    "label": {
+      "en": "Exterior",
+      "el": "Εξωτερικό",
+      "fr": "Extérieur",
+      "de": "Außenbereich",
+      "it": "Esterno",
+      "he": "חוץ"
+    },
+    "description": {
+      "en": "Yellow facade, dry-stone terraces, bougainvillea shade, and outdoor dining under the pergola.",
+      "el": "Κίτρινη πρόσοψη, ξερολιθιές, σκιά από μπουκαμβίλια και τραπέζι έξω."
+    }
+  },
+  {
+    "id": "5cc56bc5-b9e5-42ee-a0b1-341f3b0ec282",
+    "src": "/gallery/villa/airbnb/5cc56bc5-b9e5-42ee-a0b1-341f3b0ec282.jpg",
+    "label": {
+      "en": "Exterior",
+      "el": "Εξωτερικό",
+      "fr": "Extérieur",
+      "de": "Außenbereich",
+      "it": "Esterno",
+      "he": "חוץ"
+    },
+    "description": {
+      "en": "Stone stairs, vine-covered pergola, and green shutters set against the Syros hillside.",
+      "el": "Πέτρινα σκαλιά, πέργκολα με κλήματα και πράσινα παντζούρια στην πλαγιά."
+    }
+  },
+  {
+    "id": "239ae98e-2723-4c6c-bae0-93f19a780cb2",
+    "src": "/gallery/villa/airbnb/239ae98e-2723-4c6c-bae0-93f19a780cb2.jpg",
+    "label": {
+      "en": "Exterior",
+      "el": "Εξωτερικό",
+      "fr": "Extérieur",
+      "de": "Außenbereich",
+      "it": "Esterno",
+      "he": "חוץ"
+    },
+    "description": {
+      "en": "Two-story villa with palm, pink bougainvillea, and afternoon sun on the flagstone patio.",
+      "el": "Διώροφη βίλα με φοίνικα, ροζ μπουκαμβίλια και απογευματινό φως στην αυλή."
+    }
+  },
+  {
+    "id": "d6282280-b351-4c7e-a644-9ed4f44c32e7",
+    "src": "/gallery/villa/airbnb/d6282280-b351-4c7e-a644-9ed4f44c32e7.jpg",
+    "label": {
+      "en": "Sea-view deck",
+      "el": "Κατάστρωμα με θέα",
+      "fr": "Terrasse vue mer",
+      "de": "Terrasse mit Meerblick",
+      "it": "Terrazza vista mare",
+      "he": "מרפסת עם נוף לים"
+    },
+    "description": {
+      "en": "Multi-level stone terrace with sea railing, bougainvillea, and a small island in the bay.",
+      "el": "Πολυεπίπεδη πέτρινη βεράντα με κάγκελο στη θάλασσα και μικρό νησάκι στον κόλπο."
+    }
+  },
+  {
+    "id": "de37b1c3-e13f-4c33-8c38-d07ff6394fa8",
+    "src": "/gallery/villa/airbnb/de37b1c3-e13f-4c33-8c38-d07ff6394fa8.jpg",
+    "label": {
+      "en": "Sea-view lawn",
+      "el": "Γκαζόν με θέα",
+      "fr": "Pelouse vue mer",
+      "de": "Rasen mit Meerblick",
+      "it": "Prato vista mare",
+      "he": "דשא עם נוף לים"
+    },
+    "description": {
+      "en": "Green lawn, stone steps, and an open view over the bay—room to stretch out in the sun.",
+      "el": "Πράσινο γκαζόν, πέτρινα σκαλιά και ανοιχτή θέα στον κόλπο."
+    }
+  },
+  {
+    "id": "d946b4d7-0943-42a6-af18-dab41996cefe",
+    "src": "/gallery/villa/airbnb/d946b4d7-0943-42a6-af18-dab41996cefe.jpg",
+    "label": {
+      "en": "Sea-view deck",
+      "el": "Κατάστρωμα με θέα",
+      "fr": "Terrasse vue mer",
+      "de": "Terrasse mit Meerblick",
+      "it": "Terrazza vista mare",
+      "he": "מרפסת עם נוף לים"
+    },
+    "description": {
+      "en": "Sunset from the stone wall: orange sky, calm water, and the headland glowing across the bay.",
+      "el": "Ηλιοβασίλεμα από το πέτρινο τοιχίο: πορτοκαλί ουρανός και ήρεμα νερά."
+    }
+  },
+  {
+    "id": "6880c594-31a8-4358-9a2c-9f6ff99c4299",
+    "src": "/gallery/villa/airbnb/6880c594-31a8-4358-9a2c-9f6ff99c4299.jpg",
+    "label": {
+      "en": "Sea-view lawn",
+      "el": "Γκαζόν με θέα",
+      "fr": "Pelouse vue mer",
+      "de": "Rasen mit Meerblick",
+      "it": "Prato vista mare",
+      "he": "דשא עם נוף לים"
+    },
+    "description": {
+      "en": "Steps down to a grassy terrace bounded by stone walls and wide-open Aegean views.",
+      "el": "Σκαλιά προς γρασίδι με πέτρινους τοίχους και πλατιά θέα στο Αιγαίο."
+    }
+  },
+  {
+    "id": "6291c3c4-8fcb-4192-a3da-27663ebb4b23",
+    "src": "/gallery/villa/airbnb/6291c3c4-8fcb-4192-a3da-27663ebb4b23.jpg",
+    "label": {
+      "en": "Patio",
+      "el": "Αίθριο",
+      "fr": "Patio",
+      "de": "Patio",
+      "it": "Patio",
+      "he": "פטיו"
+    },
+    "description": {
+      "en": "Six-seat outdoor table on stone paving, with the coast and islets spread out before you.",
+      "el": "Εξωτερικό τραπέζι για έξι με την ακτή και τα νησάκια μπροστά σας."
+    }
+  },
+  {
+    "id": "88ef43e9-0642-4b2e-8bd3-611aa3f66a88",
+    "src": "/gallery/villa/airbnb/88ef43e9-0642-4b2e-8bd3-611aa3f66a88.jpg",
+    "label": {
+      "en": "Patio",
+      "el": "Αίθριο",
+      "fr": "Patio",
+      "de": "Patio",
+      "it": "Patio",
+      "he": "פטיו"
+    },
+    "description": {
+      "en": "Alfresco table under the reed roof, wine ready, and the whole of Delfini Bay in view.",
+      "el": "Τραπέζι κάτω από καλαμωτή στέγη και όλος ο κόλπος του Δελφινιού στη θέα."
+    }
+  },
+  {
+    "id": "f47d8601-d4e2-4289-beab-56d31e3a221e",
+    "src": "/gallery/villa/airbnb/f47d8601-d4e2-4289-beab-56d31e3a221e.jpg",
+    "label": {
+      "en": "Sea-view deck",
+      "el": "Κατάστρωμα με θέα",
+      "fr": "Terrasse vue mer",
+      "de": "Terrasse mit Meerblick",
+      "it": "Terrazza vista mare",
+      "he": "מרפסת עם נוף לים"
+    },
+    "description": {
+      "en": "Flagstone patio with a hand-carved dolphin relief, bougainvillea, and sunset over the water.",
+      "el": "Πέτρινη βεράντα με ανάγλυφο δελφίνι, μπουκαμβίλια και ηλιοβασίλεμα."
+    }
+  },
+  {
+    "id": "171af520-c545-445f-914c-187a781f17e9",
+    "src": "/gallery/villa/airbnb/171af520-c545-445f-914c-187a781f17e9.jpg",
+    "label": {
+      "en": "Garden",
+      "el": "Κήπος",
+      "fr": "Jardin",
+      "de": "Garten",
+      "it": "Giardino",
+      "he": "גינה"
+    },
+    "description": {
+      "en": "Green grapes on the vine against the dry, sun-baked hills around the property.",
+      "el": "Πράσινα σταφύλια στην κληματαριά μπροστά στους ξερούς λόφους."
+    }
+  },
+  {
+    "id": "f0df7864-638f-495b-bbe6-ec8af6d19c82",
+    "src": "/gallery/villa/airbnb/f0df7864-638f-495b-bbe6-ec8af6d19c82.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Warm plaster walls, carved mirror, pedestal sink, and a woven rug on stone tiles.",
+      "el": "Ζεστοί σοβάδες, σκαλιστός καθρέφτης, νιπτήρας και χαλί σε πέτρα."
+    }
+  },
+  {
+    "id": "2b2b332d-ff07-42e5-bdc1-f915dcae28bd",
+    "src": "/gallery/villa/airbnb/2b2b332d-ff07-42e5-bdc1-f915dcae28bd.jpg",
+    "label": {
+      "en": "Dining area",
+      "el": "Τραπεζαρία",
+      "fr": "Salle à manger",
+      "de": "Essbereich",
+      "it": "Zona pranzo",
+      "he": "פינת אוכל"
+    },
+    "description": {
+      "en": "Evening glimpse through the shutters—lemon-print linens and a welcoming glow inside.",
+      "el": "Βραδινή ματιά από τα παντζούρια—λεμονί υφάσματα και ζεστό φως μέσα."
+    }
+  },
+  {
+    "id": "056984e1-7851-4a88-b7cb-0efee4ddae8c",
+    "src": "/gallery/villa/airbnb/056984e1-7851-4a88-b7cb-0efee4ddae8c.jpg",
+    "label": {
+      "en": "Living room",
+      "el": "Σαλόνι",
+      "fr": "Salon",
+      "de": "Wohnzimmer",
+      "it": "Soggiorno",
+      "he": "סלון"
+    },
+    "description": {
+      "en": "Built-in stone bench with terracotta cushions, arched fireplace, and classic island charm.",
+      "el": "Εντοιχισμένο πέτρινο παγκάκι με κεραμιδί μαξιλάρια και τοξωτό τζάκι."
+    }
+  },
+  {
+    "id": "5ffd5212-ceab-40a3-a2d9-80ed45308764",
+    "src": "/gallery/villa/airbnb/5ffd5212-ceab-40a3-a2d9-80ed45308764.jpg",
+    "label": {
+      "en": "Delfini Beach",
+      "el": "Παραλία Δελφίνι",
+      "fr": "Plage de Delfini",
+      "de": "Delfini Beach",
+      "it": "Spiaggia di Delfini",
+      "he": "חוף דלפיני"
+    },
+    "description": {
+      "en": "Thatched umbrellas, soft sand, and turquoise shallows—your beach is minutes away.",
+      "el": "Ψάθινες ομπρέλες, μαλακή άμμος και τυρκουάζ νερά—η παραλία σε λίγα λεπτά."
+    }
+  },
+  {
+    "id": "4701bc3f-09c9-47b6-a4e6-5119ac4cbebd",
+    "src": "/gallery/villa/airbnb/4701bc3f-09c9-47b6-a4e6-5119ac4cbebd.jpg",
+    "label": {
+      "en": "Location",
+      "el": "Τοποθεσία",
+      "fr": "Emplacement",
+      "de": "Lage",
+      "it": "Posizione",
+      "he": "מיקום"
+    },
+    "description": {
+      "en": "See how close the house sits above Delfini Bay—a short walk down to the sand.",
+      "el": "Δείτε πόσο κοντά είναι το σπίτι πάνω από τον κόλπο—μικρό περπάτημα μέχρι την άμμο."
+    }
+  },
+  {
+    "id": "a6cf8cfa-d6d0-4154-b99a-fbbd40725045",
+    "src": "/gallery/villa/airbnb/a6cf8cfa-d6d0-4154-b99a-fbbd40725045.jpg",
+    "label": {
+      "en": "Parking",
+      "el": "Πάρκινγκ",
+      "fr": "Parking",
+      "de": "Parkplatz",
+      "it": "Parcheggio",
+      "he": "חניה"
+    },
+    "description": {
+      "en": "Covered stone carport on the hillside—handy shade when you arrive by car.",
+      "el": "Σκεπαστό πέτρινο πάρκινγκ στην πλαγιά—βολική σκιά όταν φτάνετε με αυτοκίνητο."
+    }
+  },
+  {
+    "id": "040f7bb2-fea5-43a6-9265-6f9a68ba6d90",
+    "src": "/gallery/villa/airbnb/040f7bb2-fea5-43a6-9265-6f9a68ba6d90.jpg",
+    "label": {
+      "en": "Parking",
+      "el": "Πάρκινγκ",
+      "fr": "Parking",
+      "de": "Parkplatz",
+      "it": "Parcheggio",
+      "he": "חניה"
+    },
+    "description": {
+      "en": "Private parking under the bamboo roof, with the sunset painting the sea beyond.",
+      "el": "Ιδιωτικό πάρκινγκ κάτω από μπαμπού, με το ηλιοβασίλεμα στη θάλασσα."
+    }
+  },
+  {
+    "id": "bb968b30-c732-4acf-81f8-939b4205e1fa",
+    "src": "/gallery/villa/airbnb/bb968b30-c732-4acf-81f8-939b4205e1fa.jpg",
+    "label": {
+      "en": "Delfini Beach",
+      "el": "Παραλία Δελφίνι",
+      "fr": "Plage de Delfini",
+      "de": "Delfini Beach",
+      "it": "Spiaggia di Delfini",
+      "he": "חוף דלפיני"
+    },
+    "description": {
+      "en": "Pebbled shore at dusk—swimmers in the bay and the sun melting behind the headland.",
+      "el": "Βοτσαλωτή ακτή στο σούρουπο—κολυμβητές στον κόλπο και ήλιος πίσω από το ακρωτήρι."
+    }
+  },
+  {
+    "id": "84804b51-b266-4b23-b13e-40f27f7b79d9",
+    "src": "/gallery/villa/airbnb/84804b51-b266-4b23-b13e-40f27f7b79d9.jpg",
+    "label": {
+      "en": "Bedroom 3",
+      "el": "Υπνοδωμάτιο 3",
+      "fr": "Chambre 3",
+      "de": "Schlafzimmer 3",
+      "it": "Camera 3",
+      "he": "חדר שינה 3"
+    },
+    "description": {
+      "en": "Two twins, a sea-view desk, and bougainvillea at the window—great for kids or friends.",
+      "el": "Δύο μονά, γραφείο με θέα και μπουκαμβίλια στο παράθυρο—ιδανικό για παιδιά ή φίλους."
+    }
+  },
+  {
+    "id": "947e2df0-77e2-40bd-aa2f-948a09c53991",
+    "src": "/gallery/villa/airbnb/947e2df0-77e2-40bd-aa2f-948a09c53991.jpg",
+    "label": {
+      "en": "Bedroom 3",
+      "el": "Υπνοδωμάτιο 3",
+      "fr": "Chambre 3",
+      "de": "Schlafzimmer 3",
+      "it": "Camera 3",
+      "he": "חדר שינה 3"
+    },
+    "description": {
+      "en": "Twin beds and a laptop-ready desk, both looking straight out to the open Aegean.",
+      "el": "Δίδυμα κρεβάτια και γραφείο με θέα κατευθείαν στο ανοιχτό Αιγαίο."
+    }
+  },
+  {
+    "id": "6443bce5-03f0-4b01-b18f-cafd43f0da4a",
+    "src": "/gallery/villa/airbnb/6443bce5-03f0-4b01-b18f-cafd43f0da4a.jpg",
+    "label": {
+      "en": "Workspace",
+      "el": "Χώρος εργασίας",
+      "fr": "Espace de travail",
+      "de": "Arbeitsplatz",
+      "it": "Spazio di lavoro",
+      "he": "פינת עבודה"
+    },
+    "description": {
+      "en": "Light wood desk between open windows—a quiet spot to work with bougainvillea and sea breeze.",
+      "el": "Ανοιχτόχρωμο γραφείο ανάμεσα σε παράθυρα—ήσυχη δουλειά με μπουκαμβίλια και αεράκι."
+    }
+  },
+  {
+    "id": "e792c8fc-0b01-45e9-9716-689d2ae3d62e",
+    "src": "/gallery/villa/airbnb/e792c8fc-0b01-45e9-9716-689d2ae3d62e.jpg",
+    "label": {
+      "en": "Interior detail",
+      "el": "Λεπτομέρεια",
+      "fr": "Détail intérieur",
+      "de": "Interieurdetail",
+      "it": "Dettaglio",
+      "he": "פרט פנים"
+    },
+    "description": {
+      "en": "Hand-carved Cycladic stone relief set into the villa’s natural stone wall.",
+      "el": "Χειροποίητο κυκλαδίτικο ανάγλυφο στην πέτρινη τοιχοποιία της βίλας."
+    }
+  },
+  {
+    "id": "721f2e0a-0bb0-4cc0-af6c-c11bc1f47cfd",
+    "src": "/gallery/villa/airbnb/721f2e0a-0bb0-4cc0-af6c-c11bc1f47cfd.jpg",
+    "label": {
+      "en": "Bedroom 2",
+      "el": "Υπνοδωμάτιο 2",
+      "fr": "Chambre 2",
+      "de": "Schlafzimmer 2",
+      "it": "Camera 2",
+      "he": "חדר שינה 2"
+    },
+    "description": {
+      "en": "Another angle on the twin room—iron frames, floral pillows, and bougainvillea outside.",
+      "el": "Άλλη γωνία στο δωμάτιο με τα δίδυμα—σιδερένια κάγκελα και μπουκαμβίλια έξω."
+    }
+  },
+  {
+    "id": "d6cb1a64-c6ed-4d7b-ac75-4293e91ca326",
+    "src": "/gallery/villa/airbnb/d6cb1a64-c6ed-4d7b-ac75-4293e91ca326.jpg",
+    "label": {
+      "en": "Bedroom 2",
+      "el": "Υπνοδωμάτιο 2",
+      "fr": "Chambre 2",
+      "de": "Schlafzimmer 2",
+      "it": "Camera 2",
+      "he": "חדר שינה 2"
+    },
+    "description": {
+      "en": "Twin wrought-iron beds, stone floors, and an open window onto the Aegean and pink blooms.",
+      "el": "Δίδυμα σιδερένια κρεβάτια, πέτρινο δάπεδο και παράθυρο στο Αιγαίο."
+    }
+  },
+  {
+    "id": "fae2ca6c-10be-4888-9c5f-aad9dcac7e33",
+    "src": "/gallery/villa/airbnb/fae2ca6c-10be-4888-9c5f-aad9dcac7e33.jpg",
+    "label": {
+      "en": "Bedroom 2",
+      "el": "Υπνοδωμάτιο 2",
+      "fr": "Chambre 2",
+      "de": "Schlafzimmer 2",
+      "it": "Camera 2",
+      "he": "חדר שינה 2"
+    },
+    "description": {
+      "en": "Crisp twin beds with sage throws, built-in wardrobes, and soft afternoon light.",
+      "el": "Καθαρά δίδυμα με πράσινες ρίγες, εντοιχισμένες ντουλάπες και απαλό φως."
+    }
+  },
+  {
+    "id": "c07a70b1-534f-4e05-b6ac-0ea8a3fba3a8",
+    "src": "/gallery/villa/airbnb/c07a70b1-534f-4e05-b6ac-0ea8a3fba3a8.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Soaking tub with mosaic curtain, blue towels, and a frosted window for privacy.",
+      "el": "Μπανιέρα με ψηφιδωτή κουρτίνα, μπλε πετσέτες και ματ παράθυρο για ιδιωτικότητα."
+    }
+  },
+  {
+    "id": "d5aca165-6f59-43d6-a268-0c41917db2dc",
+    "src": "/gallery/villa/airbnb/d5aca165-6f59-43d6-a268-0c41917db2dc.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Built-in tub on flagstone, chrome shower, and a sunny frosted window above the radiator.",
+      "el": "Εντοιχισμένη μπανιέρα σε πέτρα, ντους και φωτεινό ματ παράθυρο."
+    }
+  },
+  {
+    "id": "aa62ad8e-8365-425a-841d-3dc99e193774",
+    "src": "/gallery/villa/airbnb/aa62ad8e-8365-425a-841d-3dc99e193774.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Ornate arched mirror, seashell wind chime, and warm light in a calm powder room.",
+      "el": "Τοξωτός καθρέφτης, κοχύλια και ζεστό φως σε ήρεμο μπάνιο."
+    }
+  },
+  {
+    "id": "39186f1b-fcd6-4d43-a7a6-5e2398fa8520",
+    "src": "/gallery/villa/airbnb/39186f1b-fcd6-4d43-a7a6-5e2398fa8520.jpg",
+    "label": {
+      "en": "Bathroom",
+      "el": "Μπάνιο",
+      "fr": "Salle de bain",
+      "de": "Bad",
+      "it": "Bagno",
+      "he": "חדר רחצה"
+    },
+    "description": {
+      "en": "Walk-in shower, stone floor, in-unit washer, and fresh towels—practical and spotless.",
+      "el": "Ντους walk-in, πέτρινο δάπεδο, πλυντήριο και φρέσκες πετσέτες."
+    }
+  },
+  {
+    "id": "6535805d-b001-4fd4-9324-8fbd773397ff",
+    "src": "/gallery/villa/airbnb/6535805d-b001-4fd4-9324-8fbd773397ff.jpg",
+    "label": {
+      "en": "Bedroom 1",
+      "el": "Υπνοδωμάτιο 1",
+      "fr": "Chambre 1",
+      "de": "Schlafzimmer 1",
+      "it": "Camera 1",
+      "he": "חדר שינה 1"
+    },
+    "description": {
+      "en": "King bed facing the sea, reclaimed nightstand, beamed ceiling, and island light pouring in.",
+      "el": "King κρεβάτι προς τη θάλασσα, δοκάρια και νησιώτικο φως που πλημμυρίζει το δωμάτιο."
+    }
+  }
+]

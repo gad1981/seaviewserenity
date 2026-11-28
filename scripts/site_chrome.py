@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 # Bump when shared CSS changes so all pages refresh together
-CSS_V = "norm31"
+CSS_V = "norm43"
 
 
 def css_head_links(*, articles: bool = False, sitepro: bool = False) -> str:

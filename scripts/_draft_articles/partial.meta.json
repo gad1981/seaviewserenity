@@ -1,0 +1,30 @@
+{
+  "where-to-stay-syros-areas-compared": {
+    "title": "Where to Stay on Syros: Ermoupoli, Kini–Delfini, Galissas, and the South Compared",
+    "description": "Compare Syros stay areas—Ermoupoli, the west-coast coves around Kini and Delfini, Galissas, and the southern coast—so you pick a base that matches quiet beaches, nightlife, or a villa week.",
+    "keywords": "where to stay Syros, Syros accommodation areas, Kini vs Ermoupoli, Delfini Beach stay, Galissas Syros, Posidonia Syros villa",
+    "published": "2026-09-18",
+    "modified": "2026-11-12",
+    "hero_img": "syros-ano-ermoupoli.jpg",
+    "mid_img": "syros-delfini-beach.jpg",
+    "hero_alt": "Ano Syros and Ermoupoli rising above the harbour on Syros",
+    "hero_caption": "Ano Syros and Ermoupoli above the harbour: the island’s capital-town face. Photo: Hans Peter Schaefer / Wikimedia Commons (CC BY-SA 3.0).",
+    "sources": [
+      {
+        "id": "ref1",
+        "cite": "Visit Greece — Syros (“The lady of the Cyclades”).",
+        "url": "https://www.visitgreece.gr/en/islands/cyclades/syros"
+      },
+      {
+        "id": "ref2",
+        "cite": "Visit Greece — Beaches of Syros (Kini, Delfini, Varvarousa, southern beaches).",
+        "url": "https://www.visitgreece.gr/en/experiences/beaches/beloved-beaches/beaches-of-syros"
+      },
+      {
+        "id": "ref3",
+        "cite": "Syros Island official travel guide.",
+        "url": "https://syrosisland.gr/en/"
+      }
+    ]
+  }
+}

@@ -41,17 +41,17 @@
   <meta property="og:locale:alternate" content="fr_FR" />
   <meta property="og:locale:alternate" content="it_IT" />
   <meta property="og:locale:alternate" content="he_IL" />
-  <meta property="og:image" content="https://seaviewserenity.gr/Articles/media/villa-terrace-sunset.jpg" />
-  <meta property="og:image:secure_url" content="https://seaviewserenity.gr/Articles/media/villa-terrace-sunset.jpg" />
+  <meta property="og:image" content="https://seaviewserenity.gr/Articles/media/villa-bedroom-balcony.jpg" />
+  <meta property="og:image:secure_url" content="https://seaviewserenity.gr/Articles/media/villa-bedroom-balcony.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="675" />
-  <meta property="og:image:alt" content="Sonnenuntergang auf der Terrasse von Sea View Serenity, Syros" />
+  <meta property="og:image:alt" content="Schlafzimmer mit offenen Fensterläden zu Bougainvillea und Ägäis in Sea View Serenity, Syros" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Syros-Reiseführer | Artikel von Sea View Serenity" />
   <meta name="twitter:description" content="Praktische Ratgeber für Ihren Urlaub am Meer auf Syros: ruhige Kykladen-Ferien, der richtige Buchungszeitpunkt, Strände, Essen und Trends bei…" />
-  <meta name="twitter:image" content="https://seaviewserenity.gr/Articles/media/villa-terrace-sunset.jpg" />
-  <meta name="twitter:image:alt" content="Sonnenuntergang auf der Terrasse von Sea View Serenity, Syros" />
+  <meta name="twitter:image" content="https://seaviewserenity.gr/Articles/media/villa-bedroom-balcony.jpg" />
+  <meta name="twitter:image:alt" content="Schlafzimmer mit offenen Fensterläden zu Bougainvillea und Ägäis in Sea View Serenity, Syros" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -152,10 +152,10 @@
 }
   </script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700|Open+Sans:400,600,700&display=swap" rel="stylesheet" />
-  <link href="/css/site-chrome.css?v=norm31" rel="stylesheet" />
-  <link href="/css/articles.css?v=norm31" rel="stylesheet" />
-  <link href="/css/i18n.css?v=norm31" rel="stylesheet" />
-  <link href="/css/footer.css?v=norm31" rel="stylesheet" />
+  <link href="/css/site-chrome.css?v=norm43" rel="stylesheet" />
+  <link href="/css/articles.css?v=norm43" rel="stylesheet" />
+  <link href="/css/i18n.css?v=norm43" rel="stylesheet" />
+  <link href="/css/footer.css?v=norm43" rel="stylesheet" />
 </head>
 <body class="svs-articles">
     <header class="svs-shell-header">
@@ -183,81 +183,264 @@
       <p class="svs-lede">Praktische Ratgeber zu Unterkunft, Stränden, Essen, Anreise und Trends bei Kurzzeitvermietungen auf Syros, mit Quellen, die Sie selbst prüfen können. Erst informieren, gut entscheiden, dann buchen.</p>
     </div>
     <figure class="svs-figure svs-hero-figure">
-  <img src="/Articles/media/villa-terrace-sunset.jpg" alt="Sonnenuntergang auf der Terrasse von Sea View Serenity, Syros" loading="lazy" width="1200" height="675" />
+  <img src="/Articles/media/villa-bedroom-balcony.jpg" alt="Schlafzimmer mit offenen Fensterläden zu Bougainvillea und Ägäis in Sea View Serenity, Syros" loading="lazy" width="1200" height="675" />
   <figcaption>Übernachten Sie in unserem Haus am Meer nahe dem Strand Delfini auf Syros.</figcaption>
 </figure>
-    <section class="svs-grid" aria-label="Article list">
-    <a class="svs-card" href="/de/Articles/seaside-accommodation-syros-delfini-beach/">
-      <div class="svs-card-media"><img src="/Articles/media/villa-bedroom-sea-view.jpg" alt="Ferienhaus am Meer auf Syros: Warum Delfini Beach so gut zu einem ruhigen Griechenland-Urlaub passt" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <div class="svs-articles-filter" data-svs-articles-filter>
+      <label class="svs-articles-filter__search">
+        <span class="svs-articles-filter__search-label">Artikel suchen</span>
+        <input type="search" data-svs-articles-search autocomplete="off"
+          placeholder="Tag, Ort, Datum…"
+          aria-label="Artikel suchen" />
+      </label>
+      <div class="svs-articles-filter__topics" role="group" aria-label="Nach Thema filtern">
+        <button type="button" class="svs-articles-filter__topic is-active" data-svs-topic="all" aria-pressed="true">Alle</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="stay" aria-pressed="false">Unterkunft &amp; Villa</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="beaches" aria-pressed="false">Strände</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="plan" aria-pressed="false">Planung</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="food" aria-pressed="false">Essen</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="town" aria-pressed="false">Stadt &amp; Kultur</button><button type="button" class="svs-articles-filter__topic" data-svs-topic="tips" aria-pressed="false">Praktische Tipps</button>
+      </div>
+      <p class="svs-articles-filter__status" data-svs-articles-status aria-live="polite"></p>
+    </div>
+    <section class="svs-grid" data-svs-articles-grid aria-label="Article list">
+    <a class="svs-card" href="/de/Articles/multi-gen-group-villa-syros/" data-svs-article-card data-topics="stay" data-published="2026-11-20" data-search="Mehrgenerationen- und Gruppenurlaub in der Villa auf Syros: Platz, Tempo und Logistik ohne Schönfärberei So planen Sie einen Villenurlaub für mehrere Generationen oder eine Freundesgruppe auf Syros: Schlafplätze, Strandrhythmus, Kochen für viele und warum ein Haus an der Westküste bei Delfini passt. Gruppenvilla Syros, Mehrgenerationenurlaub Griechenland, große Gruppe Syros, Familiengruppe Villa Kykladen stay Unterkunft &amp; Villa 2026-11-20 20. Nov. 2026 multi gen group villa syros">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-dining-living.jpg" alt="Mehrgenerationen- und Gruppenurlaub in der Villa auf Syros: Platz, Tempo und Logistik ohne Schönfärberei" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-20">20. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li></ul>
+      <h2>Mehrgenerationen- und Gruppenurlaub in der Villa auf Syros: Platz, Tempo und Logistik ohne Schönfärberei</h2>
+      <p>So planen Sie einen Villenurlaub für mehrere Generationen oder eine Freundesgruppe auf Syros: Schlafplätze, Strandrhythmus, Kochen für viele und warum ein Haus an der Westküste bei Delfini passt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/winter-year-round-syros/" data-svs-article-card data-topics="plan" data-published="2026-11-16" data-search="Syros das ganze Jahr: Warum die Hauptstadtinsel auch außerhalb des Sommers funktioniert Warum Syros auch außerhalb der Hochsaison interessant bleibt: das ganzjährige Stadtleben von Ermoupoli, Realitäten in Zwischensaison und Winter und wie sich ein Haus an der Westküste darauf einstellt. Syros im Winter, Syros ganzjährig, Ermoupoli Nebensaison, Syros Zwischensaison Villa plan Planung 2026-11-16 16. Nov. 2026 winter year round syros">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-living-fireplace.jpg" alt="Syros das ganze Jahr: Warum die Hauptstadtinsel auch außerhalb des Sommers funktioniert" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-16">16. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>Syros das ganze Jahr: Warum die Hauptstadtinsel auch außerhalb des Sommers funktioniert</h2>
+      <p>Warum Syros auch außerhalb der Hochsaison interessant bleibt: das ganzjährige Stadtleben von Ermoupoli, Realitäten in Zwischensaison und Winter und wie sich ein Haus an der Westküste darauf einstellt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/grocery-self-catering-delfini-kini/" data-svs-article-card data-topics="food" data-published="2026-11-12" data-search="Selbstversorgung bei Delfini und Kini: Lebensmittel, Bäckereien und Kochen in der Villa So versorgen Sie sich selbst in einer Villa an der Westküste von Syros bei Delfini und Kini: wo Sie einkaufen, was Sie kochen und wie Ermoupoli zum praktischen Großeinkauf passt. Syros Lebensmittel, Selbstversorgung Syros, Bäckerei Kini, Kochen in der Villa Syros, Delfini Selbstversorger food Essen 2026-11-12 12. Nov. 2026 grocery self catering delfini kini">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-kitchen.jpg" alt="Selbstversorgung bei Delfini und Kini: Lebensmittel, Bäckereien und Kochen in der Villa" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-12">12. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Essen</span></li></ul>
+      <h2>Selbstversorgung bei Delfini und Kini: Lebensmittel, Bäckereien und Kochen in der Villa</h2>
+      <p>So versorgen Sie sich selbst in einer Villa an der Westküste von Syros bei Delfini und Kini: wo Sie einkaufen, was Sie kochen und wie Ermoupoli zum praktischen Großeinkauf passt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/packing-meltemi-wind-guide-syros/" data-svs-article-card data-topics="beaches tips" data-published="2026-11-08" data-search="Packen für Syros und den Meltemi: Wind, Schichten und Ausweichstrände Was Sie in der Meltemi-Saison nach Syros mitnehmen sollten: windtaugliche Kleidung, Strandausrüstung und wie Sie die Küste wechseln, wenn die Buchten im Westen unruhig werden. Meltemi Syros, Packliste Syros, Wind Kykladen, Syros Strand Plan B beaches tips Strände Praktische Tipps 2026-11-08 8. Nov. 2026 packing meltemi wind guide syros">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-kini-sunset.jpg" alt="Packen für Syros und den Meltemi: Wind, Schichten und Ausweichstrände" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-08">8. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Strände</span></li><li><span class="svs-card-tag">Praktische Tipps</span></li></ul>
+      <h2>Packen für Syros und den Meltemi: Wind, Schichten und Ausweichstrände</h2>
+      <p>Was Sie in der Meltemi-Saison nach Syros mitnehmen sollten: windtaugliche Kleidung, Strandausrüstung und wie Sie die Küste wechseln, wenn die Buchten im Westen unruhig werden.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/digital-nomad-syros-delfini-remote-work/" data-svs-article-card data-topics="stay tips" data-published="2026-11-07" data-search="Digital Nomads auf Syros: Warum Delfini ein Paradies für Remote-Arbeit ist Warum Syros für Digital Nomads besser passt als die Party-Inseln, und warum Delfini Beach ein ruhiger Hafen für Remote-Arbeit ist: WLAN, Schreibtisch mit Meerblick, Westküste und eine echte Inselhauptstadt in der Nähe. Digital Nomad Syros, Remote Work Griechenland, Delfini Beach Digital Nomad, Arbeiten von Syros, Kykladen Remote Work, WLAN Villa Syros stay tips Unterkunft &amp; Villa Praktische Tipps 2026-11-07 7. Nov. 2026 digital nomad syros delfini remote work">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-workspace-desk.jpg" alt="Digital Nomads auf Syros: Warum Delfini ein Paradies für Remote-Arbeit ist" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li><li><span class="svs-card-tag">Praktische Tipps</span></li></ul>
+      <h2>Digital Nomads auf Syros: Warum Delfini ein Paradies für Remote-Arbeit ist</h2>
+      <p>Warum Syros für Digital Nomads besser passt als die Party-Inseln, und warum Delfini Beach ein ruhiger Hafen für Remote-Arbeit ist: WLAN, Schreibtisch mit Meerblick, Westküste und eine echte Inselhauptstadt in der Nähe.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/seaside-accommodation-syros-delfini-beach/" data-svs-article-card data-topics="stay" data-published="2026-11-07" data-search="Ferienhaus am Meer auf Syros: Warum Delfini Beach so gut zu einem ruhigen Griechenland-Urlaub passt Warum Delfini Beach und die Westküste von Syros ideal für einen entspannten Urlaub am Meer sind: worauf Sie bei der Wahl einer Unterkunft achten sollten, was für und was gegen die Lage spricht – und wie ein ganz einfacher Strandtag aussieht, wenn das Haus nur zehn Gehminuten vom Sand entfernt liegt. Ferienhaus am Meer Griechenland, Unterkunft Syros, Delfini Beach Syros, Ferienhaus Syros, Urlaub am Meer Griechenland, Ferienunterkunft Syros stay Unterkunft &amp; Villa 2026-11-07 7. Nov. 2026 seaside accommodation syros delfini beach">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-bedroom-sea-view.jpg" alt="Ferienhaus am Meer auf Syros: Warum Delfini Beach so gut zu einem ruhigen Griechenland-Urlaub passt" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li></ul>
       <h2>Ferienhaus am Meer auf Syros: Warum Delfini Beach so gut zu einem ruhigen Griechenland-Urlaub passt</h2>
       <p>Warum Delfini Beach und die Westküste von Syros ideal für einen entspannten Urlaub am Meer sind: worauf Sie bei der Wahl einer Unterkunft achten sollten, was für und was gegen die Lage spricht – und wie ein ganz einfacher Strandtag aussieht, wenn das Haus nur zehn Gehminuten vom Sand entfernt liegt.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/syros-vs-santorini-mykonos-calmer-cyclades/">
-      <div class="svs-card-media"><img src="/Articles/media/syros-ermoupoli-view.jpg" alt="Syros oder Santorin und Mykonos? So finden Sie Ihren ruhigeren Kykladen-Urlaub" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/syros-vs-santorini-mykonos-calmer-cyclades/" data-svs-article-card data-topics="plan" data-published="2026-11-07" data-search="Syros oder Santorin und Mykonos? So finden Sie Ihren ruhigeren Kykladen-Urlaub Syros, Santorin und Mykonos im ehrlichen Vergleich: Kultur, Strände, Nachtleben – und wann die belebteren Inseln für Ihre Kykladenreise tatsächlich die bessere Wahl sind. Syros oder Mykonos, Syros oder Santorin, ruhige Kykladen, Syros Urlaub, Kykladen Urlaub, Urlaub am Meer Griechenland plan Planung 2026-11-07 7. Nov. 2026 syros vs santorini mykonos calmer cyclades">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ermoupoli-view.jpg" alt="Syros oder Santorin und Mykonos? So finden Sie Ihren ruhigeren Kykladen-Urlaub" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
       <h2>Syros oder Santorin und Mykonos? So finden Sie Ihren ruhigeren Kykladen-Urlaub</h2>
       <p>Syros, Santorin und Mykonos im ehrlichen Vergleich: Kultur, Strände, Nachtleben – und wann die belebteren Inseln für Ihre Kykladenreise tatsächlich die bessere Wahl sind.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/best-time-to-visit-syros-seaside-holiday/">
-      <div class="svs-card-media"><img src="/Articles/media/villa-terrace-sunset.jpg" alt="Beste Reisezeit für Syros: Urlaub am Meer – und wann Sie buchen sollten" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/best-time-to-visit-syros-seaside-holiday/" data-svs-article-card data-topics="plan" data-published="2026-11-07" data-search="Beste Reisezeit für Syros: Urlaub am Meer – und wann Sie buchen sollten Wann Sie für Badeurlaub, Wind, Andrang und Preis-Leistung am besten nach Syros reisen: ein Monatsüberblick von einem Gastgeber vor Ort – und was die Tourismus- und Vermietungstrends 2025/26 für den Buchungszeitpunkt bedeuten. beste Reisezeit Syros, Syros Wetter Urlaub, Griechenland Badeurlaub Nebensaison, Ferienhaus Syros buchen, Kykladen Reisetipps plan Planung 2026-11-07 7. Nov. 2026 best time to visit syros seaside holiday">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-terrace-sunset.jpg" alt="Beste Reisezeit für Syros: Urlaub am Meer – und wann Sie buchen sollten" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
       <h2>Beste Reisezeit für Syros: Urlaub am Meer – und wann Sie buchen sollten</h2>
       <p>Wann Sie für Badeurlaub, Wind, Andrang und Preis-Leistung am besten nach Syros reisen: ein Monatsüberblick von einem Gastgeber vor Ort – und was die Tourismus- und Vermietungstrends 2025/26 für den Buchungszeitpunkt bedeuten.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/greece-short-term-rentals-2026-what-travellers-want/">
-      <div class="svs-card-media"><img src="/Articles/media/villa-dining-living.jpg" alt="Ferienwohnungen und Ferienhäuser in Griechenland 2026: Was Gäste von einer Unterkunft am Meer erwarten" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/greece-short-term-rentals-2026-what-travellers-want/" data-svs-article-card data-topics="tips" data-published="2026-11-07" data-search="Ferienwohnungen und Ferienhäuser in Griechenland 2026: Was Gäste von einer Unterkunft am Meer erwarten Was Reisende 2026 von einer Ferienunterkunft am Meer in Griechenland erwarten – auf Grundlage von Tourismusdaten und Gästefragen: eine klare Lagebeschreibung, eine richtige Küche, ehrliche Angaben zur Belegung und ein Platz im Freien. Airbnb Griechenland 2026, Ferienunterkunft Griechenland, Ferienhaus am Meer Griechenland, Trends Gastgewerbe Griechenland, Ferienunterkunft Kykladen buchen tips Praktische Tipps 2026-11-07 7. Nov. 2026 greece short term rentals 2026 what travellers want">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-dining-living.jpg" alt="Ferienwohnungen und Ferienhäuser in Griechenland 2026: Was Gäste von einer Unterkunft am Meer erwarten" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Praktische Tipps</span></li></ul>
       <h2>Ferienwohnungen und Ferienhäuser in Griechenland 2026: Was Gäste von einer Unterkunft am Meer erwarten</h2>
       <p>Was Reisende 2026 von einer Ferienunterkunft am Meer in Griechenland erwarten – auf Grundlage von Tourismusdaten und Gästefragen: eine klare Lagebeschreibung, eine richtige Küche, ehrliche Angaben zur Belegung und ein Platz im Freien.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/how-to-get-to-syros-from-athens-ferry-flight/">
-      <div class="svs-card-media"><img src="/Articles/media/syros-from-ferry.jpg" alt="Von Athen nach Syros: Anreise mit Fähre oder Flugzeug und Tipps zur Buchung" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/how-to-get-to-syros-from-athens-ferry-flight/" data-svs-article-card data-topics="plan" data-published="2026-11-07" data-search="Von Athen nach Syros: Anreise mit Fähre oder Flugzeug und Tipps zur Buchung So kommen Sie von Athen nach Syros: Fährverbindungen ab Piräus und ihre Fahrzeiten, der 25-minütige Flug, die Fahrt zum Hafen, Mietwagen – und eine Buchungsreihenfolge, die Stress vermeidet. Anreise Syros, Fähre Athen Syros, Flug nach Syros, Piräus Syros, Flughafen Syros, Anreise Kykladen plan Planung 2026-11-07 7. Nov. 2026 how to get to syros from athens ferry flight">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-from-ferry.jpg" alt="Von Athen nach Syros: Anreise mit Fähre oder Flugzeug und Tipps zur Buchung" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
       <h2>Von Athen nach Syros: Anreise mit Fähre oder Flugzeug und Tipps zur Buchung</h2>
       <p>So kommen Sie von Athen nach Syros: Fährverbindungen ab Piräus und ihre Fahrzeiten, der 25-minütige Flug, die Fahrt zum Hafen, Mietwagen – und eine Buchungsreihenfolge, die Stress vermeidet.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/family-vacation-syros-seaside-house/">
-      <div class="svs-card-media"><img src="/Articles/media/syros-galissas-beach.jpg" alt="Familienurlaub auf Syros: Strände, Platz und Tipps für ein Ferienhaus am Meer" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/family-vacation-syros-seaside-house/" data-svs-article-card data-topics="stay" data-published="2026-11-07" data-search="Familienurlaub auf Syros: Strände, Platz und Tipps für ein Ferienhaus am Meer Familienurlaub auf Syros planen: welche Strände für Kinder geeignet sind, was ein Ferienhaus am Meer gegenüber dem Hotel bietet, ehrliche Tipps für Eltern und ein realistischer Tagesablauf. Familienurlaub Syros, Familienurlaub Griechenland, Syros mit Kindern, Ferienhaus Syros Familie, Ferienhaus am Meer Griechenland Familie stay Unterkunft &amp; Villa 2026-11-07 7. Nov. 2026 family vacation syros seaside house">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-galissas-beach.jpg" alt="Familienurlaub auf Syros: Strände, Platz und Tipps für ein Ferienhaus am Meer" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li></ul>
       <h2>Familienurlaub auf Syros: Strände, Platz und Tipps für ein Ferienhaus am Meer</h2>
       <p>Familienurlaub auf Syros planen: welche Strände für Kinder geeignet sind, was ein Ferienhaus am Meer gegenüber dem Hotel bietet, ehrliche Tipps für Eltern und ein realistischer Tagesablauf.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/ermoupoli-and-beach-day-syros-itinerary/">
-      <div class="svs-card-media"><img src="/Articles/media/syros-ermoupoli-view.jpg" alt="Ermoupoli und Strand: ein Tagesprogramm für Syros, das wirklich aufgeht" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/ermoupoli-and-beach-day-syros-itinerary/" data-svs-article-card data-topics="town plan" data-published="2026-11-07" data-search="Ermoupoli und Strand: ein Tagesprogramm für Syros, das wirklich aufgeht Ein realistisches Tagesprogramm für Syros: vormittags Ermoupoli und Ano Syros, danach Baden und Sonnenuntergang an der Westküste – dazu eine Zwei-Tages-Variante und praktische Tipps. Syros Sehenswürdigkeiten, Ermoupoli Tagesprogramm, Syros Tagesausflug, Ano Syros, Syros Strand und Stadt town plan Stadt &amp; Kultur Planung 2026-11-07 7. Nov. 2026 ermoupoli and beach day syros itinerary">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ermoupoli-view.jpg" alt="Ermoupoli und Strand: ein Tagesprogramm für Syros, das wirklich aufgeht" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Stadt &amp; Kultur</span></li><li><span class="svs-card-tag">Planung</span></li></ul>
       <h2>Ermoupoli und Strand: ein Tagesprogramm für Syros, das wirklich aufgeht</h2>
       <p>Ein realistisches Tagesprogramm für Syros: vormittags Ermoupoli und Ano Syros, danach Baden und Sonnenuntergang an der Westküste – dazu eine Zwei-Tages-Variante und praktische Tipps.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/syros-food-guide-for-villa-guests/">
-      <div class="svs-card-media"><img src="/Articles/media/loukoumi-coffee-real.jpg" alt="Kulinarischer Syros-Guide für Ferienhausgäste: Märkte, Loukoumi und Tavernen am Meer" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/syros-food-guide-for-villa-guests/" data-svs-article-card data-topics="food" data-published="2026-11-07" data-search="Kulinarischer Syros-Guide für Ferienhausgäste: Märkte, Loukoumi und Tavernen am Meer Was Sie auf Syros einkaufen, selbst kochen und im Restaurant bestellen sollten: San-Michali-Käse, Loukoumi, Halvadopita und Louza, die Aufteilung zwischen Küchenabenden und Tavernenabenden – und Tipps zum Fischbestellen. Essen Syros, Loukoumi Syros, San-Michali-Käse, Essen gehen Syros, Gastronomie Syros, Lebensmittel einkaufen Syros Ferienhaus food Essen 2026-11-07 7. Nov. 2026 syros food guide for villa guests">
+      <div class="svs-card-media">
+        <img src="/Articles/media/loukoumi-coffee-real.jpg" alt="Kulinarischer Syros-Guide für Ferienhausgäste: Märkte, Loukoumi und Tavernen am Meer" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Essen</span></li></ul>
       <h2>Kulinarischer Syros-Guide für Ferienhausgäste: Märkte, Loukoumi und Tavernen am Meer</h2>
       <p>Was Sie auf Syros einkaufen, selbst kochen und im Restaurant bestellen sollten: San-Michali-Käse, Loukoumi, Halvadopita und Louza, die Aufteilung zwischen Küchenabenden und Tavernenabenden – und Tipps zum Fischbestellen.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/greece-vacation-rental-checklist-before-you-book/">
-      <div class="svs-card-media"><img src="/Articles/media/villa-living-fireplace.jpg" alt="Checkliste für Ferienunterkünfte in Griechenland: Das sollten Sie vor der Buchung prüfen" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/greece-vacation-rental-checklist-before-you-book/" data-svs-article-card data-topics="tips" data-published="2026-11-07" data-search="Checkliste für Ferienunterkünfte in Griechenland: Das sollten Sie vor der Buchung prüfen Die Checkliste eines Gastgebers für die Buchung einer Ferienunterkunft am Meer in Griechenland: Lageangaben prüfen, tatsächliche Schlafplätze, Küche und Waschmaschine, Formalitäten, Saisonzeiten – und was Sie vor der Zahlung fragen sollten. Checkliste Ferienunterkunft Griechenland, Airbnb Griechenland Tipps, Ferienhaus Griechenland buchen, Ausstattung Ferienhaus am Meer, Unterkunft Kykladen Tipps tips Praktische Tipps 2026-11-07 7. Nov. 2026 greece vacation rental checklist before you book">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-living-fireplace.jpg" alt="Checkliste für Ferienunterkünfte in Griechenland: Das sollten Sie vor der Buchung prüfen" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Praktische Tipps</span></li></ul>
       <h2>Checkliste für Ferienunterkünfte in Griechenland: Das sollten Sie vor der Buchung prüfen</h2>
       <p>Die Checkliste eines Gastgebers für die Buchung einer Ferienunterkunft am Meer in Griechenland: Lageangaben prüfen, tatsächliche Schlafplätze, Küche und Waschmaschine, Formalitäten, Saisonzeiten – und was Sie vor der Zahlung fragen sollten.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
-    <a class="svs-card" href="/de/Articles/kini-delfini-galissas-syros-beaches-guide/">
-      <div class="svs-card-media"><img src="/Articles/media/syros-delfini-beach.jpg" alt="Kini, Delfini und Galissas: der praktische Strandführer für Syros" loading="lazy" width="640" height="400" /></div>
-      <p class="svs-kicker">Guide</p>
+    <a class="svs-card" href="/de/Articles/kini-delfini-galissas-syros-beaches-guide/" data-svs-article-card data-topics="beaches" data-published="2026-11-07" data-search="Kini, Delfini und Galissas: der praktische Strandführer für Syros Kini, Delfini, Galissas und die Südküste im Vergleich: Welcher Strand auf Syros passt zu Familien, zum Sonnenuntergang oder zum ruhigen Bad? Mit Windtipps und einem Beispiel für eine Strandwoche. Strände Syros, Kini Strand, Delfini Beach Syros, Galissas Strand, schönste Strände Syros, Westküste Syros beaches Strände 2026-11-07 7. Nov. 2026 kini delfini galissas syros beaches guide">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-delfini-beach.jpg" alt="Kini, Delfini und Galissas: der praktische Strandführer für Syros" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-07">7. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Strände</span></li></ul>
       <h2>Kini, Delfini und Galissas: der praktische Strandführer für Syros</h2>
       <p>Kini, Delfini, Galissas und die Südküste im Vergleich: Welcher Strand auf Syros passt zu Familien, zum Sonnenuntergang oder zum ruhigen Bad? Mit Windtipps und einem Beispiel für eine Strandwoche.</p>
       <span class="svs-card-link">Artikel lesen →</span>
     </a>
+    <a class="svs-card" href="/de/Articles/pet-friendly-syros-villa-stay/" data-svs-article-card data-topics="stay" data-published="2026-11-05" data-search="Haustierfreundliche Villa auf Syros: Was Sie fragen sollten, bevor der Hund mitkommt Praktische Hinweise für den Syros-Urlaub mit Hund: Villaregeln, die Sie klären sollten, Strandetikette, Tipps zu Hitze und Anreise und ein ruhiger Aufenthalt an der Westküste. haustierfreundlich Syros, Syros mit Hund, hundefreundliche Villa Griechenland, Syros Reise mit Haustier stay Unterkunft &amp; Villa 2026-11-05 5. Nov. 2026 pet friendly syros villa stay">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-terrace-sunset.jpg" alt="Haustierfreundliche Villa auf Syros: Was Sie fragen sollten, bevor der Hund mitkommt" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-05">5. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li></ul>
+      <h2>Haustierfreundliche Villa auf Syros: Was Sie fragen sollten, bevor der Hund mitkommt</h2>
+      <p>Praktische Hinweise für den Syros-Urlaub mit Hund: Villaregeln, die Sie klären sollten, Strandetikette, Tipps zu Hitze und Anreise und ein ruhiger Aufenthalt an der Westküste.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/day-trips-from-syros-tinos-mykonos/" data-svs-article-card data-topics="plan" data-published="2026-11-01" data-search="Tagesausflüge von Syros nach Tinos und Mykonos (und warum Syros die bessere Basis ist) So nutzen Sie Syros als ruhige Kykladen-Basis für Fährausflüge nach Tinos und Mykonos – mit Zeittipps und der Frage, warum die Rückkehr in eine stille Villa an der Westküste zählt. Tagesausflüge von Syros, Fähre Syros Tinos, Syros Mykonos Tagesausflug, Inselhopping Kykladen Basis plan Planung 2026-11-01 1. Nov. 2026 day trips from syros tinos mykonos">
+      <div class="svs-card-media">
+        <img src="/Articles/media/tinos-sunset-over-syros.jpg" alt="Tagesausflüge von Syros nach Tinos und Mykonos (und warum Syros die bessere Basis ist)" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-11-01">1. Nov. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>Tagesausflüge von Syros nach Tinos und Mykonos (und warum Syros die bessere Basis ist)</h2>
+      <p>So nutzen Sie Syros als ruhige Kykladen-Basis für Fährausflüge nach Tinos und Mykonos – mit Zeittipps und der Frage, warum die Rückkehr in eine stille Villa an der Westküste zählt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/ano-syros-ermoupoli-walking-guide/" data-svs-article-card data-topics="town" data-published="2026-10-26" data-search="Ano Syros und Ermoupoli zu Fuß: zwei Städte, ein Rundgang Rundgang durch Ermoupoli und Ano Syros: klassizistische Straßen, Hafen, Gassen, Aussichtspunkte – und wie Sie den Stadttag mit der Westküste verbinden. Ano Syros Spaziergang, Ermoupoli Stadtrundgang, Syros Altstadt, Ermoupoli Sehenswürdigkeiten, Ano Syros Sehenswürdigkeiten town Stadt &amp; Kultur 2026-10-26 26. Okt. 2026 ano syros ermoupoli walking guide">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ano-syros-view.jpg" alt="Ano Syros und Ermoupoli zu Fuß: zwei Städte, ein Rundgang" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-10-26">26. Okt. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Stadt &amp; Kultur</span></li></ul>
+      <h2>Ano Syros und Ermoupoli zu Fuß: zwei Städte, ein Rundgang</h2>
+      <p>Rundgang durch Ermoupoli und Ano Syros: klassizistische Straßen, Hafen, Gassen, Aussichtspunkte – und wie Sie den Stadttag mit der Westküste verbinden.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/things-to-do-on-syros/" data-svs-article-card data-topics="plan" data-published="2026-10-20" data-search="Syros Sehenswürdigkeiten: Strände, Ermoupoli, Essen, Tagespläne Praktischer Überblick zu Syros: Strände an der Westküste, Ermoupoli und Ano Syros, Essen und einfache Tagespläne ab einer Villa am Meer. Syros Sehenswürdigkeiten, Syros Aktivitäten, Syros Strände, Ermoupoli Sehenswürdigkeiten, Syros Urlaub Tipps plan Planung 2026-10-20 20. Okt. 2026 things to do on syros">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ermoupoli-pano.jpg" alt="Syros Sehenswürdigkeiten: Strände, Ermoupoli, Essen, Tagespläne" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-10-20">20. Okt. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>Syros Sehenswürdigkeiten: Strände, Ermoupoli, Essen, Tagespläne</h2>
+      <p>Praktischer Überblick zu Syros: Strände an der Westküste, Ermoupoli und Ano Syros, Essen und einfache Tagespläne ab einer Villa am Meer.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/syros-in-may-june-september/" data-svs-article-card data-topics="plan" data-published="2026-10-14" data-search="Syros im Mai, Juni und September: ideal für die Villa Warum Mai, Juni und September oft die schönste Zeit für Urlaub in einer Villa auf Syros sind: Meerestemperatur, Andrang, Fähren und Abende an der Westküste. Syros Mai, Syros Juni, Syros September, beste Reisezeit Syros Villa, Nebensaison Kykladen plan Planung 2026-10-14 14. Okt. 2026 syros in may june september">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-bedroom-balcony.jpg" alt="Syros im Mai, Juni und September: ideal für die Villa" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-10-14">14. Okt. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>Syros im Mai, Juni und September: ideal für die Villa</h2>
+      <p>Warum Mai, Juni und September oft die schönste Zeit für Urlaub in einer Villa auf Syros sind: Meerestemperatur, Andrang, Fähren und Abende an der Westküste.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/kini-restaurants-sunset-dining/" data-svs-article-card data-topics="food" data-published="2026-10-08" data-search="Kini auf Syros: Tavernen und Abendessen bei Sonnenuntergang Sonnenuntergangs-Dinner in Kini planen, mit Delfini als ruhigem Badeort: Tavernen an der Westküste, Tipps zur Uhrzeit und wann sich Ermoupoli lohnt. Kini Restaurants, Kini Sonnenuntergang Abendessen, Syros Tavernen Westküste, Delfini Beach essen, Syros Essen gehen food Essen 2026-10-08 8. Okt. 2026 kini restaurants sunset dining">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-kini-sunset.jpg" alt="Kini auf Syros: Tavernen und Abendessen bei Sonnenuntergang" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-10-08">8. Okt. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Essen</span></li></ul>
+      <h2>Kini auf Syros: Tavernen und Abendessen bei Sonnenuntergang</h2>
+      <p>Sonnenuntergangs-Dinner in Kini planen, mit Delfini als ruhigem Badeort: Tavernen an der Westküste, Tipps zur Uhrzeit und wann sich Ermoupoli lohnt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/getting-around-syros-car-rental-bus/" data-svs-article-card data-topics="plan" data-published="2026-10-02" data-search="Unterwegs auf Syros: Mietwagen, Bus, Taxi – oder ohne Auto? Mobil auf Syros ab der Westküste: Wann sich ein Mietwagen lohnt, was Busse und Taxis leisten und wie Fährhafen und Anreise zu Delfini und Kini passen. Syros Mietwagen, Syros Bus, Syros Taxi, Fortbewegung Syros, Syros ohne Auto, Syros Fähre Anreise plan Planung 2026-10-02 2. Okt. 2026 getting around syros car rental bus">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ferry-port.jpg" alt="Unterwegs auf Syros: Mietwagen, Bus, Taxi – oder ohne Auto?" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-10-02">2. Okt. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>Unterwegs auf Syros: Mietwagen, Bus, Taxi – oder ohne Auto?</h2>
+      <p>Mobil auf Syros ab der Westküste: Wann sich ein Mietwagen lohnt, was Busse und Taxis leisten und wie Fährhafen und Anreise zu Delfini und Kini passen.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/seven-day-syros-itinerary-villa-base/" data-svs-article-card data-topics="plan" data-published="2026-09-25" data-search="7 Tage auf Syros: Reiseplan für eine Villa an der Westküste Eine Woche auf Syros ab einer Villa bei Delfini und Kini: Strände, Ermoupoli, Ano Syros, Essen, Ruhetage – und wann der Autoschlüssel am Haken bleibt. Syros 7 Tage Reiseplan, Syros Wochenplan, Syros Urlaub Villa, Syros Rundreise Woche, Delfini Kini Reiseplan plan Planung 2026-09-25 25. Sept. 2026 seven day syros itinerary villa base">
+      <div class="svs-card-media">
+        <img src="/Articles/media/villa-terrace-sunset.jpg" alt="7 Tage auf Syros: Reiseplan für eine Villa an der Westküste" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-09-25">25. Sept. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Planung</span></li></ul>
+      <h2>7 Tage auf Syros: Reiseplan für eine Villa an der Westküste</h2>
+      <p>Eine Woche auf Syros ab einer Villa bei Delfini und Kini: Strände, Ermoupoli, Ano Syros, Essen, Ruhetage – und wann der Autoschlüssel am Haken bleibt.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
+    <a class="svs-card" href="/de/Articles/where-to-stay-syros-areas-compared/" data-svs-article-card data-topics="stay" data-published="2026-09-18" data-search="Wo übernachten auf Syros? Ermoupoli, Kini, Galissas im Vergleich Wo wohnen auf Syros? Ermoupoli, Kini und Delfini, Galissas und die Südküste im Vergleich – für ruhige Strände, Nachtleben oder eine Villa-Woche. Unterkunft Syros, wo übernachten Syros, Syros Urlaub Region, Kini oder Ermoupoli, Delfini Beach Unterkunft, Galissas Syros stay Unterkunft &amp; Villa 2026-09-18 18. Sept. 2026 where to stay syros areas compared">
+      <div class="svs-card-media">
+        <img src="/Articles/media/syros-ano-ermoupoli.jpg" alt="Wo übernachten auf Syros? Ermoupoli, Kini, Galissas im Vergleich" loading="lazy" width="640" height="400" />
+        <time class="svs-card-date" datetime="2026-09-18">18. Sept. 2026</time>
+      </div>
+      <ul class="svs-card-tags" aria-label="Nach Thema filtern"><li><span class="svs-card-tag">Unterkunft &amp; Villa</span></li></ul>
+      <h2>Wo übernachten auf Syros? Ermoupoli, Kini, Galissas im Vergleich</h2>
+      <p>Wo wohnen auf Syros? Ermoupoli, Kini und Delfini, Galissas und die Südküste im Vergleich – für ruhige Strände, Nachtleben oder eine Villa-Woche.</p>
+      <span class="svs-card-link">Artikel lesen →</span>
+    </a>
     </section>
+    <p class="svs-articles-filter__empty" data-svs-articles-empty hidden>Keine Artikel gefunden. Anderes Thema wählen oder Suche leeren.</p>
     <div class="svs-callout" style="margin-bottom:2.5rem">
       <strong>Bereit, aus der Planung eine Buchung zu machen?</strong>
       Übernachten Sie in unserem Haus am Meer nahe dem Strand Delfini auf Syros.
@@ -322,7 +505,8 @@
   </div>
 </div>
 <script src="/js/cookie-banner.js" defer></script>
-  <script src="/js/site-header.js?v=norm31" defer></script>
-  <script src="/js/lang-switcher.js?v=norm31" defer></script>
+  <script src="/js/site-header.js?v=norm43" defer></script>
+  <script src="/js/articles-filter.js?v=norm43" defer></script>
+  <script src="/js/lang-switcher.js?v=norm43" defer></script>
 </body>
 </html>

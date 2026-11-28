@@ -7,6 +7,7 @@
   const prevBtn = root.querySelector("[data-svs-carousel-prev]");
   const nextBtn = root.querySelector("[data-svs-carousel-next]");
   const dots = [...root.querySelectorAll("[data-svs-carousel-dot]")];
+  const indexEl = root.querySelector("[data-svs-carousel-index]");
   if (!track || slides.length < 2) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -24,6 +25,7 @@
       dot.classList.toggle("is-active", i === index);
       dot.setAttribute("aria-current", i === index ? "true" : "false");
     });
+    if (indexEl) indexEl.textContent = String(index + 1);
   };
 
   const stop = () => {
