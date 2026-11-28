@@ -160,6 +160,34 @@ ARTICLE_TOPICS = {
     "multi-gen-group-villa-syros": ("stay",),
 }
 
+# Canonical publish/update dates — spread across 2026 (avoid Nov 7 pile-up)
+ARTICLE_DATES = {
+    "where-to-stay-syros-areas-compared": ("2026-02-12", "2026-11-12"),
+    "best-time-to-visit-syros-seaside-holiday": ("2026-02-26", "2026-11-21"),
+    "how-to-get-to-syros-from-athens-ferry-flight": ("2026-03-12", "2026-11-21"),
+    "seaside-accommodation-syros-delfini-beach": ("2026-03-26", "2026-11-21"),
+    "syros-vs-santorini-mykonos-calmer-cyclades": ("2026-04-09", "2026-11-21"),
+    "things-to-do-on-syros": ("2026-04-23", "2026-11-19"),
+    "kini-delfini-galissas-syros-beaches-guide": ("2026-05-07", "2026-11-21"),
+    "getting-around-syros-car-rental-bus": ("2026-05-21", "2026-11-15"),
+    "seven-day-syros-itinerary-villa-base": ("2026-06-04", "2026-11-14"),
+    "kini-restaurants-sunset-dining": ("2026-06-18", "2026-11-16"),
+    "syros-food-guide-for-villa-guests": ("2026-07-02", "2026-11-21"),
+    "family-vacation-syros-seaside-house": ("2026-07-16", "2026-11-21"),
+    "ermoupoli-and-beach-day-syros-itinerary": ("2026-07-30", "2026-11-21"),
+    "day-trips-from-syros-tinos-mykonos": ("2026-08-13", "2026-11-21"),
+    "syros-in-may-june-september": ("2026-08-27", "2026-11-18"),
+    "packing-meltemi-wind-guide-syros": ("2026-09-10", "2026-11-23"),
+    "pet-friendly-syros-villa-stay": ("2026-09-17", "2026-11-22"),
+    "grocery-self-catering-delfini-kini": ("2026-09-24", "2026-11-24"),
+    "ano-syros-ermoupoli-walking-guide": ("2026-10-08", "2026-11-20"),
+    "greece-vacation-rental-checklist-before-you-book": ("2026-10-15", "2026-11-21"),
+    "greece-short-term-rentals-2026-what-travellers-want": ("2026-10-22", "2026-11-21"),
+    "digital-nomad-syros-delfini-remote-work": ("2026-11-05", "2026-11-21"),
+    "winter-year-round-syros": ("2026-11-12", "2026-11-25"),
+    "multi-gen-group-villa-syros": ("2026-11-19", "2026-11-26"),
+}
+
 # English article fallbacks extracted from current EN HTML at build time
 EN_SOURCES: dict[str, str] = {}
 EN_META: dict[str, dict] = {}
@@ -184,8 +212,7 @@ def extract_en_articles() -> None:
         mid_alt = figs[0][0] if figs else ""
         mid_cap = figs[0][1] if figs else ""
         body = body_m.group(1) if body_m else ""
-        pub = re.search(r'property="article:published_time" content="([^"T]+)', html)
-        mod = re.search(r'property="article:modified_time" content="([^"T]+)', html)
+        pub_default, mod_default = ARTICLE_DATES.get(slug, ("2026-06-01", "2026-11-21"))
         # Keep all inline figures — EN bodies are the photo-illustrated source of truth
         EN_META[slug] = {
             "title": re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", title.group(1) if title else slug),
@@ -197,8 +224,8 @@ def extract_en_articles() -> None:
             "hero_caption": hero_cap.group(1) if hero_cap else "",
             "mid_alt": mid_alt,
             "mid_caption": mid_cap,
-            "published": (pub.group(1) if pub else "2026-11-07"),
-            "modified": (mod.group(1) if mod else "2026-11-21"),
+            "published": pub_default,
+            "modified": mod_default,
         }
         if sources_m:
             EN_SOURCES[slug] = sources_m.group(1)
@@ -327,8 +354,8 @@ def article_page(lang: str, slug: str) -> str:
         fonts = "Heebo:400,600,700|Open+Sans:400,600,700"
 
     hero_url = f"{SITE}/Articles/media/{hero}"
-    published = en_meta.get("published") or "2026-11-07"
-    modified = en_meta.get("modified") or published
+    published = en_meta.get("published") or ARTICLE_DATES.get(slug, ("2026-06-01", "2026-11-21"))[0]
+    modified = en_meta.get("modified") or ARTICLE_DATES.get(slug, (published, published))[1]
     article_ld = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -499,7 +526,12 @@ def articles_index(lang: str) -> str:
         topics = ARTICLE_TOPICS.get(slug, ("plan",))
         topics_attr = " ".join(topics)
         topic_labels = [_topic_label(ui, t) for t in topics]
-        published = (EN_META.get(slug) or {}).get("published") or meta.get("published") or "2026-11-07"
+        published = (
+            (EN_META.get(slug) or {}).get("published")
+            or ARTICLE_DATES.get(slug, ("2026-06-01",))[0]
+            or meta.get("published")
+            or "2026-06-01"
+        )
         published = published[:10]
         date_label = _format_card_date(lang, published)
         # Search index: title, description, keywords, topic ids + localized labels, date
