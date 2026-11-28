@@ -205,10 +205,10 @@
 }
   </script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700|Open+Sans:400,600,700&display=swap" rel="stylesheet" />
-  <link href="/css/site-chrome.css?v=norm23" rel="stylesheet" />
-  <link href="/css/articles.css?v=norm23" rel="stylesheet" />
-  <link href="/css/i18n.css?v=norm23" rel="stylesheet" />
-  <link href="/css/footer.css?v=norm23" rel="stylesheet" />
+  <link href="/css/site-chrome.css?v=norm31" rel="stylesheet" />
+  <link href="/css/articles.css?v=norm31" rel="stylesheet" />
+  <link href="/css/i18n.css?v=norm31" rel="stylesheet" />
+  <link href="/css/footer.css?v=norm31" rel="stylesheet" />
 </head>
 <body class="svs-articles">
     <header class="svs-shell-header">
@@ -275,11 +275,55 @@
           <span class="svs-book-contact-title">Instagram</span>
           <span>@seaviewserenityatsyros</span>
         </a>
+        <a class="svs-book-contact" href="mailto:info@seaviewserenity.gr">
+          <span class="svs-book-contact-title">Email</span>
+          <span>info@seaviewserenity.gr</span>
+        </a>
         <a class="svs-book-contact" href="https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA" target="_blank" rel="noopener">
           <span class="svs-book-contact-title">Maps</span>
           <span>Open in Google Maps</span>
         </a>
       </div>
+    </section>
+    <section class="svs-shell svs-book-form-section svs-reveal" data-reveal-delay="0.1" aria-label="Send us a message">
+      <div class="svs-book-form-intro">
+        <h2>Send us a message</h2>
+        <p>Tell us your dates and questions. We will reply to your email as soon as we can.</p>
+      </div>
+      <form class="svs-book-form" data-contact-form data-success="Thank you — your request was submitted. We will reply soon." data-error="Something went wrong. Please try again or message us on WhatsApp." data-sending="Sending…" novalidate>
+        <input type="hidden" name="lang" value="en" />
+        <label class="svs-book-form__hp" aria-hidden="true">Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+        <div class="svs-book-form__grid">
+          <label class="svs-book-form__field">
+            <span>Name</span>
+            <input type="text" name="name" required autocomplete="name" maxlength="120" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" maxlength="254" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>Phone (optional)</span>
+            <input type="tel" name="phone" autocomplete="tel" maxlength="60" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>Preferred dates (optional)</span>
+            <input type="text" name="dates" maxlength="120" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>Guests (optional)</span>
+            <input type="text" name="guests" maxlength="40" />
+          </label>
+          <label class="svs-book-form__field svs-book-form__field--full">
+            <span>Message</span>
+            <textarea name="message" required rows="5" maxlength="4000"></textarea>
+          </label>
+        </div>
+        <div class="svs-book-form__actions">
+          <button class="svs-cta" type="submit">Send message</button>
+          <p class="svs-book-form__status" data-contact-status hidden></p>
+        </div>
+      </form>
     </section>
     <section class="svs-shell svs-book-map svs-reveal" data-reveal-delay="0.1" aria-label="Find us on the map">
       <div class="svs-book-map-head">
@@ -362,9 +406,10 @@
   </div>
 </div>
 <script src="/js/cookie-banner.js" defer></script>
-  <script src="/js/site-header.js?v=norm23" defer></script>
-  <script src="/js/reveal.js?v=norm23" defer></script>
-  <script src="/js/home-carousel.js?v=norm23" defer></script>
-  <script src="/js/lang-switcher.js?v=norm23" defer></script>
+  <script src="/js/site-header.js?v=norm31" defer></script>
+  <script src="/js/reveal.js?v=norm31" defer></script>
+  <script src="/js/home-carousel.js?v=norm31" defer></script>
+  <script src="/js/contact-form.js?v=norm31" defer></script>
+  <script src="/js/lang-switcher.js?v=norm31" defer></script>
 </body>
 </html>

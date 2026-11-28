@@ -88,7 +88,19 @@
     "og_image_alt_villa": "Sea View Serenity villa interior and sea views on Syros",
     "og_image_alt_book": "Book Sea View Serenity near Delfini Beach, Syros",
     "og_image_alt_articles": "Sunset terrace at Sea View Serenity, Syros",
-    "home_hero_lede": "A quiet west-coast house on Syros, ten minutes from Delfini Beach."
+    "home_hero_lede": "A quiet west-coast house on Syros, ten minutes from Delfini Beach.",
+    "book_form_title": "Send us a message",
+    "book_form_lede": "Tell us your dates and questions. We will reply to your email as soon as we can.",
+    "book_form_name": "Name",
+    "book_form_email": "Email",
+    "book_form_phone": "Phone (optional)",
+    "book_form_dates": "Preferred dates (optional)",
+    "book_form_guests": "Guests (optional)",
+    "book_form_message": "Message",
+    "book_form_submit": "Send message",
+    "book_form_sending": "Sending…",
+    "book_form_success": "Thank you — your request was submitted. We will reply soon.",
+    "book_form_error": "Something went wrong. Please try again or message us on WhatsApp."
   },
   "el": {
     "nav_home": "Αρχική",
@@ -171,7 +183,19 @@
     "og_image_alt_villa": "Εσωτερικό της βίλας Sea View Serenity και θέα στη θάλασσα στη Σύρο",
     "og_image_alt_book": "Κράτηση στο Sea View Serenity κοντά στη Δελφίνι, Σύρος",
     "og_image_alt_articles": "Ηλιοβασίλεμα στη βεράντα του Sea View Serenity στη Σύρο",
-    "home_hero_lede": "Ένα ήσυχο σπίτι στη δυτική ακτή της Σύρου, δέκα λεπτά από τη Δελφίνι."
+    "home_hero_lede": "Ένα ήσυχο σπίτι στη δυτική ακτή της Σύρου, δέκα λεπτά από τη Δελφίνι.",
+    "book_form_title": "Στείλτε μας μήνυμα",
+    "book_form_lede": "Πείτε μας τις ημερομηνίες και τις ερωτήσεις σας. Θα απαντήσουμε στο email σας το συντομότερο.",
+    "book_form_name": "Όνομα",
+    "book_form_email": "Email",
+    "book_form_phone": "Τηλέφωνο (προαιρετικό)",
+    "book_form_dates": "Ημερομηνίες (προαιρετικό)",
+    "book_form_guests": "Άτομα (προαιρετικό)",
+    "book_form_message": "Μήνυμα",
+    "book_form_submit": "Αποστολή",
+    "book_form_sending": "Αποστολή…",
+    "book_form_success": "Ευχαριστούμε — το αίτημά σας υποβλήθηκε. Θα σας απαντήσουμε σύντομα.",
+    "book_form_error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά ή γράψτε μας στο WhatsApp."
   },
   "fr": {
     "nav_home": "Accueil",
@@ -254,7 +278,19 @@
     "og_image_alt_villa": "Intérieur de la villa Sea View Serenity et vue mer à Syros",
     "og_image_alt_book": "Réserver Sea View Serenity près de Delfini, Syros",
     "og_image_alt_articles": "Coucher de soleil sur la terrasse de Sea View Serenity à Syros",
-    "home_hero_lede": "Une maison calme sur la côte ouest de Syros, à dix minutes de Delfini."
+    "home_hero_lede": "Une maison calme sur la côte ouest de Syros, à dix minutes de Delfini.",
+    "book_form_title": "Écrivez-nous",
+    "book_form_lede": "Indiquez vos dates et vos questions. Nous vous répondrons par e-mail dès que possible.",
+    "book_form_name": "Nom",
+    "book_form_email": "E-mail",
+    "book_form_phone": "Téléphone (facultatif)",
+    "book_form_dates": "Dates souhaitées (facultatif)",
+    "book_form_guests": "Voyageurs (facultatif)",
+    "book_form_message": "Message",
+    "book_form_submit": "Envoyer",
+    "book_form_sending": "Envoi…",
+    "book_form_success": "Merci — votre demande a bien été envoyée. Nous vous répondrons bientôt.",
+    "book_form_error": "Une erreur s’est produite. Réessayez ou écrivez-nous sur WhatsApp."
   },
   "de": {
     "nav_home": "Startseite",
@@ -337,7 +373,19 @@
     "og_image_alt_villa": "Villa-Innenraum von Sea View Serenity und Meerblick auf Syros",
     "og_image_alt_book": "Sea View Serenity nahe Delfini Beach, Syros buchen",
     "og_image_alt_articles": "Sonnenuntergang auf der Terrasse von Sea View Serenity, Syros",
-    "home_hero_lede": "Ein ruhiges Haus an der Westküste von Syros, zehn Minuten von Delfini."
+    "home_hero_lede": "Ein ruhiges Haus an der Westküste von Syros, zehn Minuten von Delfini.",
+    "book_form_title": "Schreiben Sie uns",
+    "book_form_lede": "Nennen Sie uns Ihre Daten und Fragen. Wir antworten so bald wie möglich per E-Mail.",
+    "book_form_name": "Name",
+    "book_form_email": "E-Mail",
+    "book_form_phone": "Telefon (optional)",
+    "book_form_dates": "Wunschdaten (optional)",
+    "book_form_guests": "Gäste (optional)",
+    "book_form_message": "Nachricht",
+    "book_form_submit": "Nachricht senden",
+    "book_form_sending": "Wird gesendet…",
+    "book_form_success": "Danke — Ihre Anfrage wurde übermittelt. Wir melden uns bald.",
+    "book_form_error": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder uns per WhatsApp schreiben."
   },
   "it": {
     "nav_home": "Home",
@@ -420,7 +468,19 @@
     "og_image_alt_villa": "Interni della villa Sea View Serenity e vista mare a Syros",
     "og_image_alt_book": "Prenotare Sea View Serenity vicino a Delfini, Syros",
     "og_image_alt_articles": "Tramonto sulla terrazza di Sea View Serenity a Syros",
-    "home_hero_lede": "Una casa tranquilla sulla costa ovest di Syros, a dieci minuti da Delfini."
+    "home_hero_lede": "Una casa tranquilla sulla costa ovest di Syros, a dieci minuti da Delfini.",
+    "book_form_title": "Inviateci un messaggio",
+    "book_form_lede": "Indicateci le date e le domande. Vi risponderemo via e-mail il prima possibile.",
+    "book_form_name": "Nome",
+    "book_form_email": "Email",
+    "book_form_phone": "Telefono (opzionale)",
+    "book_form_dates": "Date preferite (opzionale)",
+    "book_form_guests": "Ospiti (opzionale)",
+    "book_form_message": "Messaggio",
+    "book_form_submit": "Invia messaggio",
+    "book_form_sending": "Invio…",
+    "book_form_success": "Grazie — la richiesta è stata inviata. Vi risponderemo presto.",
+    "book_form_error": "Qualcosa è andato storto. Riprovate o scriveteci su WhatsApp."
   },
   "he": {
     "nav_home": "דף הבית",
@@ -503,6 +563,18 @@
     "og_image_alt_villa": "פנים הווילה Sea View Serenity ונוף לים בסירוס",
     "og_image_alt_book": "הזמנת Sea View Serenity ליד דלפיני, סירוס",
     "og_image_alt_articles": "שקיעה על מרפסת Sea View Serenity בסירוס",
-    "home_hero_lede": "בית שקט בחוף המערבי של סירוס, עשר דקות מדלפיני."
+    "home_hero_lede": "בית שקט בחוף המערבי של סירוס, עשר דקות מדלפיני.",
+    "book_form_title": "שלחו לנו הודעה",
+    "book_form_lede": "ספרו לנו על התאריכים והשאלות שלכם. נחזור אליכם במייל בהקדם.",
+    "book_form_name": "שם",
+    "book_form_email": "אימייל",
+    "book_form_phone": "טלפון (אופציונלי)",
+    "book_form_dates": "תאריכים מועדפים (אופציונלי)",
+    "book_form_guests": "אורחים (אופציונלי)",
+    "book_form_message": "הודעה",
+    "book_form_submit": "שליחה",
+    "book_form_sending": "שולחים…",
+    "book_form_success": "תודה — הבקשה נשלחה. נחזור אליכם בקרוב.",
+    "book_form_error": "משהו השתבש. נסו שוב או כתבו לנו ב-WhatsApp."
   }
 }

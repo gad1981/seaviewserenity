@@ -666,11 +666,55 @@ def marketing_page(lang: str, page: str) -> str:
           <span class="svs-book-contact-title">{esc(ui["book_instagram"])}</span>
           <span>@seaviewserenityatsyros</span>
         </a>
+        <a class="svs-book-contact" href="mailto:info@seaviewserenity.gr">
+          <span class="svs-book-contact-title">Email</span>
+          <span>info@seaviewserenity.gr</span>
+        </a>
         <a class="svs-book-contact" href="https://maps.app.goo.gl/z3p1PRkGuHZF1TBDA" target="_blank" rel="noopener">
           <span class="svs-book-contact-title">Maps</span>
           <span>{esc(ui["book_maps"])}</span>
         </a>
       </div>
+    </section>
+    <section class="svs-shell svs-book-form-section svs-reveal" data-reveal-delay="0.1" aria-label="{esc(ui["book_form_title"])}">
+      <div class="svs-book-form-intro">
+        <h2>{esc(ui["book_form_title"])}</h2>
+        <p>{esc(ui["book_form_lede"])}</p>
+      </div>
+      <form class="svs-book-form" data-contact-form data-success="{esc(ui["book_form_success"])}" data-error="{esc(ui["book_form_error"])}" data-sending="{esc(ui["book_form_sending"])}" novalidate>
+        <input type="hidden" name="lang" value="{lang}" />
+        <label class="svs-book-form__hp" aria-hidden="true">Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+        <div class="svs-book-form__grid">
+          <label class="svs-book-form__field">
+            <span>{esc(ui["book_form_name"])}</span>
+            <input type="text" name="name" required autocomplete="name" maxlength="120" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>{esc(ui["book_form_email"])}</span>
+            <input type="email" name="email" required autocomplete="email" maxlength="254" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>{esc(ui["book_form_phone"])}</span>
+            <input type="tel" name="phone" autocomplete="tel" maxlength="60" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>{esc(ui["book_form_dates"])}</span>
+            <input type="text" name="dates" maxlength="120" />
+          </label>
+          <label class="svs-book-form__field">
+            <span>{esc(ui["book_form_guests"])}</span>
+            <input type="text" name="guests" maxlength="40" />
+          </label>
+          <label class="svs-book-form__field svs-book-form__field--full">
+            <span>{esc(ui["book_form_message"])}</span>
+            <textarea name="message" required rows="5" maxlength="4000"></textarea>
+          </label>
+        </div>
+        <div class="svs-book-form__actions">
+          <button class="svs-cta" type="submit">{esc(ui["book_form_submit"])}</button>
+          <p class="svs-book-form__status" data-contact-status hidden></p>
+        </div>
+      </form>
     </section>
     <section class="svs-shell svs-book-map svs-reveal" data-reveal-delay="0.1" aria-label="{esc(ui["book_map_title"])}">
       <div class="svs-book-map-head">
@@ -755,6 +799,9 @@ def marketing_page(lang: str, page: str) -> str:
     home_hero_script = (
         f'  <script src="/js/home-hero.js?v={v}" defer></script>\n' if page == "home" else ""
     )
+    contact_script = (
+        f'  <script src="/js/contact-form.js?v={v}" defer></script>\n' if page == "book" else ""
+    )
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{rtl_attr}>
 <head>
@@ -773,7 +820,7 @@ def marketing_page(lang: str, page: str) -> str:
   <script src="/js/site-header.js?v={v}" defer></script>
   <script src="/js/reveal.js?v={v}" defer></script>
   <script src="/js/home-carousel.js?v={v}" defer></script>
-{home_hero_script}  <script src="/js/lang-switcher.js?v={v}" defer></script>
+{home_hero_script}{contact_script}  <script src="/js/lang-switcher.js?v={v}" defer></script>
 </body>
 </html>
 '''
