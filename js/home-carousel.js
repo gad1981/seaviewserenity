@@ -17,7 +17,8 @@
 
   const go = (next) => {
     index = (next + slides.length) % slides.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
+    // Track is forced LTR in CSS so negative X always advances forward
+    track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
     slides.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === index ? "false" : "true");
     });

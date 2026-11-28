@@ -96,8 +96,8 @@ def home_carousel_html(ui: dict, lang: str = "en") -> str:
             {"".join(slides)}
           </div>
         </div>
-        <button type="button" class="svs-carousel__nav svs-carousel__nav--prev" data-svs-carousel-prev aria-label="Previous">‹</button>
-        <button type="button" class="svs-carousel__nav svs-carousel__nav--next" data-svs-carousel-next aria-label="Next">›</button>
+        <button type="button" class="svs-carousel__nav svs-carousel__nav--prev" data-svs-carousel-prev aria-label="{esc(ui.get("carousel_prev", "Previous"))}">‹</button>
+        <button type="button" class="svs-carousel__nav svs-carousel__nav--next" data-svs-carousel-next aria-label="{esc(ui.get("carousel_next", "Next"))}">›</button>
         <p class="svs-carousel__count" data-svs-carousel-count aria-live="polite"><span data-svs-carousel-index>1</span> / {total}</p>
         {dots_html}
       </div>
@@ -105,31 +105,132 @@ def home_carousel_html(ui: dict, lang: str = "en") -> str:
 
 
 # Image map per article (shared media at /Articles/media/)
+# Heroes = index thumbnails: prefer unique Syros place photos; villa only when the piece is house-led.
 ARTICLE_MEDIA = {
-    "digital-nomad-syros-delfini-remote-work": ("villa-workspace-desk.jpg", "syros-delfini-beach.jpg"),
-    "seaside-accommodation-syros-delfini-beach": ("villa-bedroom-sea-view.jpg", "villa-terrace-sunset.jpg"),
-    "syros-vs-santorini-mykonos-calmer-cyclades": ("syros-ermoupoli-view.jpg", "villa-terrace-sunset.jpg"),
-    "best-time-to-visit-syros-seaside-holiday": ("villa-terrace-sunset.jpg", "syros-delfini-beach.jpg"),
-    "greece-short-term-rentals-2026-what-travellers-want": ("villa-dining-living.jpg", "villa-kitchen.jpg"),
-    "how-to-get-to-syros-from-athens-ferry-flight": ("syros-from-ferry.jpg", "syros-harbour.jpg"),
-    "family-vacation-syros-seaside-house": ("syros-galissas-beach.jpg", "villa-bedroom-balcony.jpg"),
-    "ermoupoli-and-beach-day-syros-itinerary": ("syros-ermoupoli-view.jpg", "syros-delfini-beach.jpg"),
-    "syros-food-guide-for-villa-guests": ("loukoumi-coffee-real.jpg", "villa-kitchen.jpg"),
-    "greece-vacation-rental-checklist-before-you-book": ("villa-living-fireplace.jpg", "villa-kitchen.jpg"),
-    "kini-delfini-galissas-syros-beaches-guide": ("syros-delfini-beach.jpg", "syros-galissas-beach.jpg"),
     "where-to-stay-syros-areas-compared": ("syros-ano-ermoupoli.jpg", "syros-delfini-beach.jpg"),
-    "seven-day-syros-itinerary-villa-base": ("villa-terrace-sunset.jpg", "syros-ermoupoli-view.jpg"),
-    "getting-around-syros-car-rental-bus": ("syros-ferry-port.jpg", "syros-harbour.jpg"),
-    "kini-restaurants-sunset-dining": ("syros-kini-sunset.jpg", "syros-kini-beach.jpg"),
-    "syros-in-may-june-september": ("villa-bedroom-balcony.jpg", "syros-kini-sunset.jpg"),
+    "best-time-to-visit-syros-seaside-holiday": ("syros-posidonia-coast.jpg", "syros-asteria-beach.jpg"),
+    "how-to-get-to-syros-from-athens-ferry-flight": ("syros-from-ferry.jpg", "syros-ferry-port.jpg"),
+    "seaside-accommodation-syros-delfini-beach": ("syros-delfini-beach.jpg", "villa-bedroom-sea-view.jpg"),
+    "syros-vs-santorini-mykonos-calmer-cyclades": ("syros-ermoupoli-view.jpg", "syros-harbour.jpg"),
     "things-to-do-on-syros": ("syros-ermoupoli-pano.jpg", "syros-kini-beach.jpg"),
+    "kini-delfini-galissas-syros-beaches-guide": ("syros-galissas-beach.jpg", "syros-delfini-beach.jpg"),
+    "getting-around-syros-car-rental-bus": ("syros-ferry-port.jpg", "syros-harbour.jpg"),
+    "seven-day-syros-itinerary-villa-base": ("syros-kini-beach.jpg", "syros-ano-syros-view.jpg"),
+    "kini-restaurants-sunset-dining": ("syros-kini-sunset.jpg", "syros-kini-beach.jpg"),
+    "syros-food-guide-for-villa-guests": ("loukoumi-coffee-real.jpg", "villa-kitchen.jpg"),
+    "family-vacation-syros-seaside-house": ("syros-asteria-beach.jpg", "syros-galissas-beach.jpg"),
+    "ermoupoli-and-beach-day-syros-itinerary": ("syros-ermoupoli-street.jpg", "syros-delfini-beach.jpg"),
+    "day-trips-from-syros-tinos-mykonos": ("tinos-sunset-over-syros.jpg", "syros-from-ferry.jpg"),
+    "syros-in-may-june-september": ("syros-harbour.jpg", "syros-kini-sunset.jpg"),
+    "packing-meltemi-wind-guide-syros": ("syros-agathopes-beach.jpg", "syros-galissas-beach.jpg"),
+    "pet-friendly-syros-villa-stay": ("syros-finikas-bay.jpg", "syros-delfini-beach.jpg"),
+    "grocery-self-catering-delfini-kini": ("syros-miaouli-square.jpg", "villa-kitchen.jpg"),
     "ano-syros-ermoupoli-walking-guide": ("syros-ano-syros-view.jpg", "syros-ermoupoli-street.jpg"),
-    "day-trips-from-syros-tinos-mykonos": ("tinos-sunset-over-syros.jpg", "syros-ferry-port.jpg"),
-    "pet-friendly-syros-villa-stay": ("villa-terrace-sunset.jpg", "syros-delfini-beach.jpg"),
-    "packing-meltemi-wind-guide-syros": ("syros-kini-sunset.jpg", "syros-galissas-beach.jpg"),
-    "grocery-self-catering-delfini-kini": ("villa-kitchen.jpg", "villa-dining-living.jpg"),
+    "greece-vacation-rental-checklist-before-you-book": ("villa-bedroom-bougainvillea.jpg", "syros-from-ferry.jpg"),
+    "greece-short-term-rentals-2026-what-travellers-want": ("syros-megas-gyalos.jpg", "villa-dining-living.jpg"),
+    "digital-nomad-syros-delfini-remote-work": ("villa-workspace-desk.jpg", "syros-delfini-beach.jpg"),
     "winter-year-round-syros": ("villa-living-fireplace.jpg", "syros-ermoupoli-view.jpg"),
-    "multi-gen-group-villa-syros": ("villa-dining-living.jpg", "villa-bedroom-sea-view.jpg"),
+    "multi-gen-group-villa-syros": ("villa-bedroom-sea-view.jpg", "syros-galissas-beach.jpg"),
+}
+
+# Hero alt/caption aligned to ARTICLE_MEDIA (proper-noun heavy so all locales stay accurate)
+ARTICLE_HERO_COPY = {
+    "where-to-stay-syros-areas-compared": (
+        "Ano Syros and Ermoupoli on the Syros hillside",
+        "Ano Syros above Ermoupoli — two bases, one island capital. Photo: Hans Peter Schaefer / Wikimedia Commons (CC BY-SA 3.0).",
+    ),
+    "best-time-to-visit-syros-seaside-holiday": (
+        "Coastal path and sea near Posidonia on Syros",
+        "West-coast light on Syros — useful when you are choosing months, not just beaches. Photo: Kevin Stroup / Wikimedia Commons (CC BY 3.0).",
+    ),
+    "how-to-get-to-syros-from-athens-ferry-flight": (
+        "Ermoupoli seen from the ferry approach to Syros",
+        "Arriving by sea: Ermoupoli from the ferry. Photo: Zde / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "seaside-accommodation-syros-delfini-beach": (
+        "Delfini Beach cove on the west coast of Syros",
+        "Delfini Beach — the quiet west-coast cove that defines a seaside stay. Photo: FocalPoint / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "syros-vs-santorini-mykonos-calmer-cyclades": (
+        "View over Ermoupoli, capital of Syros",
+        "Ermoupoli — a working Cycladic capital, not a postcard strip. Photo: Zacharias Mitzelos / Wikimedia Commons (CC0).",
+    ),
+    "things-to-do-on-syros": (
+        "Wide panorama of Ermoupoli on Syros",
+        "Ermoupoli panorama — town, harbour and hills in one frame. Photo: Zacharias Mitzelos / Wikimedia Commons (CC0).",
+    ),
+    "kini-delfini-galissas-syros-beaches-guide": (
+        "Galissas beach bay on Syros",
+        "Galissas — a wide, easy west-coast bay. Photo: Olavfin / Wikimedia Commons (public domain).",
+    ),
+    "getting-around-syros-car-rental-bus": (
+        "Ferry in the port of Syros",
+        "Syros port — where ferry logistics and island roads meet. Photo: Redon Skikuli / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "seven-day-syros-itinerary-villa-base": (
+        "Kini beach on the west coast of Syros",
+        "Kini — a natural day-two or sunset stop on a villa week. Photo: FocalPoint / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "kini-restaurants-sunset-dining": (
+        "Sunset over Kini bay on Syros",
+        "Kini at sundown — tavernas face the water. Photo: ERWEH / Wikimedia Commons (CC BY-SA 2.5).",
+    ),
+    "syros-food-guide-for-villa-guests": (
+        "Greek coffee and loukoumi",
+        "Loukoumi and coffee — Syros flavours to bring back to the house. Photo: E4024 / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "family-vacation-syros-seaside-house": (
+        "Asteria beach in Ermoupoli, Syros",
+        "Asteria, Ermoupoli — a town beach that works with children. Photo: Leeturtle / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "ermoupoli-and-beach-day-syros-itinerary": (
+        "Street in Ermoupoli, Syros",
+        "Ermoupoli streets — neoclassical town before an afternoon swim. Photo: ElioQoshi / Wikimedia Commons (CC BY 3.0).",
+    ),
+    "day-trips-from-syros-tinos-mykonos": (
+        "Sunset over Syros seen from the port of Tinos",
+        "Syros on the horizon from Tinos — the short-hop island logic. Photo: Jules Verne Times Two / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "syros-in-may-june-september": (
+        "Syros harbour and waterfront",
+        "Ermoupoli harbour in the shoulder months — capital life without peak crowds. Photo: Rberteig / Wikimedia Commons (CC BY 2.0).",
+    ),
+    "packing-meltemi-wind-guide-syros": (
+        "Agathopes beach on the south coast of Syros",
+        "South-coast bays like Agathopes sit more sheltered when the meltemi works the exposed shores. Photo: FocalPoint / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "pet-friendly-syros-villa-stay": (
+        "Finikas bay on Syros",
+        "Finikas — a calmer bay rhythm for a low-key stay with a dog; always ask us first and check local beach rules. Photo via Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "grocery-self-catering-delfini-kini": (
+        "Miaouli Square in Ermoupoli, Syros",
+        "Miaouli Square — Ermoupoli’s centre for a proper restock during a west-coast villa week. Photo: Zacharias Mitzelos / Wikimedia Commons (CC0).",
+    ),
+    "ano-syros-ermoupoli-walking-guide": (
+        "Rooftops of Ermoupoli from Ano Syros",
+        "Ermoupoli from Ano Syros — the classic two-town walk. Photo: NNeilAlieNN / Wikimedia Commons (CC BY-SA 3.0).",
+    ),
+    "greece-vacation-rental-checklist-before-you-book": (
+        "Bedroom with bougainvillea at Sea View Serenity",
+        "Before you book any Greek villa — light, layout and outdoor space matter as much as the listing photos.",
+    ),
+    "greece-short-term-rentals-2026-what-travellers-want": (
+        "Megas Gyalos beach on Syros",
+        "A Syros beach base still beats a generic rental grid — travellers want place, not only amenities. Photo: FocalPoint / Wikimedia Commons (CC BY-SA 4.0).",
+    ),
+    "digital-nomad-syros-delfini-remote-work": (
+        "Workspace desk with sea-facing light at Sea View Serenity",
+        "A quiet desk near Delfini — remote weeks need shade, bandwidth and a swim after work.",
+    ),
+    "winter-year-round-syros": (
+        "Living room fireplace at Sea View Serenity",
+        "Syros in the cooler months — a real capital town outside, a warm house base inside.",
+    ),
+    "multi-gen-group-villa-syros": (
+        "Sea-view bedroom at Sea View Serenity",
+        "Room to spread out — multi-gen weeks need sleeping space and a shared table more than hotel corridors.",
+    ),
 }
 
 # Topic tags for Articles index filter (search also uses title + description)
@@ -299,6 +400,8 @@ def article_page(lang: str, slug: str) -> str:
     # translations sometimes append brand to title — keep h1 clean
     meta["title"] = re.sub(r"\s*\|\s*Sea View Serenity\s*$", "", meta["title"]).strip()
     hero, mid = ARTICLE_MEDIA[slug]
+    if slug in ARTICLE_HERO_COPY:
+        meta["hero_alt"], meta["hero_caption"] = ARTICLE_HERO_COPY[slug]
     book = f"/{lang}/Book-now/"
     villa = f"/{lang}/The-Villa/"
     body = (

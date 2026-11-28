@@ -68,13 +68,33 @@
       "permanent": true
     },
     {
-      "source": "/Articles/digital-nomad-syros-delfini-remote-work",
-      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
+      "source": "/Articles/where-to-stay-syros-areas-compared",
+      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
       "permanent": true
     },
     {
-      "source": "/Articles/digital-nomad-syros-delfini-remote-work/",
-      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
+      "source": "/Articles/where-to-stay-syros-areas-compared/",
+      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/best-time-to-visit-syros-seaside-holiday",
+      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight",
+      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
       "permanent": true
     },
     {
@@ -98,33 +118,63 @@
       "permanent": true
     },
     {
-      "source": "/Articles/best-time-to-visit-syros-seaside-holiday",
-      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "source": "/Articles/things-to-do-on-syros",
+      "destination": "/en/Articles/things-to-do-on-syros/",
       "permanent": true
     },
     {
-      "source": "/Articles/best-time-to-visit-syros-seaside-holiday/",
-      "destination": "/en/Articles/best-time-to-visit-syros-seaside-holiday/",
+      "source": "/Articles/things-to-do-on-syros/",
+      "destination": "/en/Articles/things-to-do-on-syros/",
       "permanent": true
     },
     {
-      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want",
-      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide",
+      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
       "permanent": true
     },
     {
-      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want/",
-      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide/",
+      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
       "permanent": true
     },
     {
-      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight",
-      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "source": "/Articles/getting-around-syros-car-rental-bus",
+      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
       "permanent": true
     },
     {
-      "source": "/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
-      "destination": "/en/Articles/how-to-get-to-syros-from-athens-ferry-flight/",
+      "source": "/Articles/getting-around-syros-car-rental-bus/",
+      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seven-day-syros-itinerary-villa-base",
+      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/seven-day-syros-itinerary-villa-base/",
+      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-restaurants-sunset-dining",
+      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/kini-restaurants-sunset-dining/",
+      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-food-guide-for-villa-guests",
+      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/syros-food-guide-for-villa-guests/",
+      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
       "permanent": true
     },
     {
@@ -148,73 +198,13 @@
       "permanent": true
     },
     {
-      "source": "/Articles/syros-food-guide-for-villa-guests",
-      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
+      "source": "/Articles/day-trips-from-syros-tinos-mykonos",
+      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
       "permanent": true
     },
     {
-      "source": "/Articles/syros-food-guide-for-villa-guests/",
-      "destination": "/en/Articles/syros-food-guide-for-villa-guests/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/greece-vacation-rental-checklist-before-you-book",
-      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/greece-vacation-rental-checklist-before-you-book/",
-      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide",
-      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/kini-delfini-galissas-syros-beaches-guide/",
-      "destination": "/en/Articles/kini-delfini-galissas-syros-beaches-guide/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/where-to-stay-syros-areas-compared",
-      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/where-to-stay-syros-areas-compared/",
-      "destination": "/en/Articles/where-to-stay-syros-areas-compared/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/seven-day-syros-itinerary-villa-base",
-      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/seven-day-syros-itinerary-villa-base/",
-      "destination": "/en/Articles/seven-day-syros-itinerary-villa-base/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/getting-around-syros-car-rental-bus",
-      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/getting-around-syros-car-rental-bus/",
-      "destination": "/en/Articles/getting-around-syros-car-rental-bus/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/kini-restaurants-sunset-dining",
-      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/kini-restaurants-sunset-dining/",
-      "destination": "/en/Articles/kini-restaurants-sunset-dining/",
+      "source": "/Articles/day-trips-from-syros-tinos-mykonos/",
+      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
       "permanent": true
     },
     {
@@ -228,33 +218,13 @@
       "permanent": true
     },
     {
-      "source": "/Articles/things-to-do-on-syros",
-      "destination": "/en/Articles/things-to-do-on-syros/",
+      "source": "/Articles/packing-meltemi-wind-guide-syros",
+      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
       "permanent": true
     },
     {
-      "source": "/Articles/things-to-do-on-syros/",
-      "destination": "/en/Articles/things-to-do-on-syros/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/ano-syros-ermoupoli-walking-guide",
-      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/ano-syros-ermoupoli-walking-guide/",
-      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/day-trips-from-syros-tinos-mykonos",
-      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/day-trips-from-syros-tinos-mykonos/",
-      "destination": "/en/Articles/day-trips-from-syros-tinos-mykonos/",
+      "source": "/Articles/packing-meltemi-wind-guide-syros/",
+      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
       "permanent": true
     },
     {
@@ -268,16 +238,6 @@
       "permanent": true
     },
     {
-      "source": "/Articles/packing-meltemi-wind-guide-syros",
-      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
-      "permanent": true
-    },
-    {
-      "source": "/Articles/packing-meltemi-wind-guide-syros/",
-      "destination": "/en/Articles/packing-meltemi-wind-guide-syros/",
-      "permanent": true
-    },
-    {
       "source": "/Articles/grocery-self-catering-delfini-kini",
       "destination": "/en/Articles/grocery-self-catering-delfini-kini/",
       "permanent": true
@@ -285,6 +245,46 @@
     {
       "source": "/Articles/grocery-self-catering-delfini-kini/",
       "destination": "/en/Articles/grocery-self-catering-delfini-kini/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ano-syros-ermoupoli-walking-guide",
+      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/ano-syros-ermoupoli-walking-guide/",
+      "destination": "/en/Articles/ano-syros-ermoupoli-walking-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-vacation-rental-checklist-before-you-book",
+      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "destination": "/en/Articles/greece-vacation-rental-checklist-before-you-book/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want",
+      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "destination": "/en/Articles/greece-short-term-rentals-2026-what-travellers-want/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/digital-nomad-syros-delfini-remote-work",
+      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
+      "permanent": true
+    },
+    {
+      "source": "/Articles/digital-nomad-syros-delfini-remote-work/",
+      "destination": "/en/Articles/digital-nomad-syros-delfini-remote-work/",
       "permanent": true
     },
     {

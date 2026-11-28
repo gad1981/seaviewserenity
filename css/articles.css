@@ -779,13 +779,17 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   max-height: min(70vh, 560px);
+  /* Keep slide math LTR even on rtl pages — otherwise translateX jumps the wrong way */
+  direction: ltr;
 }
 
 .svs-carousel__track {
   display: flex;
+  flex-direction: row;
   height: 100%;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
+  direction: ltr;
 }
 
 .svs-carousel__slide {
@@ -805,8 +809,7 @@
 
 .svs-carousel__caption {
   position: absolute;
-  left: 0.85rem;
-  right: 0.85rem;
+  inset-inline: 0.85rem;
   bottom: 0.85rem;
   z-index: 2;
   margin: 0;
@@ -815,6 +818,11 @@
   background: linear-gradient(180deg, rgba(15, 30, 45, 0.42), rgba(15, 30, 45, 0.72));
   color: #fff;
   pointer-events: none;
+  text-align: start;
+}
+
+html[dir="rtl"] .svs-carousel__caption {
+  direction: rtl;
 }
 
 .svs-carousel:has(.svs-carousel__dots) .svs-carousel__caption {
@@ -840,7 +848,7 @@
 .svs-carousel__count {
   position: absolute;
   top: 0.85rem;
-  right: 0.85rem;
+  inset-inline-end: 0.85rem;
   z-index: 2;
   margin: 0;
   padding: 0.3rem 0.55rem;
@@ -850,6 +858,8 @@
   font-weight: 500;
   letter-spacing: 0.04em;
   pointer-events: none;
+  direction: ltr; /* keep 1 / 42 readable */
+  unicode-bidi: isolate;
 }
 
 .svs-carousel__nav {
@@ -881,11 +891,17 @@
 }
 
 .svs-carousel__nav--prev {
-  left: 0.75rem;
+  inset-inline-start: 0.75rem;
 }
 
 .svs-carousel__nav--next {
-  right: 0.75rem;
+  inset-inline-end: 0.75rem;
+}
+
+html[dir="rtl"] .svs-carousel__nav--prev,
+html[dir="rtl"] .svs-carousel__nav--next {
+  /* Chevrons stay visual; inline-start/end already mirror sides */
+  transform: translateY(-50%);
 }
 
 .svs-carousel__dots {

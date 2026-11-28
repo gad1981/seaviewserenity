@@ -16,3 +16,7 @@ Place photographs used in Articles are real photos from Wikimedia Commons. Villa
 - **Ermoupoli, Syros.JPG** → syros-ermoupoli-pano.jpg — Zacharias Mitzelos. License: CC0. Source: https://commons.wikimedia.org/wiki/File:Ermoupoli%2C_Syros.JPG
 - **Posidonos, Ermoupoli 841 00, Greece - panoramio.jpg** → syros-posidonia-coast.jpg — Kevin Stroup. License: CC BY 3.0. Source: https://commons.wikimedia.org/wiki/File:Posidonos%2C_Ermoupoli_841_00%2C_Greece_-_panoramio.jpg
 - **Sunset over Syros seen from the Port of Tinos… julesvernex2.jpg** → tinos-sunset-over-syros.jpg — Jules Verne Times Two. License: CC BY-SA 4.0. Source: https://commons.wikimedia.org/wiki/File:Sunset_over_Syros_seen_from_the_Port_of_Tinos%2C_Tinos%2C_Greece_julesvernex2.jpg
+- **Finikas (Foinikas), Syros, Greece 15.jpg** → syros-finikas-bay.jpg — Sgroey. License: CC BY-SA 4.0. Source: https://commons.wikimedia.org/wiki/File:Finikas_(Foinikas),_Syros,_Greece_15.jpg
+- **Agathopes beach Syros 2.jpg** → syros-agathopes-beach.jpg — FocalPoint. License: CC BY-SA 4.0. Source: https://commons.wikimedia.org/wiki/File:Agathopes_beach_Syros_2.jpg
+- **Miaouli Square.JPG** → syros-miaouli-square.jpg — Zacharias Mitzelos. License: CC0. Source: https://commons.wikimedia.org/wiki/File:Miaouli_Square.JPG
+- **Megas Gyalos Syros 2.jpg** → syros-megas-gyalos.jpg — FocalPoint. License: CC BY-SA 4.0. Source: https://commons.wikimedia.org/wiki/File:Megas_Gyalos_Syros_2.jpg

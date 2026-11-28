@@ -66,7 +66,7 @@ body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-la
 .svs-lang-dd__menu {
   position: absolute;
   top: calc(100% + 4px);
-  right: 0;
+  inset-inline-end: 0;
   min-width: 10.5rem;
   padding: 0.35rem 0;
   background: #fff;
@@ -97,20 +97,8 @@ body.svs-page-home .svs-shell-header:not(.is-scrolled):not(.is-nav-open) .svs-la
   font-weight: 700;
 }
 
-html[dir="rtl"] .svs-shell-header {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .svs-nav-panel,
-html[dir="rtl"] .svs-shell-nav {
-  justify-content: flex-start;
-}
-
-html[dir="rtl"] .svs-lang-dd__menu {
-  right: auto;
-  left: 0;
-}
-
+/* dir=rtl already mirrors flex start/end — do NOT row-reverse the header
+   (that double-flips brand to the left and breaks the mirror). */
 html[dir="rtl"] body.svs-articles {
   font-family: Heebo, "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
@@ -123,11 +111,46 @@ html[dir="rtl"] .svs-shell-brand {
 }
 
 html[dir="rtl"] .svs-callout {
-  border-left: none;
+  border-left: 0;
   border-right: 4px solid var(--svs-sea, #7caae5);
 }
 
-html[dir="rtl"] .svs-book-platform {
-  flex-direction: row-reverse;
+/* Keep logo→name order for the Latin wordmark; chrome still mirrors via dir=rtl */
+html[dir="rtl"] .svs-shell-brand {
+  direction: ltr;
+}
+
+html[dir="rtl"] .svs-shell-nav {
+  justify-content: flex-end;
+}
+
+/*
+ * Mobile RTL: brand must not flex-grow. With direction:ltr + flex:1 the
+ * wordmark packs next to the burger; shrink-wrap keeps logo|name on the right.
+ * Open grid: brand cell is wide — pin wordmark to the inline-end (right).
+ */
+@media (max-width: 900px) {
+  html[dir="rtl"] .svs-shell-brand {
+    flex: 0 1 auto;
+    max-width: calc(100% - 3.75rem);
+  }
+
+  html[dir="rtl"] .svs-nav-toggle {
+    margin-inline-start: 0;
+  }
+
+  html[dir="rtl"] .svs-shell-header.is-nav-open .svs-shell-brand {
+    justify-content: flex-end;
+    width: 100%;
+    max-width: none;
+  }
+
+  html[dir="rtl"] .svs-shell-nav a {
+    text-align: start;
+  }
+
+  html[dir="rtl"] .svs-nav-panel.is-open {
+    background: #fff;
+  }
 }
 
